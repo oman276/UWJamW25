@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpxllp4v0regt"]
+
+[ext_resource type="Script" path="res://scenes/levels/Player.gd" id="1_nmeoe"]
+[ext_resource type="PackedScene" uid="uid://dnwetmf81iser" path="res://scenes/objects/test/simple_wall.tscn" id="2_oaffa"]
+[ext_resource type="Script" path="res://scripts/Camera.gd" id="3_gipqc"]
+[ext_resource type="Script" path="res://scripts/SimpleEnemy.gd" id="4_sseqo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qs0el"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ethfy"]
+size = Vector2(38, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bh4op"]
+size = Vector2(38, 38)
+
+[node name="Scene Root" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(328, 252)
+scale = Vector2(1.92, 1.92)
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_nmeoe")
+speed = 1100.0
+acceleration = 3000.0
+friction = 1000.0
+slash_multiplier = null
+slash_acceleration_multiplier = null
+slash_friction_multiplier = null
+speed_kept_on_bounce = null
+dodge_multiplier = 2.0
+dodge_acceleration_multiplier = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_qs0el")
+
+[node name="MovementLock" type="Timer" parent="Player"]
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 34.0
+offset_bottom = 33.0
+scale = Vector2(0.458334, 0.458334)
+
+[node name="WALLS" type="Node2D" parent="."]
+position = Vector2(-34, -57)
+
+[node name="SimpleWall" parent="WALLS" instance=ExtResource("2_oaffa")]
+
+[node name="SimpleWall2" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(1904, 319)
+
+[node name="SimpleWall6" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(1912, 822)
+
+[node name="SimpleWall7" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(6.00012, 913)
+
+[node name="SimpleWall3" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(323, 644)
+rotation = 1.57088
+scale = Vector2(3.59547, 32.3747)
+
+[node name="SimpleWall8" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(1556, 636)
+rotation = 1.57088
+scale = Vector2(3.59547, 32.3747)
+
+[node name="SimpleWall4" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(958, -18)
+rotation = 1.57088
+scale = Vector2(3.59547, 99.2142)
+
+[node name="SimpleWall5" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(953, 1125)
+rotation = 1.57088
+scale = Vector2(3.59547, 96.7746)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(520, 472)
+process_callback = 0
+position_smoothing_enabled = true
+script = ExtResource("3_gipqc")
+target = NodePath("../Player")
+smoothing_speed = 15.0
+
+[node name="Enemy" type="CharacterBody2D" parent="."]
+position = Vector2(1241, 394)
+collision_layer = 4
+script = ExtResource("4_sseqo")
+target = NodePath("../Player")
+
+[node name="ColorRect" type="ColorRect" parent="Enemy"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.797318, 0, 0.140164, 1)
+
+[node name="Collider" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_ethfy")
+
+[node name="Trigger" type="Area2D" parent="Enemy"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Trigger"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_bh4op")
+
+[connection signal="timeout" from="Player/MovementLock" to="Player" method="_on_movement_lock_timeout"]
+[connection signal="area_entered" from="Enemy/Trigger" to="Enemy" method="_on_trigger_area_entered"]
+[connection signal="body_entered" from="Enemy/Trigger" to="Enemy" method="_on_trigger_body_entered"]

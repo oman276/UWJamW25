@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpxllp4v0regt"]
+
+[ext_resource type="Script" path="res://scenes/levels/Player.gd" id="1_nmeoe"]
+[ext_resource type="PackedScene" uid="uid://dnwetmf81iser" path="res://scenes/objects/test/simple_wall.tscn" id="2_oaffa"]
+[ext_resource type="Script" path="res://scripts/Camera.gd" id="3_gipqc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qs0el"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ob06d"]
+
+[node name="Scene Root" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(328, 252)
+scale = Vector2(1.92, 1.92)
+motion_mode = 1
+script = ExtResource("1_nmeoe")
+speed = 1100.0
+acceleration = 3000.0
+friction = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_qs0el")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(19.96, 19.96)
+texture = SubResource("CanvasTexture_ob06d")
+
+[node name="MovementLock" type="Timer" parent="Player"]
+
+[node name="WALLS" type="Node2D" parent="."]
+position = Vector2(-34, -57)
+
+[node name="SimpleWall" parent="WALLS" instance=ExtResource("2_oaffa")]
+
+[node name="SimpleWall2" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(1904, 319)
+
+[node name="SimpleWall6" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(1912, 822)
+
+[node name="SimpleWall7" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(6.00012, 913)
+
+[node name="SimpleWall3" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(323, 644)
+rotation = 1.57088
+scale = Vector2(3.59547, 32.3747)
+
+[node name="SimpleWall8" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(1556, 636)
+rotation = 1.57088
+scale = Vector2(3.59547, 32.3747)
+
+[node name="SimpleWall4" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(958, -18)
+rotation = 1.57088
+scale = Vector2(3.59547, 99.2142)
+
+[node name="SimpleWall5" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(953, 1125)
+rotation = 1.57088
+scale = Vector2(3.59547, 96.7746)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(520, 472)
+process_callback = 0
+position_smoothing_enabled = true
+script = ExtResource("3_gipqc")
+target = NodePath("../Player")
+smoothing_speed = 15.0
+
+[connection signal="timeout" from="Player/MovementLock" to="Player" method="_on_movement_lock_timeout"]
