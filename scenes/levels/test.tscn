@@ -1,65 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpxllp4v0regt"]
+[gd_scene load_steps=5 format=3 uid="uid://bpxllp4v0regt"]
 
-[ext_resource type="Script" path="res://scenes/levels/Player.gd" id="1_nmeoe"]
-[ext_resource type="Script" path="res://scripts/FreezeEffect.gd" id="2_3mby7"]
+[ext_resource type="PackedScene" uid="uid://brgiqpataf0au" path="res://scenes/player.tscn" id="1_giv4u"]
 [ext_resource type="PackedScene" uid="uid://dnwetmf81iser" path="res://scenes/objects/test/simple_wall.tscn" id="2_oaffa"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="3_gipqc"]
 [ext_resource type="PackedScene" uid="uid://fo3dcsvx5gnj" path="res://scenes/enemy.tscn" id="5_xuybx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qs0el"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfki0"]
-size = Vector2(171.979, 98.5417)
-
 [node name="Scene Root" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(328, 252)
-scale = Vector2(1.92, 1.92)
-collision_layer = 2
-motion_mode = 1
-script = ExtResource("1_nmeoe")
-speed = 1100.0
-acceleration = 3000.0
-friction = 1000.0
-dodge_multiplier = 2.0
-dodge_acceleration_multiplier = 5.0
-knockback_multiplier = 3.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_qs0el")
-
-[node name="MovementLock" type="Timer" parent="Player"]
-
-[node name="ColorRect" type="ColorRect" parent="Player"]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 34.0
-offset_bottom = 33.0
-scale = Vector2(0.458334, 0.458334)
-
-[node name="AttackTimer" type="Timer" parent="Player"]
-
-[node name="VisualTimer" type="Timer" parent="Player"]
-
-[node name="FreezeEffect" type="Node2D" parent="Player"]
-script = ExtResource("2_3mby7")
-
-[node name="ColorRect" type="ColorRect" parent="Player/FreezeEffect"]
-offset_left = 26.5625
-offset_top = -42.1875
-offset_right = 195.563
-offset_bottom = 50.8125
-color = Color(0, 1, 1, 0.364706)
-
-[node name="Area2D" type="Area2D" parent="Player/FreezeEffect"]
-collision_layer = 8
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/FreezeEffect/Area2D"]
-position = Vector2(111.927, 4.37497)
-scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_sfki0")
+[node name="Player" parent="." instance=ExtResource("1_giv4u")]
 
 [node name="WALLS" type="Node2D" parent="."]
 position = Vector2(-34, -57)
@@ -111,10 +59,3 @@ position = Vector2(1177, 916)
 
 [node name="Enemy3" parent="." instance=ExtResource("5_xuybx")]
 position = Vector2(757, 789)
-
-[connection signal="timeout" from="Player/MovementLock" to="Player" method="_on_movement_lock_timeout"]
-[connection signal="timeout" from="Player/AttackTimer" to="Player" method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="Player/VisualTimer" to="Player" method="_on_visual_timer_timeout"]
-[connection signal="area_entered" from="Player/FreezeEffect/Area2D" to="Player/FreezeEffect" method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Player/FreezeEffect/Area2D" to="Player/FreezeEffect" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Player/FreezeEffect/Area2D" to="Player/FreezeEffect" method="_on_area_2d_body_exited"]

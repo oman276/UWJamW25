@@ -1,0 +1,119 @@
+[gd_scene load_steps=13 format=3 uid="uid://brgiqpataf0au"]
+
+[ext_resource type="Script" path="res://scenes/levels/Player.gd" id="1_cbau7"]
+[ext_resource type="Script" path="res://scripts/FreezeEffect.gd" id="2_i6oex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qs0el"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_22he0"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(83.107, 32.995, 1)
+gravity = Vector3(0, 98, 0)
+scale_max = 4.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfki0"]
+size = Vector2(171.979, 98.5417)
+
+[sub_resource type="Curve" id="Curve_qh5vp"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lombg"]
+curve = SubResource("Curve_qh5vp")
+
+[sub_resource type="Gradient" id="Gradient_wrjye"]
+offsets = PackedFloat32Array(0, 0.995536, 1)
+colors = PackedColorArray(0.832722, 0.613371, 0, 1, 0.580852, 0.195674, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_k228d"]
+gradient = SubResource("Gradient_wrjye")
+
+[sub_resource type="Curve" id="Curve_nt762"]
+max_value = 3.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xq53d"]
+curve = SubResource("Curve_nt762")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mkkw2"]
+lifetime_randomness = 0.14
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 14.0
+inherit_velocity_ratio = 1.0
+spread = 60.429
+angular_velocity_min = -174.86
+angular_velocity_max = 720.0
+angular_velocity_curve = SubResource("CurveTexture_lombg")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_max = 10.0
+scale_over_velocity_curve = SubResource("CurveTexture_xq53d")
+color = Color(0.988769, 0.305013, 1.92523e-07, 1)
+color_ramp = SubResource("GradientTexture1D_k228d")
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(328, 252)
+scale = Vector2(1.92, 1.92)
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_cbau7")
+speed = 1100.0
+acceleration = 3000.0
+friction = 1000.0
+dodge_multiplier = 2.0
+dodge_acceleration_multiplier = 5.0
+knockback_multiplier = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qs0el")
+
+[node name="MovementLock" type="Timer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 34.0
+offset_bottom = 33.0
+scale = Vector2(0.458334, 0.458334)
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="VisualTimer" type="Timer" parent="."]
+
+[node name="FreezeEffect" type="Node2D" parent="."]
+script = ExtResource("2_i6oex")
+
+[node name="FreezeVFX" type="GPUParticles2D" parent="FreezeEffect"]
+z_index = 5
+position = Vector2(113.542, -10.9375)
+scale = Vector2(1, 1)
+emitting = false
+amount = 2000
+process_material = SubResource("ParticleProcessMaterial_22he0")
+
+[node name="Area2D" type="Area2D" parent="FreezeEffect"]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FreezeEffect/Area2D"]
+position = Vector2(111.927, 4.37497)
+shape = SubResource("RectangleShape2D_sfki0")
+
+[node name="FireVFX" type="GPUParticles2D" parent="."]
+position = Vector2(-5.96046e-08, -6.25)
+amount = 1400
+process_material = SubResource("ParticleProcessMaterial_mkkw2")
+lifetime = 0.3
+fixed_fps = 120
+
+[connection signal="timeout" from="MovementLock" to="." method="_on_movement_lock_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="VisualTimer" to="." method="_on_visual_timer_timeout"]
+[connection signal="area_entered" from="FreezeEffect/Area2D" to="FreezeEffect" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="FreezeEffect/Area2D" to="FreezeEffect" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="FreezeEffect/Area2D" to="FreezeEffect" method="_on_area_2d_body_exited"]

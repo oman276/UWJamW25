@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var attack_timer = $AttackTimer
 @onready var visual_timer = $VisualTimer
 @onready var freeze_effect = $FreezeEffect
+@onready var fire_effect = $FireVFX
+@onready var freeze_vfx = $FreezeEffect/FreezeVFX
 
 enum PLAYER_MOVE_STATE {
 	Free,
@@ -52,7 +54,8 @@ var last_dodge_dir: Vector2 = Vector2(0, 0)
 var freeze_effect_active : bool = false
 
 func _ready():
-	freeze_effect.visible = false
+	#freeze_effect.visible = false
+	fire_effect.emitting = false
 
 func lock_movement_for(seconds: float):
 	movement_lock.stop()
@@ -71,6 +74,7 @@ func slash_attack(dir: Vector2):
 	
 	current_damage_state = PLAYER_DAMAGE_STATE.Slashing
 	color_rect.color = Color.GOLD
+	fire_effect.emitting = true
 
 func dodge_attack():
 	current_state = PLAYER_MOVE_STATE.Dodging
@@ -107,13 +111,14 @@ func _input(event: InputEvent) -> void:
 		#Freeze Effect Start
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			freeze_effect_active = true
-			pass
+			
 			
 		#Freeze Effect End
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_released():
 			freeze_effect_active = false
 			#deactivate spritw
-			freeze_effect.visible = false
+			#freeze_effect.visible = false
+			freeze_vfx.emitting = false
 			pass
 
 func _process(delta: float) -> void:
@@ -125,8 +130,8 @@ func _process(delta: float) -> void:
 		var direction = (mouse_pos - global_position).normalized()
 		var angle = direction.angle()
 		freeze_effect.rotation = angle
-		if freeze_effect.visible == false:
-			freeze_effect.visible = true
+		if freeze_vfx.emitting == false:
+			freeze_vfx.emitting = true
 
 func _physics_process(delta: float) -> void:
 	#handle input if free
@@ -164,6 +169,7 @@ func _on_movement_lock_timeout():
 func _on_attack_timer_timeout():
 	current_damage_state = PLAYER_DAMAGE_STATE.Vulnerable
 	color_rect.color = Color.WHITE
+	fire_effect.emitting = false
 
 func _on_visual_timer_timeout():
 	if color_rect.color == Color.DARK_RED:
