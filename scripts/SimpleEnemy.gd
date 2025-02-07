@@ -11,12 +11,12 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed
 	move_and_slide()
 
-
-func _on_trigger_area_entered(area):
-	print("player contact")
-	pass # Replace with function body.
-
-
 func _on_trigger_body_entered(body):
-	print("player body contact")
-	pass # Replace with function body.
+	if body is Player:
+		print("player body contact")
+		if body.current_damage_state == Player.PLAYER_DAMAGE_STATE.Slashing:
+			print("Dead...")
+			queue_free()
+		else:
+			print("knockback position!")
+			body.knockback(global_position)

@@ -1,12 +1,18 @@
+class_name Player
+
 extends CharacterBody2D
 @onready var movement_lock = $MovementLock
 @onready var color_rect = $ColorRect
+@onready var attack_timer = $AttackTimer
+@onready var visual_timer = $VisualTimer
+@onready var freeze_effect = $FreezeEffect
 
 enum PLAYER_MOVE_STATE {
 	Free,
 	Slashing,
 	Dodging,
 	FreezeFrame,
+	Knockback
 }
 
 enum PLAYER_DAMAGE_STATE {
@@ -28,12 +34,22 @@ enum PLAYER_DAMAGE_STATE {
 @export var dodge_multiplier: float = 3.0
 @export var dodge_acceleration_multiplier = 3.0
 
+@export var knockback_multiplier: float = 4.0
+@export var knockback_acceleration_multiplier = 4.0
+
+@export var invuln_time: float = 0.7
+
+@export var starting_health: int = 3
+var health : int = starting_health
+
 var current_state: PLAYER_MOVE_STATE = PLAYER_MOVE_STATE.Free
-var current_damage_state: 
+var current_damage_state: PLAYER_DAMAGE_STATE = PLAYER_DAMAGE_STATE.Vulnerable
 
 var last_input_dir: Vector2 = Vector2(0, 0)
 var last_slash_dir: Vector2 = Vector2(0, 0)
 var last_dodge_dir: Vector2 = Vector2(0, 0)
+
+var freeze_effect_active : bool = false
 
 func lock_movement_for(seconds: float):
 	movement_lock.stop()
@@ -45,12 +61,29 @@ func slash_attack(dir: Vector2):
 	current_state = PLAYER_MOVE_STATE.Slashing
 	lock_movement_for(0.1)
 	last_slash_dir = dir
+	
+	attack_timer.stop()
+	attack_timer.wait_time = invuln_time
+	attack_timer.start()
+	
+	current_damage_state = PLAYER_DAMAGE_STATE.Slashing
+	color_rect.color = Color.GOLD
 
 func dodge_attack():
 	current_state = PLAYER_MOVE_STATE.Dodging
 	lock_movement_for(0.2)
 	velocity = velocity * dodge_multiplier
 	
+func knockback(origin_pos: Vector2):
+	current_state = PLAYER_MOVE_STATE.Knockback
+	
+	color_rect.color = Color.DARK_RED
+	visual_timer.stop()
+	visual_timer.wait_time = 0.2
+	visual_timer.start()
+	lock_movement_for(0.2)
+	
+	velocity = speed * knockback_multiplier * (global_position - origin_pos).normalized()
 
 func _input(event: InputEvent) -> void:
 	#input to only register if player is free
@@ -68,6 +101,28 @@ func _input(event: InputEvent) -> void:
 			var relative_mouse_position = (global_mouse_position - global_position).normalized()
 			dodge_attack()
 			
+		#Freeze Effect Start
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			freeze_effect_active = true
+			pass
+			
+		#Freeze Effect End
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			freeze_effect_active = false
+			#deactivate spritw
+			pass
+			
+
+func _process(delta: float) -> void:
+	if freeze_effect_active:
+		#rotate the object to face the mouse
+		var mouse_pos = get_global_mouse_position()
+		var direction = (mouse_pos - global_position).normalized()
+		var angle = direction.angle()
+		freeze_effect.rotation = angle
+		
+		#if the object is not visible, make it visible
+		
 
 func _physics_process(delta: float) -> void:
 	#handle input if free
@@ -80,13 +135,11 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.move_toward(input_vector * speed, acceleration * delta)
 		else:
 			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-		
 		last_input_dir = input_vector
 	elif (current_state == PLAYER_MOVE_STATE.Slashing):
 		velocity = velocity.move_toward(last_slash_dir * speed * slash_multiplier, acceleration * delta * slash_acceleration_multiplier)
-	elif (current_state == PLAYER_MOVE_STATE.Dodging):
+	elif (current_state == PLAYER_MOVE_STATE.Dodging || current_state == PLAYER_MOVE_STATE.Knockback):
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta * dodge_acceleration_multiplier)
-		#velocity = velocity.move_toward(last_input_dir * speed * dodge_multiplier, acceleration * delta * dodge_acceleration_multiplier)
 	
 	var prev_velocity = velocity
 	move_and_slide()
@@ -101,6 +154,13 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity = bounce_vel.normalized() * speed * 1.2
 
-
 func _on_movement_lock_timeout():
 	current_state = PLAYER_MOVE_STATE.Free
+
+func _on_attack_timer_timeout():
+	current_damage_state = PLAYER_DAMAGE_STATE.Vulnerable
+	color_rect.color = Color.WHITE
+
+func _on_visual_timer_timeout():
+	if color_rect.color == Color.DARK_RED:
+		color_rect.color = Color.WHITE

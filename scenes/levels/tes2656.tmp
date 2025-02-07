@@ -26,7 +26,6 @@ acceleration = 3000.0
 friction = 1000.0
 dodge_multiplier = 2.0
 dodge_acceleration_multiplier = 5.0
-knockback_multiplier = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_qs0el")
@@ -39,19 +38,6 @@ offset_top = -10.0
 offset_right = 34.0
 offset_bottom = 33.0
 scale = Vector2(0.458334, 0.458334)
-
-[node name="AttackTimer" type="Timer" parent="Player"]
-
-[node name="VisualTimer" type="Timer" parent="Player"]
-
-[node name="FreezeEffect" type="Node2D" parent="Player"]
-
-[node name="ColorRect" type="ColorRect" parent="Player/FreezeEffect"]
-offset_left = -27.0
-offset_top = -71.0
-offset_right = 26.0
-offset_bottom = -15.0
-color = Color(0, 1, 1, 0.364706)
 
 [node name="WALLS" type="Node2D" parent="."]
 position = Vector2(-34, -57)
@@ -102,17 +88,15 @@ script = ExtResource("4_sseqo")
 target = NodePath("../Player")
 
 [node name="ColorRect" type="ColorRect" parent="Enemy"]
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_right = 40.0
+offset_bottom = 40.0
 color = Color(0.797318, 0, 0.140164, 1)
 
 [node name="Collider" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_ethfy")
 
 [node name="Trigger" type="Area2D" parent="Enemy"]
-position = Vector2(-20, -20)
 collision_layer = 0
 collision_mask = 2
 
@@ -121,7 +105,5 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_bh4op")
 
 [connection signal="timeout" from="Player/MovementLock" to="Player" method="_on_movement_lock_timeout"]
-[connection signal="timeout" from="Player/AttackTimer" to="Player" method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="Player/VisualTimer" to="Player" method="_on_visual_timer_timeout"]
 [connection signal="area_entered" from="Enemy/Trigger" to="Enemy" method="_on_trigger_area_entered"]
 [connection signal="body_entered" from="Enemy/Trigger" to="Enemy" method="_on_trigger_body_entered"]
