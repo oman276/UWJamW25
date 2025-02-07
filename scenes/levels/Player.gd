@@ -51,6 +51,9 @@ var last_dodge_dir: Vector2 = Vector2(0, 0)
 
 var freeze_effect_active : bool = false
 
+func _ready():
+	freeze_effect.visible = false
+
 func lock_movement_for(seconds: float):
 	movement_lock.stop()
 	movement_lock.wait_time = seconds
@@ -107,22 +110,23 @@ func _input(event: InputEvent) -> void:
 			pass
 			
 		#Freeze Effect End
-		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_released():
 			freeze_effect_active = false
 			#deactivate spritw
+			freeze_effect.visible = false
 			pass
-			
 
 func _process(delta: float) -> void:
+	freeze_effect.effect_active = freeze_effect_active
+	
 	if freeze_effect_active:
 		#rotate the object to face the mouse
 		var mouse_pos = get_global_mouse_position()
 		var direction = (mouse_pos - global_position).normalized()
 		var angle = direction.angle()
 		freeze_effect.rotation = angle
-		
-		#if the object is not visible, make it visible
-		
+		if freeze_effect.visible == false:
+			freeze_effect.visible = true
 
 func _physics_process(delta: float) -> void:
 	#handle input if free

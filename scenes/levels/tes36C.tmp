@@ -1,15 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpxllp4v0regt"]
+[gd_scene load_steps=10 format=3 uid="uid://bpxllp4v0regt"]
 
 [ext_resource type="Script" path="res://scenes/levels/Player.gd" id="1_nmeoe"]
 [ext_resource type="Script" path="res://scripts/FreezeEffect.gd" id="2_3mby7"]
 [ext_resource type="PackedScene" uid="uid://dnwetmf81iser" path="res://scenes/objects/test/simple_wall.tscn" id="2_oaffa"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="3_gipqc"]
-[ext_resource type="PackedScene" uid="uid://fo3dcsvx5gnj" path="res://scenes/enemy.tscn" id="5_xuybx"]
+[ext_resource type="Script" path="res://scripts/SimpleEnemy.gd" id="4_sseqo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qs0el"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfki0"]
 size = Vector2(171.979, 98.5417)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ethfy"]
+size = Vector2(38, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bh4op"]
+size = Vector2(38, 38)
 
 [node name="Scene Root" type="Node2D"]
 
@@ -103,14 +109,30 @@ script = ExtResource("3_gipqc")
 target = NodePath("../Player")
 smoothing_speed = 15.0
 
-[node name="Enemy" parent="." instance=ExtResource("5_xuybx")]
-position = Vector2(1292, 222)
+[node name="Enemy" type="CharacterBody2D" parent="."]
+position = Vector2(1241, 394)
+collision_layer = 4
+script = ExtResource("4_sseqo")
+target = NodePath("../Player")
 
-[node name="Enemy2" parent="." instance=ExtResource("5_xuybx")]
-position = Vector2(1177, 916)
+[node name="ColorRect" type="ColorRect" parent="Enemy"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.797318, 0, 0.140164, 1)
 
-[node name="Enemy3" parent="." instance=ExtResource("5_xuybx")]
-position = Vector2(757, 789)
+[node name="Collider" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource("RectangleShape2D_ethfy")
+
+[node name="Trigger" type="Area2D" parent="Enemy"]
+position = Vector2(-20, -20)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/Trigger"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_bh4op")
 
 [connection signal="timeout" from="Player/MovementLock" to="Player" method="_on_movement_lock_timeout"]
 [connection signal="timeout" from="Player/AttackTimer" to="Player" method="_on_attack_timer_timeout"]
@@ -118,3 +140,5 @@ position = Vector2(757, 789)
 [connection signal="area_entered" from="Player/FreezeEffect/Area2D" to="Player/FreezeEffect" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Player/FreezeEffect/Area2D" to="Player/FreezeEffect" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Player/FreezeEffect/Area2D" to="Player/FreezeEffect" method="_on_area_2d_body_exited"]
+[connection signal="area_entered" from="Enemy/Trigger" to="Enemy" method="_on_trigger_area_entered"]
+[connection signal="body_entered" from="Enemy/Trigger" to="Enemy" method="_on_trigger_body_entered"]
