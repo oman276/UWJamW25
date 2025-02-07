@@ -1,6 +1,7 @@
 class_name FreezeEffect
 
 extends Node2D
+@onready var freeze_vfx = $FreezeVFX
 
 var enemies_in_array : Array = []
 var effect_active : bool = false
