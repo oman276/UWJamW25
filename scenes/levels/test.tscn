@@ -5,13 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://dnwetmf81iser" path="res://scenes/objects/test/simple_wall.tscn" id="2_oaffa"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="3_gipqc"]
 [ext_resource type="Texture2D" uid="uid://d2qflta0umd8q" path="res://assets/background.png" id="5_pwut4"]
-[ext_resource type="PackedScene" uid="uid://fo3dcsvx5gnj" path="res://scenes/enemy.tscn" id="5_xuybx"]
 [ext_resource type="Texture2D" uid="uid://cpb8vh62mn6ip" path="res://assets/wall_tile.png" id="6_n6xqx"]
 [ext_resource type="Texture2D" uid="uid://c7nlgi5aq4cxh" path="res://assets/pillar.png" id="7_dpq3j"]
 [ext_resource type="Texture2D" uid="uid://loou2d5at62x" path="res://assets/wave1.png" id="8_drtys"]
 [ext_resource type="Texture2D" uid="uid://h0udiscagitg" path="res://assets/wave2.png" id="9_lmnow"]
 [ext_resource type="Texture2D" uid="uid://q8vgoa7bl4y8" path="res://assets/wave3.png" id="10_atjru"]
 [ext_resource type="Texture2D" uid="uid://b8c2noefqfnca" path="res://assets/small.png" id="10_dpqoa"]
+[ext_resource type="PackedScene" uid="uid://cvqjojpjr4cg1" path="res://scenes/charge_enemy.tscn" id="12_72yaj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8buv"]
 texture = ExtResource("6_n6xqx")
@@ -112,15 +112,6 @@ script = ExtResource("3_gipqc")
 target = NodePath("../Player")
 smoothing_speed = 15.0
 
-[node name="Enemy" parent="." instance=ExtResource("5_xuybx")]
-position = Vector2(1292, 222)
-
-[node name="Enemy2" parent="." instance=ExtResource("5_xuybx")]
-position = Vector2(1141, 492)
-
-[node name="Enemy3" parent="." instance=ExtResource("5_xuybx")]
-position = Vector2(757, 564)
-
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2
 position = Vector2(938, 498)
@@ -209,3 +200,9 @@ texture = ExtResource("10_atjru")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-174, -126)
 navigation_polygon = SubResource("NavigationPolygon_35c2p")
+
+[node name="ChargeEnemy" parent="." instance=ExtResource("12_72yaj")]
+position = Vector2(1486, 411)
+accelleration = 2000.0
+speed = 150000.0
+target = NodePath("../Player")

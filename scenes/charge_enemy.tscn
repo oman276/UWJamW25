@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvqjojpjr4cg1"]
+
+[ext_resource type="PackedScene" uid="uid://fo3dcsvx5gnj" path="res://scenes/enemy.tscn" id="1_7mpna"]
+[ext_resource type="Script" path="res://scripts/ChargeEnemy.gd" id="2_4uekb"]
+
+[node name="ChargeEnemy" instance=ExtResource("1_7mpna")]
+script = ExtResource("2_4uekb")
+accelleration = 2000.0
+speed = 125000.0
+target = NodePath("")
+min_speed_percentage = 0.1
+slowdown_per_sec = 0.3
