@@ -7,7 +7,7 @@ extends Camera2D
 func _process(delta):
 	if target:
 		var target_position = get_node(target).global_position
-		print(target_position)
+
 		if target_position.y > 450:
 			target_position.y = 450
 		if target_position.y < 275:

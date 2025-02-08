@@ -11,6 +11,7 @@ size = Vector2(38, 38)
 [node name="Enemy" type="CharacterBody2D"]
 scale = Vector2(1.60463, 1.60463)
 collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_ycc08")
 speed = 250.0
 target = NodePath("../Player")
@@ -36,5 +37,13 @@ collision_mask = 2
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_bh4op")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
 [connection signal="area_entered" from="Trigger" to="." method="_on_trigger_area_entered"]
 [connection signal="body_entered" from="Trigger" to="." method="_on_trigger_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
