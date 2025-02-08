@@ -72,6 +72,7 @@ agent_radius = 30.0
 script = ExtResource("1_llhaj")
 
 [node name="Player" parent="." instance=ExtResource("1_giv4u")]
+scale = Vector2(0.6, 0.6)
 
 [node name="WALLS" type="Node2D" parent="."]
 position = Vector2(-409, 1435)
