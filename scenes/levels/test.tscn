@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bpxllp4v0regt"]
+[gd_scene load_steps=16 format=3 uid="uid://bpxllp4v0regt"]
 
 [ext_resource type="PackedScene" uid="uid://brgiqpataf0au" path="res://scenes/player.tscn" id="1_giv4u"]
 [ext_resource type="Script" path="res://scenes/levels/test.gd" id="1_llhaj"]
@@ -17,21 +17,56 @@
 texture = ExtResource("6_n6xqx")
 texture_region_size = Vector2i(134, 90)
 1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
 2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
 0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-67, -45, 67, -45, 67, 45, -67, 45)
 1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
 3:2/0 = 0
+3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:2/0/physics_layer_0/angular_velocity = 0.0
 3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
 3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
 2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
 0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
 0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
 1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
 2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_g3t5e"]
 tile_size = Vector2i(134, 90)
+physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_k8buv")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_35c2p"]
+vertices = PackedVector2Array(2214, 1004, 2141, 1004, 2141, 7, 2205, 7, 71, 1003, 57, 1003, 64, 14, 71, 14, 1947, 885, 265, 885, 935, 585, 1947, 135, 339, 585, 265, 135, 339, 435, 935, 435)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 10, 9), PackedInt32Array(12, 9, 13, 14), PackedInt32Array(11, 10, 15), PackedInt32Array(13, 11, 15, 14)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(35, -15, 27, 1033, 2245, 1035, 2235, -23)])
+parsed_collision_mask = 5
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation"
+agent_radius = 30.0
 
 [node name="Scene Root" type="Node2D"]
 script = ExtResource("1_llhaj")
@@ -39,7 +74,7 @@ script = ExtResource("1_llhaj")
 [node name="Player" parent="." instance=ExtResource("1_giv4u")]
 
 [node name="WALLS" type="Node2D" parent="."]
-position = Vector2(-34, -57)
+position = Vector2(-409, 1435)
 
 [node name="SimpleWall" parent="WALLS" instance=ExtResource("2_oaffa")]
 
@@ -84,19 +119,19 @@ position = Vector2(1292, 222)
 position = Vector2(1141, 492)
 
 [node name="Enemy3" parent="." instance=ExtResource("5_xuybx")]
-position = Vector2(757, 789)
+position = Vector2(757, 564)
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2
 position = Vector2(938, 498)
 texture = ExtResource("5_pwut4")
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=["navigation"]]
 z_index = 1
 position = Vector2(61, -21)
 tile_set = SubResource("TileSet_g3t5e")
 format = 2
-layer_0/tile_data = PackedInt32Array(-1, 2, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 0, -65533, 2, 0, -65532, 2, 0, -65531, 2, 0, -65530, 2, 0, -65529, 2, 0, -65528, 2, 0, -65527, 2, 0, -65526, 2, 0, -65525, 2, 0, -65524, 2, 0, -65523, 2, 0, 262146, 2, 0, 262145, 2, 0, 262147, 2, 0, 262148, 2, 0)
+layer_0/tile_data = PackedInt32Array(-1, 2, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 0, -65533, 2, 0, -65532, 2, 0, -65531, 2, 0, -65530, 2, 0, -65529, 2, 0, -65528, 2, 0, -65527, 2, 0, -65526, 2, 0, -65525, 2, 0, -65524, 2, 0, -65523, 2, 0, 262146, 2, 0, 262145, 2, 0, 262147, 2, 0, 262148, 2, 0, 13, 2, 0, 65549, 2, 0, 131085, 2, 0, 196621, 2, 0, 262157, 2, 0, 327693, 2, 0, 393229, 2, 0, 458765, 2, 0, 524301, 2, 0, 589837, 2, 0, 655359, 2, 0, 589824, 2, 0, 589825, 2, 0, 589826, 2, 0, 589827, 2, 0, 589828, 2, 0, 589829, 2, 0, 589830, 2, 0, 589831, 2, 0, 589832, 2, 0, 589833, 2, 0, 589834, 2, 0, 589835, 2, 0, 589836, 2, 0, 65535, 2, 0, 131071, 2, 0, 196607, 2, 0, 262143, 2, 0, 327679, 2, 0, 393215, 2, 0, 458751, 2, 0, 524287, 2, 0, 589823, 2, 0)
 
 [node name="Pillar" type="Sprite2D" parent="."]
 z_index = -1
@@ -124,6 +159,7 @@ position = Vector2(41, 0)
 texture = ExtResource("10_dpqoa")
 
 [node name="Wave1" type="Sprite2D" parent="."]
+z_index = 5
 position = Vector2(-157, -48)
 
 [node name="Wave3" type="Sprite2D" parent="Wave1"]
@@ -169,3 +205,7 @@ texture = ExtResource("10_atjru")
 [node name="Wave1" type="Sprite2D" parent="Wave3"]
 position = Vector2(290, 807)
 texture = ExtResource("10_atjru")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-174, -126)
+navigation_polygon = SubResource("NavigationPolygon_35c2p")

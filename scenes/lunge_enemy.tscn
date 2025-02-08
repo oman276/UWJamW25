@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj61u6x4wiglq"]
+
+[ext_resource type="PackedScene" uid="uid://fo3dcsvx5gnj" path="res://scenes/enemy.tscn" id="1_2sod7"]
+[ext_resource type="Script" path="res://scripts/LungeEnemy.gd" id="2_u534n"]
+
+[node name="LungeEnemy" instance=ExtResource("1_2sod7")]
+script = ExtResource("2_u534n")
+base_speed = 200.0
+base_acceleration = 200.0
+lunge_speed = 1000.0
+lunge_friction = 100.0
+slowdown_speed = 700.0
+speed = 100.0
+target = NodePath("")
+min_speed_percentage = 0.1
+slowdown_per_sec = 0.3
+
+[node name="ColorRect" parent="." index="0"]
+color = Color(0.6353, 0.333126, 2.88785e-07, 1)
+
+[node name="LungeTimer" type="Timer" parent="." index="3"]
