@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyf74nfydvss2"]
+
+[ext_resource type="PackedScene" uid="uid://fo3dcsvx5gnj" path="res://scenes/enemy.tscn" id="1_qm1re"]
+[ext_resource type="Script" path="res://scripts/ShootEnemygd.gd" id="2_lnwqs"]
+
+[node name="ShootEnemy" instance=ExtResource("1_qm1re")]
+script = ExtResource("2_lnwqs")
+max_dis_to_player = 250.0
+friction = 300.0
+acceleration = 200.0
+slowdown_friction = 150.0
+time_between_shots = 1.5
+speed = 100.0
+target = NodePath("")
+min_speed_percentage = 0.1
+slowdown_per_sec = 0.3
+
+[node name="ShootTimer" type="Timer" parent="." index="5"]
+
+[node name="BulletSpawn" type="Node2D" parent="." index="6"]
+position = Vector2(47.3629, 0)
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

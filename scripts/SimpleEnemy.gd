@@ -38,10 +38,15 @@ func slowdown(delta : float):
 		current_speed_percent = min_speed_percentage
 
 func _physics_process(delta: float) -> void:
-	#var direction = (player.global_position - global_position).normalized()
 	var direction = to_local(nav_agent.get_next_path_position()).normalized()
 	velocity = direction * speed * current_speed_percent
 	move_and_slide()
+	
+
+func rotate_to_player():
+	if player:
+		var direction = (player.global_position - global_position).normalized()
+		rotation = direction.angle()
 
 func make_path():
 	nav_agent.target_position = player.global_position
