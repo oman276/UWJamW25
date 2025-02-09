@@ -7,9 +7,13 @@
 script = ExtResource("2_u534n")
 base_speed = 200.0
 base_acceleration = 200.0
+distance_to_start_lunge = 10.0
 lunge_speed = 1000.0
-lunge_friction = 100.0
+lunge_friction = 10000.0
 slowdown_speed = 700.0
+pause_time = 0.5
+lunge_time = 0.3
+time_between_lunges = 7.0
 speed = 100.0
 target = NodePath("")
 min_speed_percentage = 0.1
@@ -18,4 +22,15 @@ slowdown_per_sec = 0.3
 [node name="ColorRect" parent="." index="0"]
 color = Color(0.6353, 0.333126, 2.88785e-07, 1)
 
-[node name="LungeTimer" type="Timer" parent="." index="3"]
+[node name="LungeTimer" type="Timer" parent="." index="5"]
+one_shot = true
+
+[node name="PauseTimer" type="Timer" parent="." index="6"]
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="." index="7"]
+one_shot = true
+
+[connection signal="timeout" from="LungeTimer" to="." method="_on_lunge_timer_timeout"]
+[connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
