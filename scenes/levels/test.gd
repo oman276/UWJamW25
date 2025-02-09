@@ -1,6 +1,5 @@
 extends Node2D
 
-
 var initial_wave_pos_1
 var initial_wave_pos_2
 var initial_wave_pos_3
@@ -10,7 +9,6 @@ func _ready() -> void:
 	initial_wave_pos_1 = $Wave1.position
 	initial_wave_pos_2 = $Wave2.position
 	initial_wave_pos_3 = $Wave3.position
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
