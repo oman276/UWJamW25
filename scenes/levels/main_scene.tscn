@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://fuwldaqyjphl"]
+
+[ext_resource type="PackedScene" uid="uid://dty6bam7ws52h" path="res://scenes/main_camera.tscn" id="1_5xhns"]
+[ext_resource type="PackedScene" uid="uid://brgiqpataf0au" path="res://scenes/player.tscn" id="2_4pjhe"]
+[ext_resource type="Texture2D" uid="uid://cpb8vh62mn6ip" path="res://assets/wall_tile.png" id="3_8tgbt"]
+[ext_resource type="PackedScene" uid="uid://cpmpwfqf8a5r7" path="res://scenes/charge_enemy.tscn" id="4_ph6b0"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8buv"]
+texture = ExtResource("3_8tgbt")
+texture_region_size = Vector2i(134, 90)
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-67, -45, 67, -45, 67, 45, -67, 45)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+3:2/0 = 0
+3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:2/0/physics_layer_0/angular_velocity = 0.0
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_ih4h5"]
+tile_size = Vector2i(134, 90)
+physics_layer_0/collision_layer = 1
+sources/2 = SubResource("TileSetAtlasSource_k8buv")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_kpctt"]
+vertices = PackedVector2Array(15244, 1114, 15088, 5965, 14077, -1968, 9071, 4876, 10953, 6688, -8082, 6330, 2639, 5146, 10858, -6235, 9071, -2704, 6257, -2704, 6257, -5134, -6886, -6164, -195, -5134, -195, -2704, -5823, -2704, -5823, 5146, 2639, 4876, 4247, 556, 4247, -544, 8649, -2414, 8649, 4586, 4649, 1886, 3825, -2414, 2619, -544, -979, -794, 2619, 556, -1803, 1886, -2989, 16, -2989, -544, -1401, -794, 5835, -4844, 5835, -2704, 3825, -2704, 227, -4844, 2639, 4586, 2639, 2176, 4649, 2176, -1803, 2176, 2217, 2176, 2217, 4856, -5401, 4856, -5401, 2176, -3391, 2176, -3391, 1886, -5401, 1886, -5401, -2414, -4215, 16, -1401, -2414, -4215, -544, -979, -2414, 2237, -2414, 2237, -2704, 227, -2704)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 4, 3, 8), PackedInt32Array(8, 9, 10, 7), PackedInt32Array(11, 7, 10, 12), PackedInt32Array(12, 13, 14, 11), PackedInt32Array(5, 11, 14, 15), PackedInt32Array(6, 16, 3), PackedInt32Array(5, 15, 6), PackedInt32Array(17, 18, 19, 20, 21), PackedInt32Array(22, 19, 18, 23), PackedInt32Array(24, 23, 25, 26, 27, 28, 29), PackedInt32Array(30, 31, 32, 33), PackedInt32Array(20, 34, 35, 36), PackedInt32Array(37, 38, 39, 40), PackedInt32Array(40, 41, 42), PackedInt32Array(37, 40, 42, 26), PackedInt32Array(26, 42, 43, 27), PackedInt32Array(43, 44, 45, 46), PackedInt32Array(45, 47, 29, 28, 48), PackedInt32Array(24, 49, 50, 23), PackedInt32Array(51, 52, 33), PackedInt32Array(51, 33, 32, 22), PackedInt32Array(51, 22, 23, 50), PackedInt32Array(20, 36, 21), PackedInt32Array(17, 21, 26, 25), PackedInt32Array(46, 27, 43), PackedInt32Array(45, 48, 46)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(15094, 6092, 15255, 1113, 14057, -2051), PackedVector2Array(-6896, -6174, 10868, -6246, 10964, 6699, -8094, 6340)])
+parsed_collision_mask = 1
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation"
+
+[node name="MainScene" type="Node2D"]
+
+[node name="Camera2D" parent="." instance=ExtResource("1_5xhns")]
+position = Vector2(580, 573)
+zoom = Vector2(0.2, 0.2)
+
+[node name="Player" parent="." instance=ExtResource("2_4pjhe")]
+
+[node name="TileMap" type="TileMap" parent="." groups=["navigation"]]
+z_index = 1
+position = Vector2(-1391, -534)
+scale = Vector2(3, 3)
+tile_set = SubResource("TileSet_ih4h5")
+format = 2
+layer_0/tile_data = PackedInt32Array(655359, 2, 0, 589827, 2, 0, 589828, 2, 0, 589829, 2, 0, 589830, 2, 0, 589831, 2, 0, 589832, 2, 0, 65546, 2, 0, 131082, 2, 0, 196618, 2, 0, 196619, 2, 0, 196620, 2, 0, 131084, 2, 0, 131085, 2, 0, 65549, 2, 0, 65548, 2, 0, 12, 2, 0, 11, 2, 0, 65547, 2, 0, 131083, 2, 0, 10, 2, 0, 13, 2, 0, 196621, 2, 0, -458762, 2, 0, -458761, 2, 0, -458760, 2, 0, -458759, 2, 0, -458758, 2, 0, -458757, 2, 0, -458756, 2, 0, -458755, 2, 0, -458754, 2, 0, -458753, 2, 0, -524288, 2, 0, -524287, 2, 0, -524286, 2, 0, -524285, 2, 0, -524284, 2, 0, -524283, 2, 0, -524280, 2, 0, -524281, 2, 0, -524282, 2, 0, 65529, 2, 0, 65530, 2, 0, 65531, 2, 0, 131067, 2, 0, 131066, 2, 0, 131065, 2, 0, -458752, 2, 0, -393216, 2, 0, -327680, 2, 0, -262144, 2, 0, -196608, 2, 0, -131072, 2, 0, 589824, 2, 0, 589825, 2, 0, 589826, 2, 0, 589833, 2, 0, 589834, 2, 0, 589835, 2, 0, 589836, 2, 0, 589837, 2, 0, 589838, 2, 0, -524275, 2, 0, -524274, 2, 0, -524273, 2, 0, -524272, 2, 0, -524271, 2, 0, -524270, 2, 0, -524269, 2, 0, 655369, 2, 0, 720905, 2, 0, 786441, 2, 0, 851977, 2, 0, 917513, 2, 0, 983049, 2, 0, 1114121, 2, 0, 1048585, 2, 0, 1179657, 2, 0, 1245193, 2, 0, 1245194, 2, 0, 1245195, 2, 0, 1245196, 2, 0, 1245197, 2, 0, 1245198, 2, 0, 1245199, 2, 0, 1245200, 2, 0, 1245201, 2, 0, 1245202, 2, 0, 1245203, 2, 0, 1245204, 2, 0, 1245205, 2, 0, 1245206, 2, 0, 1245207, 2, 0, 1179673, 2, 0, 1245209, 2, 0, 1245208, 2, 0, 1114137, 2, 0, 1048601, 2, 0, 983065, 2, 0, 917529, 2, 0, 851993, 2, 0, 786457, 2, 0, 720921, 2, 0, 655385, 2, 0, 458777, 2, 0, 393241, 2, 0, 327705, 2, 0, 262169, 2, 0, 196633, 2, 0, 131097, 2, 0, 65561, 2, 0, 25, 2, 0, -65511, 2, 0, -131047, 2, 0, 589849, 2, 0, -196583, 2, 0, -262119, 2, 0, -327655, 2, 0, -393191, 2, 0, -458727, 2, 0, -524263, 2, 0, -524264, 2, 0, -524265, 2, 0, -524266, 2, 0, -524268, 2, 0, -524267, 2, 0, 524313, 2, 0, -589821, 2, 0, -655357, 2, 0, -720893, 2, 0, -786429, 2, 0, -851965, 2, 0, -1048573, 2, 0, -983037, 2, 0, -917501, 2, 0, -1114109, 2, 0, -1114108, 2, 0, -1114107, 2, 0, -1114104, 2, 0, -1114103, 2, 0, -1114102, 2, 0, -1114101, 2, 0, -1114100, 2, 0, -1114095, 2, 0, -983022, 2, 0, -917486, 2, 0, -851950, 2, 0, -786414, 2, 0, -720878, 2, 0, -589806, 2, 0, -655342, 2, 0, -1114106, 2, 0, -1114105, 2, 0, -1114099, 2, 0, -1114098, 2, 0, -1114097, 2, 0, -1114096, 2, 0, -1114094, 2, 0, -1048558, 2, 0, -458763, 2, 0, -393227, 2, 0, -327691, 2, 0, -262155, 2, 0, -196619, 2, 0, -131083, 2, 0, -65547, 2, 0, -11, 2, 0, 65525, 2, 0, 131061, 2, 0, 196597, 2, 0, 262133, 2, 0, 327669, 2, 0, 393205, 2, 0, 458741, 2, 0, 524277, 2, 0, 589813, 2, 0, 655349, 2, 0, 720885, 2, 0, 655350, 2, 0, 655351, 2, 0, 655352, 2, 0, 655353, 2, 0, 655354, 2, 0, 786421, 2, 0, 851957, 2, 0, 917493, 2, 0, 983029, 2, 0, 1048565, 2, 0, 1114101, 2, 0, 1179637, 2, 0, 1245173, 2, 0, 1310709, 2, 0, 1376245, 2, 0, 1376246, 2, 0, 1376247, 2, 0, 1376248, 2, 0, 1376249, 2, 0, 1376250, 2, 0, 1376251, 2, 0, 1376252, 2, 0, 1376253, 2, 0, 1376254, 2, 0, 1376255, 2, 0, 1310720, 2, 0, 1310721, 2, 0, 1310722, 2, 0, 1310723, 2, 0, 1310724, 2, 0, 1310725, 2, 0, 1310726, 2, 0, 1310727, 2, 0, 1310728, 2, 0, 1310729, 2, 0)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_kpctt")
+
+[node name="ChargeEnemy" parent="." instance=ExtResource("4_ph6b0")]
+position = Vector2(5930, 2120)
+
+[node name="ChargeEnemy2" parent="." instance=ExtResource("4_ph6b0")]
+position = Vector2(-3084, 3631)
