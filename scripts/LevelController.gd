@@ -28,6 +28,12 @@ func _ready():
 
 func spawn_new_wave(num : int):
 	enemies_remaining = num
+	timer.stop()
+	timer.wait_time = 2
+	timer.start()
+	
+	new_wave_.text = "WAVE " + str(num)
+	
 	for i in range(num):
 		var enemy_type = randi_range(1, 3)
 		var spawn_loc = randi_range(0, 4)
@@ -42,11 +48,8 @@ func spawn_new_wave(num : int):
 		add_child(enemy_ins)
 		enemy_ins.global_position = spawns[spawn_loc].global_position
 		
-		timer.stop()
-		timer.wait_time = 2
-		timer.start()
-		
-		new_wave_.text = "WAVE " + str(num)
+		$RespawnTimer.start(1)  # Start a 5-second timer
+		await $RespawnTimer.timeout
 
 func enemy_died():
 	enemies_remaining -= 1

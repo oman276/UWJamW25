@@ -183,6 +183,8 @@ func _process(delta: float) -> void:
 	fire_effect.rotation_degrees = self.rotation_degrees
 	
 	ability_cooldown -= ability_cooldown_drop_per_sec * delta
+	if ability_cooldown < 0:
+		ability_cooldown = 0
 
 func _physics_process(delta: float) -> void:
 	#handle input if free
