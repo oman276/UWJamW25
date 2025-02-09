@@ -77,6 +77,9 @@ func _ready():
 	anim_timer.one_shot = true
 	player_scale = self.scale.x
 
+func death():
+	get_tree().change_scene_to_file("res://scenes/levels/game_over.tscn")
+	
 func lock_movement_for(seconds: float):
 	movement_lock.stop()
 	movement_lock.wait_time = seconds
@@ -86,7 +89,7 @@ func slash_attack(dir: Vector2):
 	ability_cooldown += ability_per_use
 	print(ability_cooldown)
 	if ability_cooldown >= 100:
-		get_tree().reload_current_scene()
+		death()
 	
 	anim_timer.start()
 	dash_toggle = true
@@ -113,7 +116,7 @@ func dodge_attack():
 func knockback(origin_pos: Vector2):
 	health -= 1
 	if (health == 0):
-		get_tree().reload_current_scene()
+		death()
 	heart1.visible = health >= 3
 	heart2.visible = health >= 2
 	heart3.visible = health >= 1

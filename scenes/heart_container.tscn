@@ -4,8 +4,10 @@
 [ext_resource type="Script" path="res://scenes/heart_container.gd" id="1_r86au"]
 
 [node name="HeartContainer" type="HBoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 18.0
+offset_top = 14.0
+offset_right = 146.0
+offset_bottom = 54.0
 script = ExtResource("1_r86au")
 
 [node name="Heart" parent="." instance=ExtResource("1_gjokm")]

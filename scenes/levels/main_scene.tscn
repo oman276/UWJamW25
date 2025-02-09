@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://fuwldaqyjphl"]
+[gd_scene load_steps=20 format=3 uid="uid://fuwldaqyjphl"]
 
 [ext_resource type="PackedScene" uid="uid://dty6bam7ws52h" path="res://scenes/main_camera.tscn" id="1_5xhns"]
 [ext_resource type="Script" path="res://scripts/LevelController.gd" id="1_iwnx3"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://h0udiscagitg" path="res://assets/wave2.png" id="8_b0n2w"]
 [ext_resource type="Texture2D" uid="uid://q8vgoa7bl4y8" path="res://assets/wave3.png" id="9_y4c0d"]
 [ext_resource type="Texture2D" uid="uid://b8c2noefqfnca" path="res://assets/small.png" id="10_e2fuh"]
+[ext_resource type="Texture2D" uid="uid://dbwdabypue4p6" path="res://assets/bar.png" id="14_id3o5"]
 [ext_resource type="PackedScene" uid="uid://dlqkmvrdfg60d" path="res://scenes/heart_container.tscn" id="14_q8r18"]
 [ext_resource type="PackedScene" uid="uid://c1e3rqofqm30v" path="res://scenes/texture_progress_bar.tscn" id="15_jstp0"]
 
@@ -336,7 +337,19 @@ position = Vector2(14762, -74)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = 19.0
+offset_top = 12.0
+offset_right = 613.0
+offset_bottom = 212.0
+scale = Vector2(0.485, 0.485)
+texture = ExtResource("14_id3o5")
+
 [node name="HeartContainer" parent="CanvasLayer" instance=ExtResource("14_q8r18")]
+offset_left = 37.0
+offset_top = 26.0
+offset_right = 165.0
+offset_bottom = 66.0
 scale = Vector2(2, 2)
 
 [node name="TextureProgressBar" parent="CanvasLayer" instance=ExtResource("15_jstp0")]

@@ -1,17 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1e3rqofqm30v"]
+[gd_scene load_steps=6 format=3 uid="uid://c1e3rqofqm30v"]
 
 [ext_resource type="Texture2D" uid="uid://bypym2jaeia0r" path="res://assets/firebar.png" id="1_elyb0"]
 [ext_resource type="Texture2D" uid="uid://beshrnb11rxv3" path="res://assets/barback.png" id="1_in237"]
 [ext_resource type="Script" path="res://scenes/ability_bar.gd" id="1_t7bx7"]
+[ext_resource type="Texture2D" uid="uid://dvludrlcj7ovc" path="res://scenes/fire_UI.png" id="2_06ajo"]
+[ext_resource type="Texture2D" uid="uid://dooaet3h1w8gy" path="res://scenes/skull.png" id="5_kutj5"]
 
 [node name="TextureProgressBar" type="TextureProgressBar"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -309.0
-offset_bottom = 40.0
+offset_left = -381.0
+offset_top = 1.0
+offset_right = -20.0
+offset_bottom = 120.0
 grow_horizontal = 0
-fill_mode = 1
+value = 100.0
+texture_under = ExtResource("1_in237")
 texture_over = ExtResource("1_elyb0")
-texture_progress = ExtResource("1_in237")
+texture_progress = ExtResource("2_06ajo")
+texture_progress_offset = Vector2(98.895, 37.085)
 script = ExtResource("1_t7bx7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 253.0
+offset_top = 12.0
+offset_right = 371.0
+offset_bottom = 107.0
+texture = ExtResource("5_kutj5")
+expand_mode = 1
