@@ -22,7 +22,7 @@ func _process(delta):
 
 		
 		target_position.x = clamp(target_position.x, bottom_left.global_position.x, top_right.global_position.x)
-		target_position.y = clamp(target_position.y, top_right.global_position.y, top_right.global_position.y)	
+		target_position.y = clamp(target_position.y, top_right.global_position.y, bottom_left.global_position.y)	
 		
 		if smoothing_enabled:
 			global_position = global_position.lerp(target_position, smoothing_speed * delta)
