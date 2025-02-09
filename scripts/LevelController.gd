@@ -23,7 +23,7 @@ func _ready():
 	for wave in waves:
 		initial_wave_positions.append(wave.position)
 	
-	#spawn_new_wave(1)
+	spawn_new_wave(1)
 	new_wave_.text = ""
 
 func spawn_new_wave(num : int):
