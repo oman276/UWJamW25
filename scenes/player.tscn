@@ -44,8 +44,8 @@ directional_velocity_max = 0.0
 directional_velocity_curve = SubResource("CurveXYZTexture_ijey3")
 gravity = Vector3(0, 0, 0)
 linear_accel_max = 10.0
-scale_min = 0.02
-scale_max = 0.02
+scale_min = 0.2
+scale_max = 0.5
 
 [sub_resource type="Curve" id="Curve_qh5vp"]
 min_value = -360.0
@@ -95,8 +95,8 @@ directional_velocity_min = 0.5
 directional_velocity_max = 10.0
 directional_velocity_curve = SubResource("CurveXYZTexture_jh1np")
 gravity = Vector3(0, 0, 0)
-scale_min = 0.1
-scale_max = 0.1
+scale_min = 0.25
+scale_max = 0.4
 scale_curve = SubResource("CurveTexture_go5cj")
 scale_over_velocity_curve = SubResource("CurveTexture_xq53d")
 color_ramp = SubResource("GradientTexture1D_qov41")
@@ -1323,12 +1323,12 @@ collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_cbau7")
 speed = 10000.0
-acceleration = 8000.0
-friction = 8000.0
+acceleration = 15000.0
+friction = 12000.0
 slash_multiplier = 20.0
 slash_acceleration_multiplier = 20.0
 slash_friction_multiplier = 5.0
-dodge_multiplier = 2.0
+speed_kept_on_bounce = 0.7
 dodge_acceleration_multiplier = 5.0
 knockback_multiplier = 3.0
 
@@ -1349,6 +1349,7 @@ scale = Vector2(0.458334, 0.458334)
 [node name="VisualTimer" type="Timer" parent="."]
 
 [node name="FreezeEffect" type="Node2D" parent="."]
+scale = Vector2(3.65338, 3.65338)
 script = ExtResource("2_i6oex")
 
 [node name="FreezeVFX" type="GPUParticles2D" parent="FreezeEffect"]

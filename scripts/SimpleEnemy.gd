@@ -16,6 +16,7 @@ var frozen_color : Color = Color.SKY_BLUE
 var current_speed_percent : float = 1.0
 
 @export var regen_rate_per_sec : float = 0.05
+var next_path_pos_dir : Vector2 = Vector2.ZERO
 
 var player : Node2D
 
@@ -32,7 +33,6 @@ func _process(delta):
 	current_speed_percent += regen_rate_per_sec * delta
 	if current_speed_percent > 1:
 		current_speed_percent = 1
-	
 	
 	$Sprites.modulate = base_color.lerp(frozen_color, 1 - current_speed_percent)
 	$IceSprite.modulate.a = 1 - current_speed_percent
@@ -55,6 +55,7 @@ func rotate_to_player():
 
 func make_path():
 	nav_agent.target_position = player.global_position
+	next_path_pos_dir = to_local(nav_agent.get_next_path_position()).normalized()
 
 func _on_trigger_body_entered(body):
 	if body is Player:

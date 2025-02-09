@@ -168,7 +168,7 @@ func _physics_process(delta: float) -> void:
 		if input_vector != Vector2.ZERO:
 			velocity = velocity.move_toward(input_vector * speed, acceleration * delta)
 		else:
-			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+			velocity = velocity.move_toward(Vector2(0, 0), friction * delta)
 		last_input_dir = input_vector
 	elif (current_state == PLAYER_MOVE_STATE.Slashing):
 		velocity = velocity.move_toward(last_slash_dir * speed * slash_multiplier, acceleration * delta * slash_acceleration_multiplier)
