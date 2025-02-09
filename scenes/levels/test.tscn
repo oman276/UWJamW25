@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bpxllp4v0regt"]
+[gd_scene load_steps=19 format=3 uid="uid://bpxllp4v0regt"]
 
 [ext_resource type="PackedScene" uid="uid://brgiqpataf0au" path="res://scenes/player.tscn" id="1_giv4u"]
 [ext_resource type="Script" path="res://scenes/levels/test.gd" id="1_llhaj"]
@@ -11,7 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://h0udiscagitg" path="res://assets/wave2.png" id="9_lmnow"]
 [ext_resource type="Texture2D" uid="uid://q8vgoa7bl4y8" path="res://assets/wave3.png" id="10_atjru"]
 [ext_resource type="Texture2D" uid="uid://b8c2noefqfnca" path="res://assets/small.png" id="10_dpqoa"]
-[ext_resource type="PackedScene" uid="uid://cvqjojpjr4cg1" path="res://scenes/charge_enemy.tscn" id="12_72yaj"]
+[ext_resource type="PackedScene" uid="uid://cpmpwfqf8a5r7" path="res://scenes/charge_enemy.tscn" id="12_72yaj"]
+[ext_resource type="Script" path="res://scripts/ChargeEnemy.gd" id="13_f0kkh"]
+[ext_resource type="PackedScene" uid="uid://g27ilmc6722t" path="res://scenes/shoot_enemy.tscn" id="13_spun7"]
+[ext_resource type="PackedScene" uid="uid://dj61u6x4wiglq" path="res://scenes/lunge_enemy.tscn" id="14_p8s2r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8buv"]
 texture = ExtResource("6_n6xqx")
@@ -202,8 +205,14 @@ texture = ExtResource("10_atjru")
 position = Vector2(-174, -126)
 navigation_polygon = SubResource("NavigationPolygon_35c2p")
 
+[node name="LungeEnemy" parent="." instance=ExtResource("14_p8s2r")]
+position = Vector2(1390, 189)
+script = ExtResource("13_f0kkh")
+accelleration = 100.0
+speed = 2000.0
+
 [node name="ChargeEnemy" parent="." instance=ExtResource("12_72yaj")]
-position = Vector2(1486, 411)
-accelleration = 2000.0
-speed = 150000.0
-target = NodePath("../Player")
+position = Vector2(1378, 502)
+
+[node name="ShootEnemy" parent="." instance=ExtResource("13_spun7")]
+position = Vector2(1212, 363)

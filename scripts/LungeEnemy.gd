@@ -31,10 +31,8 @@ var target_position : Vector2 = Vector2.ZERO
 func _ready():
 	super._ready()
 	velocity = Vector2.ZERO
-	base_color = Color.ORANGE
 
 func activate_pause_state():
-	base_color = Color.GREEN
 	current_lunge_state = LUNGE_STATE.Paused
 	target_position = player.global_position
 	
@@ -64,7 +62,6 @@ func _physics_process(delta):
 	#rotate_to_player()
 
 func _on_pause_timer_timeout():
-	base_color = Color.PURPLE
 	current_lunge_state = LUNGE_STATE.Lunging
 	velocity = (target_position - global_position).normalized() * lunge_speed
 	can_lunge = false
@@ -78,7 +75,6 @@ func _on_pause_timer_timeout():
 	cooldown_timer.start()
 
 func _on_lunge_timer_timeout():
-	base_color = Color.ORANGE
 	current_lunge_state = LUNGE_STATE.Moving
 
 func _on_cooldown_timer_timeout():

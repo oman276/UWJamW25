@@ -5,8 +5,8 @@ extends CharacterBody2D
 @onready var nav_agent = $NavigationAgent2D
 @onready var color_rect = $ColorRect
 
-var base_color : Color = Color.RED
-var frozen_color : Color = Color.AQUA
+var base_color : Color
+var frozen_color : Color = Color.SKY_BLUE
 
 @export var speed := 100.0
 @export var target: NodePath
@@ -20,6 +20,7 @@ var current_speed_percent : float = 1.0
 var player : Node2D
 
 func _ready():
+	base_color = $Sprites.modulate
 	player = get_node_or_null(target)
 	if player == null:
 		player = get_node("../Player")
@@ -32,7 +33,9 @@ func _process(delta):
 	if current_speed_percent > 1:
 		current_speed_percent = 1
 	
-	color_rect.color = base_color.lerp(frozen_color, 1 - current_speed_percent)
+	
+	$Sprites.modulate = base_color.lerp(frozen_color, 1 - current_speed_percent)
+	$IceSprite.modulate.a = 1 - current_speed_percent
 
 func slowdown(delta : float):
 	current_speed_percent -= delta * slowdown_per_sec

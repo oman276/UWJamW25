@@ -1,14 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://dj61u6x4wiglq"]
+[gd_scene load_steps=11 format=3 uid="uid://dj61u6x4wiglq"]
 
 [ext_resource type="PackedScene" uid="uid://fo3dcsvx5gnj" path="res://scenes/enemy.tscn" id="1_2sod7"]
 [ext_resource type="Script" path="res://scripts/LungeEnemy.gd" id="2_u534n"]
+[ext_resource type="Texture2D" uid="uid://dft41xddisxd7" path="res://assets/enemy1_head.png" id="3_go5pn"]
+[ext_resource type="Texture2D" uid="uid://dpbj1x8sucrg8" path="res://assets/enemy1_spines.png" id="4_wjutp"]
+[ext_resource type="Texture2D" uid="uid://juaejm7f42u6" path="res://assets/ice.png" id="5_nqmy3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7l7ch"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rugxs"]
+
+[sub_resource type="Animation" id="Animation_lew8c"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(3.73918, -1.24639), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_frx7c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fego8"]
+_data = {
+"RESET": SubResource("Animation_frx7c"),
+"idle": SubResource("Animation_lew8c")
+}
 
 [node name="LungeEnemy" instance=ExtResource("1_2sod7")]
 script = ExtResource("2_u534n")
-base_speed = 200.0
-base_acceleration = 200.0
-distance_to_start_lunge = 10.0
-lunge_speed = 1000.0
+base_speed = 2000.0
+base_acceleration = 2000.0
+distance_to_start_lunge = 100.0
+lunge_speed = 10000.0
 lunge_friction = 10000.0
 slowdown_speed = 700.0
 pause_time = 0.5
@@ -20,7 +63,18 @@ min_speed_percentage = 0.1
 slowdown_per_sec = 0.3
 
 [node name="ColorRect" parent="." index="0"]
+visible = false
 color = Color(0.6353, 0.333126, 2.88785e-07, 1)
+
+[node name="Collider" parent="." index="1"]
+position = Vector2(-4.36238, 5.60877)
+scale = Vector2(-1.35942, -1.35942)
+shape = SubResource("CircleShape2D_7l7ch")
+
+[node name="CollisionShape2D" parent="Trigger" index="0"]
+position = Vector2(14.3912, 26.8552)
+scale = Vector2(1.7, 1.7)
+shape = SubResource("CircleShape2D_rugxs")
 
 [node name="LungeTimer" type="Timer" parent="." index="5"]
 one_shot = true
@@ -30,6 +84,27 @@ one_shot = true
 
 [node name="CooldownTimer" type="Timer" parent="." index="7"]
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
+libraries = {
+"": SubResource("AnimationLibrary_fego8")
+}
+
+[node name="Sprites" type="Node2D" parent="." index="9"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprites" index="0"]
+scale = Vector2(0.389, 0.389)
+texture = ExtResource("3_go5pn")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprites" index="1"]
+scale = Vector2(0.389, 0.389)
+texture = ExtResource("4_wjutp")
+
+[node name="IceSprite" type="Sprite2D" parent="." index="10"]
+modulate = Color(1, 1, 1, 0.745098)
+position = Vector2(-6.23197, 6.85516)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_nqmy3")
 
 [connection signal="timeout" from="LungeTimer" to="." method="_on_lunge_timer_timeout"]
 [connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]

@@ -1,7 +1,75 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpmpwfqf8a5r7"]
+[gd_scene load_steps=11 format=3 uid="uid://cpmpwfqf8a5r7"]
 
 [ext_resource type="PackedScene" uid="uid://fo3dcsvx5gnj" path="res://scenes/enemy.tscn" id="1_7mpna"]
 [ext_resource type="Script" path="res://scripts/ChargeEnemy.gd" id="2_4uekb"]
+[ext_resource type="Texture2D" uid="uid://cmodyu52bruyi" path="res://assets/enemy2_spine1.png" id="3_m651i"]
+[ext_resource type="Texture2D" uid="uid://bslawgpvo8eic" path="res://assets/enemy2_spine.png" id="4_ue34h"]
+[ext_resource type="Texture2D" uid="uid://x45titxxcp23" path="res://assets/enemy2_head.png" id="5_xk72x"]
+[ext_resource type="Texture2D" uid="uid://juaejm7f42u6" path="res://assets/ice.png" id="6_uc0na"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i41d2"]
+height = 52.0312
+
+[sub_resource type="Animation" id="Animation_jdsmv"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.623197, -2.49279), Vector2(-4.36238, 3.11598), Vector2(0.623197, -2.49279)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Sprite2D3:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.623197, -2.49279), Vector2(4.98557, 4.98557), Vector2(0.623197, -2.49279)]
+}
+
+[sub_resource type="Animation" id="Animation_vy10f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.623197, -2.49279)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Sprite2D3:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.623197, -2.49279)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1vk2p"]
+_data = {
+"RESET": SubResource("Animation_vy10f"),
+"idle": SubResource("Animation_jdsmv")
+}
 
 [node name="ChargeEnemy" instance=ExtResource("1_7mpna")]
 script = ExtResource("2_4uekb")
@@ -11,5 +79,41 @@ target = NodePath("")
 min_speed_percentage = 0.1
 slowdown_per_sec = 0.3
 
+[node name="ColorRect" parent="." index="0"]
+visible = false
+
+[node name="CollisionShape2D" parent="Trigger" index="0"]
+position = Vector2(20, 20)
+rotation = 0.698132
+scale = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_i41d2")
+
 [node name="Timer" parent="." index="4"]
 wait_time = 0.4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_1vk2p")
+}
+autoplay = "idle"
+
+[node name="Sprites" type="Node2D" parent="." index="6"]
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprites" index="0"]
+position = Vector2(0.623197, -2.49279)
+scale = Vector2(0.389302, 0.389302)
+texture = ExtResource("3_m651i")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprites" index="1"]
+position = Vector2(0.623197, -2.49279)
+scale = Vector2(0.389302, 0.389302)
+texture = ExtResource("4_ue34h")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprites" index="2"]
+position = Vector2(0.623197, -2.49279)
+scale = Vector2(0.389302, 0.389302)
+texture = ExtResource("5_xk72x")
+
+[node name="IceSprite" type="Sprite2D" parent="." index="7"]
+scale = Vector2(0.30025, 0.30025)
+texture = ExtResource("6_uc0na")
