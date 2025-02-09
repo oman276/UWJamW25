@@ -22,8 +22,10 @@ var player : Node2D
 func _ready():
 	player = get_node_or_null(target)
 	if player == null:
-		print("cannot find player")
-		return  
+		player = get_node("../Player")
+		if player == null:
+			print("fuck")
+
 
 func _process(delta):
 	current_speed_percent += regen_rate_per_sec * delta

@@ -1,5 +1,8 @@
 extends SimpleEnemy
 @onready var shoot_timer = $ShootTimer
+@onready var bullet_spawn_host = $BulletSpawnHost
+@export var bullet_scene: PackedScene  
+@onready var bullet_spawn_point = $BulletSpawnHost/BulletSpawnPoint
 
 # SHOOT ENEMY:
 # Approach player, stop a solid distance away from them
@@ -30,8 +33,16 @@ func _physics_process(delta):
 			is_shooting = true
 			shoot_timer.start()
 	move_and_slide()
-	rotate_to_player()
+	
+	#rotate the shooter
+	if player:
+		var direction = (player.global_position - global_position).normalized()
+		bullet_spawn_host.rotation = direction.angle()
 
 func _on_shoot_timer_timeout():
 	#fire bullet
-	pass
+	var bullet = bullet_scene.instantiate()
+	get_parent().add_child(bullet)  # Add to the scene
+
+	bullet.global_transform = bullet_spawn_point.global_transform  
+	bullet.velocity = (player.global_position - bullet_spawn_point.global_position).normalized()

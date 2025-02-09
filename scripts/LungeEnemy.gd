@@ -61,7 +61,7 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, lunge_friction * delta)
 	
 	move_and_slide()
-	rotate_to_player()
+	#rotate_to_player()
 
 func _on_pause_timer_timeout():
 	base_color = Color.PURPLE
