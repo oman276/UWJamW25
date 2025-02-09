@@ -9,4 +9,4 @@ process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("1_e27eh")
 target = NodePath("../Player")
-smoothing_speed = 15.0
+smoothing_speed = 20.0

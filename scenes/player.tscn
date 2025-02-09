@@ -1326,12 +1326,11 @@ ability_cooldown_drop_per_sec = 2.0
 speed = 10000.0
 acceleration = 15000.0
 friction = 12000.0
-slash_multiplier = 15.0
-slash_acceleration_multiplier = 15.0
-slash_friction_multiplier = 5.0
+slash_friction_multiplier = 8.0
 speed_kept_on_bounce = 0.7
 dodge_acceleration_multiplier = 5.0
-knockback_multiplier = 3.0
+knockback_multiplier = 2.0
+knockback_acceleration_multiplier = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qs0el")

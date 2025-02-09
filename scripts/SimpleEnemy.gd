@@ -58,6 +58,14 @@ func make_path():
 	nav_agent.target_position = player.global_position
 	next_path_pos_dir = to_local(nav_agent.get_next_path_position()).normalized()
 
+	# If the path size is 0 or 1 (only the start point), no valid path exists
+	if not nav_agent.is_target_reachable():
+		print("No valid path found!")
+		get_parent().enemy_died()
+		queue_free()
+	else:
+		print("Path found!")
+
 func _on_trigger_body_entered(body):
 	if body is Player:
 		if body.current_damage_state == Player.PLAYER_DAMAGE_STATE.Slashing:

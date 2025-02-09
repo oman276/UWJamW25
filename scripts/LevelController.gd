@@ -4,6 +4,8 @@ extends Node2D
 @onready var player = $Player
 @export var wave_move_scale : float = 3
 @export var waves : Array[Sprite2D] = []
+@onready var timer = $Timer
+@onready var new_wave_ = $"CanvasLayer/New Wave!"
 
 @export var chase_enemy : PackedScene
 @export var lunge_enemy : PackedScene
@@ -21,8 +23,8 @@ func _ready():
 	for wave in waves:
 		initial_wave_positions.append(wave.position)
 	
-	spawn_new_wave(1)
-	enemies_remaining = 1
+	#spawn_new_wave(1)
+	new_wave_.text = ""
 
 func spawn_new_wave(num : int):
 	enemies_remaining = num
@@ -39,6 +41,12 @@ func spawn_new_wave(num : int):
 		var enemy_ins = enemy.instantiate()
 		add_child(enemy_ins)
 		enemy_ins.global_position = spawns[spawn_loc].global_position
+		
+		timer.stop()
+		timer.wait_time = 2
+		timer.start()
+		
+		new_wave_.text = "WAVE " + str(num)
 
 func enemy_died():
 	enemies_remaining -= 1
@@ -53,3 +61,6 @@ func _process(delta):
 	
 	for i in range(waves.size()):
 		waves[i].position = initial_wave_positions[i] + 0.3 * wave_move_scale * $Pivot/Mover.global_position
+
+func _on_timer_timeout():
+	new_wave_.text = ""
