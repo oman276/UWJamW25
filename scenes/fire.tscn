@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcydpjy8sifew"]
+
+[ext_resource type="Texture2D" uid="uid://dj8g3vocm7ly2" path="res://assets/fire.png" id="1_wjfmy"]
+
+[node name="Fire" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture = ExtResource("1_wjfmy")

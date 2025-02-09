@@ -1,8 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://brgiqpataf0au"]
+[gd_scene load_steps=39 format=3 uid="uid://brgiqpataf0au"]
 
 [ext_resource type="Script" path="res://scenes/levels/Player.gd" id="1_cbau7"]
 [ext_resource type="Script" path="res://scripts/FreezeEffect.gd" id="2_i6oex"]
 [ext_resource type="Texture2D" uid="uid://buu84fd0mtgp1" path="res://assets/icarus_sprites/Untitled_Artwork-1.png" id="3_cxm2x"]
+[ext_resource type="Texture2D" uid="uid://jf8c34oae1d8" path="res://assets/snow.png" id="3_dp0ue"]
+[ext_resource type="Texture2D" uid="uid://dj8g3vocm7ly2" path="res://assets/fire.png" id="3_tfcsg"]
+[ext_resource type="Texture2D" uid="uid://cv0qrunyjthv3" path="res://assets/Untitled_Artwork.png" id="4_trd8q"]
 [ext_resource type="Texture2D" uid="uid://dp4lxej06rnqx" path="res://assets/icarus_sprites/Untitled_Artwork-2.png" id="4_vsvg2"]
 [ext_resource type="Texture2D" uid="uid://dbnkrugswqhqk" path="res://assets/icarus_sprites/Untitled_Artwork-6.png" id="5_5krqi"]
 [ext_resource type="Texture2D" uid="uid://dmembcn0wsm00" path="res://assets/icarus_sprites/Untitled_Artwork-5.png" id="6_xatdy"]
@@ -19,15 +22,30 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qs0el"]
 size = Vector2(67.1875, 230.208)
 
+[sub_resource type="Curve" id="Curve_5o7i4"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vrxnm"]
+curve = SubResource("Curve_5o7i4")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ijey3"]
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_22he0"]
 particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(83.107, 32.995, 1)
-gravity = Vector3(0, 98, 0)
-scale_max = 4.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfki0"]
-size = Vector2(171.979, 98.5417)
+emission_shape_offset = Vector3(120, 20, 0)
+emission_shape = 2
+emission_sphere_radius = 111.13
+angular_velocity_curve = SubResource("CurveTexture_vrxnm")
+directional_velocity_min = 0.0
+directional_velocity_max = 0.0
+directional_velocity_curve = SubResource("CurveXYZTexture_ijey3")
+gravity = Vector3(0, 0, 0)
+linear_accel_max = 10.0
+scale_min = 0.02
+scale_max = 0.02
 
 [sub_resource type="Curve" id="Curve_qh5vp"]
 min_value = -360.0
@@ -38,12 +56,21 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_lombg"]
 curve = SubResource("Curve_qh5vp")
 
-[sub_resource type="Gradient" id="Gradient_wrjye"]
-offsets = PackedFloat32Array(0, 0.995536, 1)
-colors = PackedColorArray(0.832722, 0.613371, 0, 1, 0.580852, 0.195674, 0, 1, 1, 1, 1, 1)
+[sub_resource type="Gradient" id="Gradient_c6ay8"]
+offsets = PackedFloat32Array(0, 0.433498, 1)
+colors = PackedColorArray(0.839216, 0.647059, 0.980392, 1, 0.834352, 0.828471, 0.995791, 0.561576, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_k228d"]
-gradient = SubResource("Gradient_wrjye")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qov41"]
+gradient = SubResource("Gradient_c6ay8")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_jh1np"]
+
+[sub_resource type="Curve" id="Curve_612ls"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_go5cj"]
+curve = SubResource("Curve_612ls")
 
 [sub_resource type="Curve" id="Curve_nt762"]
 max_value = 3.0
@@ -57,18 +84,31 @@ curve = SubResource("Curve_nt762")
 lifetime_randomness = 0.14
 particle_flag_disable_z = true
 emission_shape = 1
-emission_sphere_radius = 14.0
+emission_sphere_radius = 25.0
 inherit_velocity_ratio = 1.0
-spread = 60.429
+direction = Vector3(1, 8, 0)
+spread = 100.0
 angular_velocity_min = -174.86
 angular_velocity_max = 720.0
 angular_velocity_curve = SubResource("CurveTexture_lombg")
+directional_velocity_min = 0.5
+directional_velocity_max = 10.0
+directional_velocity_curve = SubResource("CurveXYZTexture_jh1np")
 gravity = Vector3(0, 0, 0)
-scale_min = 0.0
-scale_max = 10.0
+scale_min = 0.1
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_go5cj")
 scale_over_velocity_curve = SubResource("CurveTexture_xq53d")
-color = Color(0.988769, 0.305013, 1.92523e-07, 1)
-color_ramp = SubResource("GradientTexture1D_k228d")
+color_ramp = SubResource("GradientTexture1D_qov41")
+
+[sub_resource type="Environment" id="Environment_i0pan"]
+glow_enabled = true
+glow_intensity = 5.23
+glow_hdr_threshold = 1.5
+fog_light_color = Color(0.862459, 0.693086, 0.234582, 1)
+fog_light_energy = 4.0
+fog_sun_scatter = 2.0
+volumetric_fog_albedo = Color(0.758828, 0.644642, 0.278446, 1)
 
 [sub_resource type="Animation" id="Animation_o2s53"]
 length = 0.001
@@ -1310,25 +1350,39 @@ script = ExtResource("2_i6oex")
 
 [node name="FreezeVFX" type="GPUParticles2D" parent="FreezeEffect"]
 z_index = 5
-position = Vector2(113.542, -10.9375)
-emitting = false
-amount = 2000
+position = Vector2(91.6667, -16.6667)
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_22he0")
+texture = ExtResource("3_dp0ue")
+lifetime = 0.3
+
+[node name="icewave" type="Sprite2D" parent="FreezeEffect/FreezeVFX"]
+z_index = -1
+position = Vector2(126.042, 33.8542)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("4_trd8q")
 
 [node name="Area2D" type="Area2D" parent="FreezeEffect"]
 collision_layer = 8
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FreezeEffect/Area2D"]
-position = Vector2(111.927, 4.37497)
-shape = SubResource("RectangleShape2D_sfki0")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FreezeEffect/Area2D"]
+position = Vector2(77.6042, 12.5)
+scale = Vector2(1, 0.96875)
+polygon = PackedVector2Array(10.4167, -3.76344, -7.29166, 50, 101.042, 184.409, 233.854, 81.7204, 241.667, -55.914, 119.271, -192.473, -14.0625, -69.8925)
 
 [node name="FireVFX" type="GPUParticles2D" parent="."]
-position = Vector2(-5.96046e-08, -6.25)
-amount = 1400
+modulate = Color(1.5, 1.497, 1.5, 1)
+position = Vector2(0, -6.25001)
+amount = 50
 process_material = SubResource("ParticleProcessMaterial_mkkw2")
+texture = ExtResource("3_tfcsg")
 lifetime = 0.3
 fixed_fps = 120
+trail_lifetime = 1.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_i0pan")
 
 [node name="Polygons" type="Node2D" parent="."]
 position = Vector2(-332.292, -238.542)
@@ -1454,7 +1508,7 @@ rest = Transform2D(1, 0, 0, 1, -34.375, 58.8542)
 
 [node name="swordwhole" type="Bone2D" parent="Skeleton2D/hip/neck/leftarm"]
 rotation = -3.24806
-scale = Vector2(1, 1)
+scale = Vector2(0.999995, 0.999995)
 rest = Transform2D(1, 0, 0, 1, -27.0833, 82.8125)
 
 [node name="sword" type="Bone2D" parent="Skeleton2D/hip/neck/leftarm/swordwhole"]

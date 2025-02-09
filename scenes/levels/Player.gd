@@ -62,6 +62,7 @@ var freeze_effect_active : bool = false
 var facing_left = true
 
 func _ready():
+	freeze_vfx.modulate.a = 0
 	#freeze_effect.visible = false
 	fire_effect.emitting = false
 	add_child(anim_timer)
@@ -135,6 +136,8 @@ func _input(event: InputEvent) -> void:
 			#deactivate spritw
 			#freeze_effect.visible = false
 			freeze_vfx.emitting = false
+			var tween: Tween = create_tween()
+			tween.tween_property(freeze_vfx, "modulate:a", 0, 0.5).from(1)
 			pass
 
 func _process(delta: float) -> void:
@@ -148,9 +151,12 @@ func _process(delta: float) -> void:
 		var mouse_pos = get_global_mouse_position()
 		var direction = (mouse_pos - global_position).normalized()
 		var angle = direction.angle()
-		freeze_effect.rotation = angle
+		freeze_effect.global_rotation = angle
 		if freeze_vfx.emitting == false:
 			freeze_vfx.emitting = true
+			var tween: Tween = create_tween()
+			tween.tween_property(freeze_vfx, "modulate:a", 1, 0.5).from(0)
+	fire_effect.rotation_degrees = self.rotation_degrees
 
 func _physics_process(delta: float) -> void:
 	#handle input if free
