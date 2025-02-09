@@ -16,7 +16,7 @@ script = ExtResource("1_ycc08")
 speed = 250.0
 target = NodePath("../Player")
 min_speed_percentage = 0.2
-slowdown_per_sec = 0.35
+slowdown_per_sec = 1.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -20.0

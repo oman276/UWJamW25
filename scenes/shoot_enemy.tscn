@@ -84,6 +84,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="Sprites" type="Sprite2D" parent="." index="8"]
+z_index = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprites" index="0"]
 position = Vector2(6.23197, 2.49279)
@@ -99,6 +100,7 @@ scale = Vector2(0.316144, -0.316144)
 texture = ExtResource("5_jd7pg")
 
 [node name="IceSprite" type="Sprite2D" parent="." index="9"]
+z_index = 2
 scale = Vector2(0.252163, 0.252163)
 texture = ExtResource("6_nfu42")
 
