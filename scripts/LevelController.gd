@@ -23,6 +23,7 @@ func _ready():
 	for wave in waves:
 		initial_wave_positions.append(wave.position)
 	
+	wave = 1
 	spawn_new_wave(1)
 	new_wave_.text = ""
 
@@ -55,6 +56,7 @@ func enemy_died():
 	enemies_remaining -= 1
 	if enemies_remaining == 0:
 		wave += 1
+		utils.wave = wave
 		print("New Wave")
 		spawn_new_wave(wave)
 

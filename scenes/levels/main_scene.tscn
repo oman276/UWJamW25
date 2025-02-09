@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://fuwldaqyjphl"]
+[gd_scene load_steps=23 format=3 uid="uid://fuwldaqyjphl"]
 
 [ext_resource type="PackedScene" uid="uid://dty6bam7ws52h" path="res://scenes/main_camera.tscn" id="1_5xhns"]
 [ext_resource type="Script" path="res://scripts/LevelController.gd" id="1_iwnx3"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dbwdabypue4p6" path="res://assets/bar.png" id="14_id3o5"]
 [ext_resource type="PackedScene" uid="uid://dlqkmvrdfg60d" path="res://scenes/heart_container.tscn" id="14_q8r18"]
 [ext_resource type="PackedScene" uid="uid://c1e3rqofqm30v" path="res://scenes/texture_progress_bar.tscn" id="15_jstp0"]
+[ext_resource type="AudioStream" uid="uid://cb2m54m3w04bt" path="res://bensound-timeflies.mp3" id="18_kjmfk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8buv"]
 texture = ExtResource("3_8tgbt")
@@ -92,6 +93,13 @@ bottom_left = NodePath("../BottomLeft")
 top_right = NodePath("../TopRight")
 
 [node name="Player" parent="." instance=ExtResource("2_4pjhe")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-170.833, -131.25)
+scale = Vector2(0.520833, 0.520833)
+stream = ExtResource("18_kjmfk")
+autoplay = true
+max_distance = 2e+08
 
 [node name="TileMap" type="TileMap" parent="." groups=["navigation"]]
 z_index = 6

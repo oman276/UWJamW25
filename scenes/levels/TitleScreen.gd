@@ -1,7 +1,11 @@
 extends Sprite2D
+@onready var label = $"../Label"
 
 func _ready():
 	MusicManager.play_music(preload("res://bensound-timeflies.mp3"))  # Change music
+	if label:
+		label.text = "WAVE: " + str(utils.wave)
+	
 
 func _on_start_button_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton \

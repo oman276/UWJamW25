@@ -22,4 +22,19 @@ position = Vector2(824, 913)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_wa4fm")
 
+[node name="Label" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1382.0
+offset_top = 594.0
+offset_right = 1879.0
+offset_bottom = 712.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "WAVE : 2"
+
 [connection signal="input_event" from="StartButton" to="TitleScreen" method="_on_start_button_input_event"]
