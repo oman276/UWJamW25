@@ -9,6 +9,11 @@ extends CharacterBody2D
 @onready var fire_effect = $FireVFX
 @onready var freeze_vfx = $FreezeEffect/FreezeVFX
 
+var anim_timer := Timer.new()
+var dash_toggle = false
+
+var player_scale = 0
+
 enum PLAYER_MOVE_STATE {
 	Free,
 	Slashing,
@@ -53,9 +58,16 @@ var last_dodge_dir: Vector2 = Vector2(0, 0)
 
 var freeze_effect_active : bool = false
 
+
+var facing_left = true
+
 func _ready():
 	#freeze_effect.visible = false
 	fire_effect.emitting = false
+	add_child(anim_timer)
+	anim_timer.wait_time = 1.0
+	anim_timer.one_shot = true
+	player_scale = self.scale.x
 
 func lock_movement_for(seconds: float):
 	movement_lock.stop()
@@ -63,6 +75,10 @@ func lock_movement_for(seconds: float):
 	movement_lock.start()
 
 func slash_attack(dir: Vector2):
+	anim_timer.start()
+	dash_toggle = true
+	$AnimationPlayer.play("dash")
+	
 	velocity = Vector2.ZERO
 	current_state = PLAYER_MOVE_STATE.Slashing
 	lock_movement_for(0.1)
@@ -122,6 +138,9 @@ func _input(event: InputEvent) -> void:
 			pass
 
 func _process(delta: float) -> void:
+	if anim_timer.time_left == 0 && dash_toggle == true:
+		$AnimationPlayer.play("flight")
+		dash_toggle = false
 	freeze_effect.effect_active = freeze_effect_active
 	
 	if freeze_effect_active:
@@ -135,11 +154,11 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	#handle input if free
-	if(current_state == PLAYER_MOVE_STATE.Free):
-		var input_vector = Vector2(
+	var input_vector = Vector2(
 			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 			Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 		).normalized()
+	if(current_state == PLAYER_MOVE_STATE.Free):
 		if input_vector != Vector2.ZERO:
 			velocity = velocity.move_toward(input_vector * speed, acceleration * delta)
 		else:
@@ -152,6 +171,18 @@ func _physics_process(delta: float) -> void:
 	
 	var prev_velocity = velocity
 	move_and_slide()
+	print(velocity.x)
+	var angle_to_turn = velocity.angle()
+	if velocity.x < 0 and facing_left == true:
+		facing_left = false
+		self.scale.x = -player_scale
+	elif velocity.x > 0 and facing_left == false:
+		facing_left = true
+		self.scale.x = -player_scale
+	if velocity.x == 0 and facing_left != true:
+		angle_to_turn = 3.14
+	var current_angle = lerp_angle(self.rotation, angle_to_turn, 3 * delta)
+	self.rotation = current_angle  # Apply to the Node2D rotation
 	
 	#bounce if we've hit anything
 	if get_slide_collision_count() > 0:
