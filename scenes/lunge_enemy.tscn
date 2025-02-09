@@ -10,21 +10,6 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rugxs"]
 
-[sub_resource type="Animation" id="Animation_lew8c"]
-resource_name = "idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Sprite2D2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(3.73918, -1.24639), Vector2(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_frx7c"]
 length = 0.001
 tracks/0/type = "value"
@@ -40,6 +25,21 @@ tracks/0/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_lew8c"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(3.73918, -1.24639), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fego8"]
 _data = {
 "RESET": SubResource("Animation_frx7c"),
@@ -47,13 +47,14 @@ _data = {
 }
 
 [node name="LungeEnemy" instance=ExtResource("1_2sod7")]
+scale = Vector2(7.23, 7.23)
 script = ExtResource("2_u534n")
-base_speed = 2000.0
+base_speed = 200000.0
 base_acceleration = 2000.0
-distance_to_start_lunge = 100.0
+distance_to_start_lunge = 2800.0
 lunge_speed = 10000.0
-lunge_friction = 10000.0
-slowdown_speed = 700.0
+lunge_friction = 10.0
+slowdown_speed = 70000.0
 pause_time = 0.5
 lunge_time = 0.3
 time_between_lunges = 7.0

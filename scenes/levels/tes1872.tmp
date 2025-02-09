@@ -1,0 +1,205 @@
+[gd_scene load_steps=16 format=3 uid="uid://bpxllp4v0regt"]
+
+[ext_resource type="PackedScene" uid="uid://brgiqpataf0au" path="res://scenes/player.tscn" id="1_giv4u"]
+[ext_resource type="Script" path="res://scenes/levels/test.gd" id="1_llhaj"]
+[ext_resource type="PackedScene" uid="uid://dnwetmf81iser" path="res://scenes/objects/test/simple_wall.tscn" id="2_oaffa"]
+[ext_resource type="Script" path="res://scripts/Camera.gd" id="3_gipqc"]
+[ext_resource type="Texture2D" uid="uid://d2qflta0umd8q" path="res://assets/background.png" id="5_pwut4"]
+[ext_resource type="Texture2D" uid="uid://cpb8vh62mn6ip" path="res://assets/wall_tile.png" id="6_n6xqx"]
+[ext_resource type="Texture2D" uid="uid://c7nlgi5aq4cxh" path="res://assets/pillar.png" id="7_dpq3j"]
+[ext_resource type="Texture2D" uid="uid://loou2d5at62x" path="res://assets/wave1.png" id="8_drtys"]
+[ext_resource type="Texture2D" uid="uid://h0udiscagitg" path="res://assets/wave2.png" id="9_lmnow"]
+[ext_resource type="Texture2D" uid="uid://q8vgoa7bl4y8" path="res://assets/wave3.png" id="10_atjru"]
+[ext_resource type="Texture2D" uid="uid://b8c2noefqfnca" path="res://assets/small.png" id="10_dpqoa"]
+[ext_resource type="PackedScene" uid="uid://dj61u6x4wiglq" path="res://scenes/lunge_enemy.tscn" id="12_uds52"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8buv"]
+texture = ExtResource("6_n6xqx")
+texture_region_size = Vector2i(134, 90)
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-67, -45, 67, -45, 67, 45, -67, 45)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+3:2/0 = 0
+3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:2/0/physics_layer_0/angular_velocity = 0.0
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_g3t5e"]
+tile_size = Vector2i(134, 90)
+physics_layer_0/collision_layer = 1
+sources/2 = SubResource("TileSetAtlasSource_k8buv")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_35c2p"]
+vertices = PackedVector2Array(2214, 1004, 2141, 1004, 2141, 7, 2205, 7, 71, 1003, 57, 1003, 64, 14, 71, 14, 1947, 885, 265, 885, 935, 585, 1947, 135, 339, 585, 265, 135, 339, 435, 935, 435)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 10, 9), PackedInt32Array(12, 9, 13, 14), PackedInt32Array(11, 10, 15), PackedInt32Array(13, 11, 15, 14)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(35, -15, 27, 1033, 2245, 1035, 2235, -23)])
+parsed_collision_mask = 5
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation"
+agent_radius = 30.0
+
+[node name="Scene Root" type="Node2D"]
+script = ExtResource("1_llhaj")
+
+[node name="Player" parent="." instance=ExtResource("1_giv4u")]
+
+[node name="WALLS" type="Node2D" parent="."]
+position = Vector2(-409, 1435)
+
+[node name="SimpleWall" parent="WALLS" instance=ExtResource("2_oaffa")]
+
+[node name="SimpleWall2" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(1904, 319)
+
+[node name="SimpleWall6" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(1912, 822)
+
+[node name="SimpleWall7" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(6.00012, 913)
+
+[node name="SimpleWall3" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(494, 442)
+rotation = 1.57088
+scale = Vector2(4.26394, 26.7574)
+
+[node name="SimpleWall4" parent="WALLS" instance=ExtResource("2_oaffa")]
+z_index = 1
+position = Vector2(976, -14)
+rotation = 1.57088
+scale = Vector2(-4.83671, 99.19)
+
+[node name="SimpleWall5" parent="WALLS" instance=ExtResource("2_oaffa")]
+position = Vector2(935, 886)
+rotation = 1.57088
+scale = Vector2(0.581214, 93.8859)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(520, 472)
+zoom = Vector2(1.3, 1.3)
+process_callback = 0
+position_smoothing_enabled = true
+script = ExtResource("3_gipqc")
+target = NodePath("../Player")
+smoothing_speed = 15.0
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(938, 498)
+texture = ExtResource("5_pwut4")
+
+[node name="TileMap" type="TileMap" parent="." groups=["navigation"]]
+z_index = 1
+position = Vector2(61, -21)
+tile_set = SubResource("TileSet_g3t5e")
+format = 2
+layer_0/tile_data = PackedInt32Array(-1, 2, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 0, -65533, 2, 0, -65532, 2, 0, -65531, 2, 0, -65530, 2, 0, -65529, 2, 0, -65528, 2, 0, -65527, 2, 0, -65526, 2, 0, -65525, 2, 0, -65524, 2, 0, -65523, 2, 0, 262146, 2, 0, 262145, 2, 0, 262147, 2, 0, 262148, 2, 0, 13, 2, 0, 65549, 2, 0, 131085, 2, 0, 196621, 2, 0, 262157, 2, 0, 327693, 2, 0, 393229, 2, 0, 458765, 2, 0, 524301, 2, 0, 589837, 2, 0, 655359, 2, 0, 589824, 2, 0, 589825, 2, 0, 589826, 2, 0, 589827, 2, 0, 589828, 2, 0, 589829, 2, 0, 589830, 2, 0, 589831, 2, 0, 589832, 2, 0, 589833, 2, 0, 589834, 2, 0, 589835, 2, 0, 589836, 2, 0, 65535, 2, 0, 131071, 2, 0, 196607, 2, 0, 262143, 2, 0, 327679, 2, 0, 393215, 2, 0, 458751, 2, 0, 524287, 2, 0, 589823, 2, 0)
+
+[node name="Pillar" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(48, 384)
+texture = ExtResource("7_dpq3j")
+
+[node name="Pillar2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(917, 384)
+texture = ExtResource("7_dpq3j")
+
+[node name="Pillar3" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1800, 384)
+texture = ExtResource("7_dpq3j")
+
+[node name="Pivot" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(925, 40)
+texture = ExtResource("10_dpqoa")
+
+[node name="Mover" type="Sprite2D" parent="Pivot"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(41, 0)
+texture = ExtResource("10_dpqoa")
+
+[node name="Wave1" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(-157, -48)
+
+[node name="Wave3" type="Sprite2D" parent="Wave1"]
+position = Vector2(1768, 808)
+texture = ExtResource("8_drtys")
+
+[node name="Wave2" type="Sprite2D" parent="Wave1"]
+position = Vector2(1029, 807)
+texture = ExtResource("8_drtys")
+
+[node name="Wave1" type="Sprite2D" parent="Wave1"]
+position = Vector2(290, 807)
+texture = ExtResource("8_drtys")
+
+[node name="Wave2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-112, -81)
+
+[node name="Wave3" type="Sprite2D" parent="Wave2"]
+position = Vector2(1768, 808)
+texture = ExtResource("9_lmnow")
+
+[node name="Wave2" type="Sprite2D" parent="Wave2"]
+position = Vector2(1029, 807)
+texture = ExtResource("9_lmnow")
+
+[node name="Wave1" type="Sprite2D" parent="Wave2"]
+position = Vector2(290, 807)
+texture = ExtResource("9_lmnow")
+
+[node name="Wave3" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(-11, -102)
+
+[node name="Wave3" type="Sprite2D" parent="Wave3"]
+position = Vector2(1768, 808)
+texture = ExtResource("10_atjru")
+
+[node name="Wave2" type="Sprite2D" parent="Wave3"]
+position = Vector2(1029, 807)
+texture = ExtResource("10_atjru")
+
+[node name="Wave1" type="Sprite2D" parent="Wave3"]
+position = Vector2(290, 807)
+texture = ExtResource("10_atjru")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-174, -126)
+navigation_polygon = SubResource("NavigationPolygon_35c2p")
+
+[node name="LungeEnemy" parent="." instance=ExtResource("12_uds52")]
+position = Vector2(1496, 499)

@@ -7,6 +7,21 @@
 [ext_resource type="Texture2D" uid="uid://d32xktmhwyrgp" path="res://assets/enemy3_spines.png" id="5_jd7pg"]
 [ext_resource type="Texture2D" uid="uid://juaejm7f42u6" path="res://assets/ice.png" id="6_nfu42"]
 
+[sub_resource type="Animation" id="Animation_taf2j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.49279, 0.623197)]
+}
+
 [sub_resource type="Animation" id="Animation_yfxjq"]
 resource_name = "idle"
 loop_mode = 1
@@ -23,21 +38,6 @@ tracks/0/keys = {
 "values": [Vector2(2.49279, 0.623197), Vector2(-0.623196, -1.86959), Vector2(2.49279, 0.623197)]
 }
 
-[sub_resource type="Animation" id="Animation_taf2j"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Sprite2D2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2.49279, 0.623197)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hpal5"]
 _data = {
 "RESET": SubResource("Animation_taf2j"),
@@ -45,14 +45,15 @@ _data = {
 }
 
 [node name="ShootEnemy" instance=ExtResource("1_qm1re")]
+scale = Vector2(7.23, 7.23)
 script = ExtResource("2_lnwqs")
 bullet_scene = ExtResource("3_g4ugq")
-max_dis_to_player = 600.0
+max_dis_to_player = 3600.0
 friction = 3000.0
-acceleration = 2000.0
+acceleration = 20000.0
 slowdown_friction = 5000.0
 time_between_shots = 1.5
-speed = 10000.0
+speed = 100000.0
 target = NodePath("")
 min_speed_percentage = 0.1
 slowdown_per_sec = 0.3
