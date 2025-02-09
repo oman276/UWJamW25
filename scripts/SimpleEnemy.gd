@@ -61,8 +61,8 @@ func make_path():
 	# If the path size is 0 or 1 (only the start point), no valid path exists
 	if not nav_agent.is_target_reachable():
 		print("No valid path found!")
-		get_parent().enemy_died()
-		queue_free()
+		#get_parent().enemy_died()
+		#queue_free()
 	else:
 		print("Path found!")
 

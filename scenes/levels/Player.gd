@@ -76,6 +76,8 @@ func _ready():
 	anim_timer.wait_time = 1.0
 	anim_timer.one_shot = true
 	player_scale = self.scale.x
+	freeze_vfx.emitting = false
+	freeze_effect_active = false
 
 func death():
 	get_tree().change_scene_to_file("res://scenes/levels/game_over.tscn")
@@ -165,6 +167,7 @@ func _process(delta: float) -> void:
 	if anim_timer.time_left == 0 && dash_toggle == true:
 		$AnimationPlayer.play("flight")
 		dash_toggle = false
+	
 	freeze_effect.effect_active = freeze_effect_active
 	
 	if freeze_effect_active:
