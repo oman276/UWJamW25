@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dws3yj7x3g2uf"]
+
+[ext_resource type="Texture2D" uid="uid://bk62qi0skkd4t" path="res://assets/title_screen.png" id="1_mw222"]
+[ext_resource type="Script" path="res://scenes/levels/TitleScreen.gd" id="2_1qs4m"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wa4fm"]
+radius = 61.0
+height = 484.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e52q4"]
+radius = 61.0
+height = 654.0
+
+[node name="Title" type="Node2D"]
+
+[node name="TitleScreen" type="Sprite2D" parent="."]
+position = Vector2(961, 543)
+texture = ExtResource("1_mw222")
+script = ExtResource("2_1qs4m")
+
+[node name="StartButton" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartButton"]
+position = Vector2(824, 913)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_wa4fm")
+
+[node name="InstructionsButton" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InstructionsButton"]
+position = Vector2(1548, 911)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_e52q4")
+
+[connection signal="input_event" from="StartButton" to="TitleScreen" method="_on_start_button_input_event"]

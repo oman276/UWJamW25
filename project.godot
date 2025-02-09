@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="UWGameJamW25"
-run/main_scene="res://scenes/levels/main_scene.tscn"
+run/main_scene="res://scenes/levels/title.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
