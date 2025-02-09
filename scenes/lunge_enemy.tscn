@@ -9,6 +9,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7l7ch"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rugxs"]
+radius = 14.2017
 
 [sub_resource type="Animation" id="Animation_frx7c"]
 length = 0.001
@@ -61,7 +62,6 @@ time_between_lunges = 7.0
 speed = 100.0
 target = NodePath("")
 min_speed_percentage = 0.1
-slowdown_per_sec = 0.3
 
 [node name="ColorRect" parent="." index="0"]
 visible = false
@@ -76,6 +76,9 @@ shape = SubResource("CircleShape2D_7l7ch")
 position = Vector2(14.3912, 26.8552)
 scale = Vector2(1.7, 1.7)
 shape = SubResource("CircleShape2D_rugxs")
+
+[node name="NavigationAgent2D" parent="." index="3"]
+debug_enabled = false
 
 [node name="LungeTimer" type="Timer" parent="." index="5"]
 one_shot = true

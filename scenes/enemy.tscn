@@ -6,7 +6,7 @@
 size = Vector2(38, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bh4op"]
-size = Vector2(38, 38)
+size = Vector2(55.3762, 56.4315)
 
 [node name="Enemy" type="CharacterBody2D"]
 scale = Vector2(1.60463, 1.60463)
@@ -17,6 +17,7 @@ speed = 250.0
 target = NodePath("../Player")
 min_speed_percentage = 0.2
 slowdown_per_sec = 1.0
+regen_rate_per_sec = 0.1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -20.0

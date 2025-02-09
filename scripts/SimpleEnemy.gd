@@ -18,6 +18,8 @@ var current_speed_percent : float = 1.0
 @export var regen_rate_per_sec : float = 0.05
 var next_path_pos_dir : Vector2 = Vector2.ZERO
 
+@export var bonus_ability_regen_per_sec : float = 10
+
 var player : Node2D
 
 func _ready():
@@ -40,6 +42,7 @@ func slowdown(delta : float):
 	current_speed_percent -= delta * slowdown_per_sec
 	if current_speed_percent < min_speed_percentage:
 		current_speed_percent = min_speed_percentage
+	player.ability_cooldown -= bonus_ability_regen_per_sec * delta
 
 func _physics_process(delta: float) -> void:
 	var direction = to_local(nav_agent.get_next_path_position()).normalized()

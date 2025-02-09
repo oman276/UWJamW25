@@ -14,6 +14,10 @@ var dash_toggle = false
 
 var player_scale = 0
 
+var ability_cooldown : float = 0
+@export var ability_cooldown_drop_per_sec : float = 5
+@export var ability_per_use : float = 30
+
 enum PLAYER_MOVE_STATE {
 	Free,
 	Slashing,
@@ -58,6 +62,9 @@ var last_dodge_dir: Vector2 = Vector2(0, 0)
 
 var freeze_effect_active : bool = false
 
+var heart1
+var heart2
+var heart3
 
 var facing_left = true
 
@@ -76,6 +83,11 @@ func lock_movement_for(seconds: float):
 	movement_lock.start()
 
 func slash_attack(dir: Vector2):
+	ability_cooldown += ability_per_use
+	print(ability_cooldown)
+	if ability_cooldown >= 100:
+		get_tree().reload_current_scene()
+	
 	anim_timer.start()
 	dash_toggle = true
 	$AnimationPlayer.play("dash")
@@ -99,6 +111,13 @@ func dodge_attack():
 	velocity = velocity * dodge_multiplier
 	
 func knockback(origin_pos: Vector2):
+	health -= 1
+	if (health == 0):
+		get_tree().reload_current_scene()
+	heart1.visible = health >= 3
+	heart2.visible = health >= 2
+	heart3.visible = health >= 1
+	
 	current_state = PLAYER_MOVE_STATE.Knockback
 	
 	color_rect.color = Color.DARK_RED
@@ -129,7 +148,6 @@ func _input(event: InputEvent) -> void:
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			freeze_effect_active = true
 			
-			
 		#Freeze Effect End
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_released():
 			freeze_effect_active = false
@@ -157,6 +175,8 @@ func _process(delta: float) -> void:
 			var tween: Tween = create_tween()
 			tween.tween_property(freeze_vfx, "modulate:a", 1, 0.5).from(0)
 	fire_effect.rotation_degrees = self.rotation_degrees
+	
+	ability_cooldown -= ability_cooldown_drop_per_sec * delta
 
 func _physics_process(delta: float) -> void:
 	#handle input if free
