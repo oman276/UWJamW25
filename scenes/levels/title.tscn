@@ -33,3 +33,4 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_e52q4")
 
 [connection signal="input_event" from="StartButton" to="TitleScreen" method="_on_start_button_input_event"]
+[connection signal="input_event" from="InstructionsButton" to="TitleScreen" method="_on_instructions_button_input_event"]
