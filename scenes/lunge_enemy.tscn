@@ -92,6 +92,7 @@ libraries = {
 }
 
 [node name="Sprites" type="Node2D" parent="." index="9"]
+z_index = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprites" index="0"]
 scale = Vector2(0.389, 0.389)
@@ -103,6 +104,7 @@ texture = ExtResource("4_wjutp")
 
 [node name="IceSprite" type="Sprite2D" parent="." index="10"]
 modulate = Color(1, 1, 1, 0.745098)
+z_index = 2
 position = Vector2(-6.23197, 6.85516)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_nqmy3")

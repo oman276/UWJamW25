@@ -28,7 +28,6 @@ func _ready():
 		if player == null:
 			print("fuck")
 
-
 func _process(delta):
 	current_speed_percent += regen_rate_per_sec * delta
 	if current_speed_percent > 1:
@@ -46,7 +45,6 @@ func _physics_process(delta: float) -> void:
 	var direction = to_local(nav_agent.get_next_path_position()).normalized()
 	velocity = direction * speed * current_speed_percent
 	move_and_slide()
-	
 
 func rotate_to_player():
 	if player:
@@ -60,6 +58,7 @@ func make_path():
 func _on_trigger_body_entered(body):
 	if body is Player:
 		if body.current_damage_state == Player.PLAYER_DAMAGE_STATE.Slashing:
+			get_parent().enemy_died()
 			queue_free()
 		else:
 			body.knockback(global_position)
