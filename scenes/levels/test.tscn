@@ -210,9 +210,12 @@ position = Vector2(1390, 189)
 script = ExtResource("13_f0kkh")
 accelleration = 100.0
 speed = 2000.0
+regen_rate_per_sec = 0.05
 
 [node name="ChargeEnemy" parent="." instance=ExtResource("12_72yaj")]
 position = Vector2(1378, 502)
+regen_rate_per_sec = 0.05
 
 [node name="ShootEnemy" parent="." instance=ExtResource("13_spun7")]
 position = Vector2(1212, 363)
+regen_rate_per_sec = 0.05

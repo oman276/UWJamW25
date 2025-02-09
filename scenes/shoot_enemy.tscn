@@ -56,10 +56,15 @@ time_between_shots = 1.5
 speed = 100000.0
 target = NodePath("")
 min_speed_percentage = 0.1
-slowdown_per_sec = 0.3
 
 [node name="ColorRect" parent="." index="0"]
 visible = false
+
+[node name="CollisionShape2D" parent="Trigger" index="0"]
+position = Vector2(11.3119, 18.4786)
+
+[node name="NavigationAgent2D" parent="." index="3"]
+debug_enabled = false
 
 [node name="ShootTimer" type="Timer" parent="." index="5"]
 

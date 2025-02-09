@@ -1316,12 +1316,13 @@ _data = {
 "flight": SubResource("Animation_8eetp")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(328, 252)
 scale = Vector2(1.92, 1.92)
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_cbau7")
+ability_cooldown_drop_per_sec = 2.0
 speed = 10000.0
 acceleration = 15000.0
 friction = 12000.0

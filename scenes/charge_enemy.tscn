@@ -8,7 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://juaejm7f42u6" path="res://assets/ice.png" id="6_uc0na"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i41d2"]
-height = 52.0312
+radius = 25.6353
+height = 91.5236
 
 [sub_resource type="Animation" id="Animation_vy10f"]
 length = 0.001
@@ -78,7 +79,6 @@ accelleration = 10416.3
 speed = 300000.0
 target = NodePath("")
 min_speed_percentage = 0.1
-slowdown_per_sec = 0.3
 
 [node name="ColorRect" parent="." index="0"]
 visible = false
