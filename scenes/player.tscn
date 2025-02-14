@@ -1316,7 +1316,7 @@ _data = {
 "flight": SubResource("Animation_8eetp")
 }
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("character_polys") groups=["player"]]
 position = Vector2(328, 252)
 scale = Vector2(1.92, 1.92)
 collision_layer = 2
@@ -1331,6 +1331,7 @@ speed_kept_on_bounce = 0.7
 dodge_acceleration_multiplier = 5.0
 knockback_multiplier = 2.0
 knockback_acceleration_multiplier = 2.0
+character_polys = [NodePath("Polygons/arm_left"), NodePath("Polygons/torso"), NodePath("Polygons/arm_right"), NodePath("Polygons/hand_right"), NodePath("Polygons/hand_left"), NodePath("Polygons/thigh_right"), NodePath("Polygons/thigh_left"), NodePath("Polygons/leg_left"), NodePath("Polygons/leg_right"), NodePath("Polygons/head"), NodePath("Polygons/wing_left"), NodePath("Polygons/wing_right"), NodePath("Polygons/sword")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qs0el")
@@ -1338,6 +1339,7 @@ shape = SubResource("RectangleShape2D_qs0el")
 [node name="MovementLock" type="Timer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -10.0
 offset_top = -10.0
 offset_right = 34.0
@@ -1567,9 +1569,15 @@ libraries = {
 }
 autoplay = "flight"
 
+[node name="FreezeTimer" type="Timer" parent="."]
+
+[node name="InvulnTimer" type="Timer" parent="."]
+
 [connection signal="timeout" from="MovementLock" to="." method="_on_movement_lock_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="VisualTimer" to="." method="_on_visual_timer_timeout"]
 [connection signal="area_entered" from="FreezeEffect/Area2D" to="FreezeEffect" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="FreezeEffect/Area2D" to="FreezeEffect" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="FreezeEffect/Area2D" to="FreezeEffect" method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="FreezeTimer" to="." method="_on_freeze_timer_timeout"]
+[connection signal="timeout" from="InvulnTimer" to="." method="_on_invuln_timer_timeout"]

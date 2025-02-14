@@ -45,6 +45,9 @@ debug_enabled = true
 wait_time = 0.5
 autostart = true
 
+[node name="DeathFreezeTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Trigger" to="." method="_on_trigger_area_entered"]
 [connection signal="body_entered" from="Trigger" to="." method="_on_trigger_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DeathFreezeTimer" to="." method="_on_death_freeze_timer_timeout"]

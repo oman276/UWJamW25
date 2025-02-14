@@ -33,7 +33,8 @@ func _physics_process(delta):
 		if global_position.distance_to(player.global_position) < max_dis_to_player:
 			is_shooting = true
 			shoot_timer.start()
-	move_and_slide()
+	#move_and_slide()
+	_base_enemy_move()
 	
 	#rotate the shooter
 	if player:
