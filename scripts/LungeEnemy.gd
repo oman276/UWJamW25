@@ -58,7 +58,8 @@ func _physics_process(delta):
 		print("lunginf")
 		velocity = velocity.move_toward(Vector2.ZERO, lunge_friction * delta)
 	
-	move_and_slide()
+	#move_and_slide()
+	_base_enemy_move()
 	#rotate_to_player()
 
 func _on_pause_timer_timeout():

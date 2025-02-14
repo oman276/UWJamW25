@@ -8,6 +8,8 @@ extends CharacterBody2D
 @onready var freeze_effect = $FreezeEffect
 @onready var fire_effect = $FireVFX
 @onready var freeze_vfx = $FreezeEffect/FreezeVFX
+@onready var freeze_timer = $FreezeTimer
+@onready var invuln_timer = $InvulnTimer
 
 var anim_timer := Timer.new()
 var dash_toggle = false
@@ -30,6 +32,7 @@ enum PLAYER_DAMAGE_STATE {
 	Vulnerable,
 	Slashing,
 	FreezeFrame,
+	Invulnerable,
 }
 
 @export var speed: float = 200.0
@@ -68,6 +71,11 @@ var heart3
 
 var facing_left = true
 
+@export var freeze_frame_time : float = 0.1
+
+@export var character_polys : Array[Polygon2D]
+var tweens : Array[Tween]
+
 func _ready():
 	freeze_vfx.modulate.a = 0
 	#freeze_effect.visible = false
@@ -78,6 +86,7 @@ func _ready():
 	player_scale = self.scale.x
 	freeze_vfx.emitting = false
 	freeze_effect_active = false
+	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
 
 func death():
 	get_tree().change_scene_to_file("res://scenes/levels/game_over.tscn")
@@ -116,12 +125,13 @@ func dodge_attack():
 	velocity = velocity * dodge_multiplier
 	
 func knockback(origin_pos: Vector2):
-	health -= 1
-	if (health == 0):
-		death()
-	heart1.visible = health >= 3
-	heart2.visible = health >= 2
-	heart3.visible = health >= 1
+	if current_damage_state != PLAYER_DAMAGE_STATE.Invulnerable:
+		health -= 1
+		if (health == 0):
+			death()
+		heart1.visible = health >= 3
+		heart2.visible = health >= 2
+		heart3.visible = health >= 1
 	
 	current_state = PLAYER_MOVE_STATE.Knockback
 	
@@ -130,6 +140,25 @@ func knockback(origin_pos: Vector2):
 	visual_timer.wait_time = 0.2
 	visual_timer.start()
 	lock_movement_for(0.2)
+	
+	if current_damage_state != PLAYER_DAMAGE_STATE.Invulnerable:
+		if not is_inside_tree():
+			return
+		
+		current_damage_state = PLAYER_DAMAGE_STATE.Invulnerable
+		GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.TempFreeze
+		invuln_timer.stop()
+		invuln_timer.wait_time = 2
+		invuln_timer.start()
+		for polygon in character_polys:
+			var tween = create_tween().set_loops()
+			tweens.append(tween)  # Store the tween for stopping later
+			tween.tween_property(polygon, "modulate", Color.WHITE, 0.2)
+			tween.tween_property(polygon, "modulate", Color(1, 1, 1, 0), 0.2)
+	
+	freeze_timer.stop()
+	freeze_timer.wait_time = 0.1
+	freeze_timer.start()
 	
 	velocity = speed * knockback_multiplier * (global_position - origin_pos).normalized()
 
@@ -187,46 +216,47 @@ func _process(delta: float) -> void:
 		ability_cooldown = 0
 
 func _physics_process(delta: float) -> void:
-	#handle input if free
-	var input_vector = Vector2(
-			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-			Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-		).normalized()
-	if(current_state == PLAYER_MOVE_STATE.Free):
-		if input_vector != Vector2.ZERO:
-			velocity = velocity.move_toward(input_vector * speed, acceleration * delta)
-		else:
-			velocity = velocity.move_toward(Vector2(0, 0), friction * delta)
-		last_input_dir = input_vector
-	elif (current_state == PLAYER_MOVE_STATE.Slashing):
-		velocity = velocity.move_toward(last_slash_dir * speed * slash_multiplier, acceleration * delta * slash_acceleration_multiplier)
-	elif (current_state == PLAYER_MOVE_STATE.Dodging || current_state == PLAYER_MOVE_STATE.Knockback):
-		velocity = velocity.move_toward(Vector2.ZERO, friction * delta * dodge_acceleration_multiplier)
-	
-	var prev_velocity = velocity
-	move_and_slide()
-	print(velocity.x)
-	var angle_to_turn = velocity.angle()
-	if velocity.x < 0 and facing_left == true:
-		facing_left = false
-		self.scale.x = -player_scale
-	elif velocity.x > 0 and facing_left == false:
-		facing_left = true
-		self.scale.x = -player_scale
-	if velocity.x == 0 and facing_left != true:
-		angle_to_turn = 3.14
-	var current_angle = lerp_angle(self.rotation, angle_to_turn, 3 * delta)
-	self.rotation = current_angle  # Apply to the Node2D rotation
-	
-	#bounce if we've hit anything
-	if get_slide_collision_count() > 0:
-		var collision = get_slide_collision(0)
-		if collision != null:
-			var bounce_vel = prev_velocity.bounce(collision.get_normal()) * speed_kept_on_bounce
-			if (bounce_vel.length() < speed):
-				velocity = bounce_vel
+	if GameManager.current_global_state == GameManager.GLOBAL_GAME_STATE.Default:
+		#handle input if free
+		var input_vector = Vector2(
+				Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+				Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+			).normalized()
+		if(current_state == PLAYER_MOVE_STATE.Free):
+			if input_vector != Vector2.ZERO:
+				velocity = velocity.move_toward(input_vector * speed, acceleration * delta)
 			else:
-				velocity = bounce_vel.normalized() * speed * 1.2
+				velocity = velocity.move_toward(Vector2(0, 0), friction * delta)
+			last_input_dir = input_vector
+		elif (current_state == PLAYER_MOVE_STATE.Slashing):
+			velocity = velocity.move_toward(last_slash_dir * speed * slash_multiplier, acceleration * delta * slash_acceleration_multiplier)
+		elif (current_state == PLAYER_MOVE_STATE.Dodging || current_state == PLAYER_MOVE_STATE.Knockback):
+			velocity = velocity.move_toward(Vector2.ZERO, friction * delta * dodge_acceleration_multiplier)
+		
+		var prev_velocity = velocity
+		move_and_slide()
+		print(velocity.x)
+		var angle_to_turn = velocity.angle()
+		if velocity.x < 0 and facing_left == true:
+			facing_left = false
+			self.scale.x = -player_scale
+		elif velocity.x > 0 and facing_left == false:
+			facing_left = true
+			self.scale.x = -player_scale
+		if velocity.x == 0 and facing_left != true:
+			angle_to_turn = 3.14
+		var current_angle = lerp_angle(self.rotation, angle_to_turn, 3 * delta)
+		self.rotation = current_angle  # Apply to the Node2D rotation
+		
+		#bounce if we've hit anything
+		if get_slide_collision_count() > 0:
+			var collision = get_slide_collision(0)
+			if collision != null:
+				var bounce_vel = prev_velocity.bounce(collision.get_normal()) * speed_kept_on_bounce
+				if (bounce_vel.length() < speed):
+					velocity = bounce_vel
+				else:
+					velocity = bounce_vel.normalized() * speed * 1.2
 
 func _on_movement_lock_timeout():
 	current_state = PLAYER_MOVE_STATE.Free
@@ -239,3 +269,18 @@ func _on_attack_timer_timeout():
 func _on_visual_timer_timeout():
 	if color_rect.color == Color.DARK_RED:
 		color_rect.color = Color.WHITE
+
+func _on_freeze_timer_timeout():
+	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
+
+func _on_invuln_timer_timeout():
+	if current_damage_state == PLAYER_DAMAGE_STATE.Invulnerable:
+		current_damage_state = PLAYER_DAMAGE_STATE.Vulnerable
+	
+	for tween in tweens:
+		if tween: 
+			tween.kill()  
+	tweens.clear()  
+	
+	for polygon in character_polys:
+		polygon.modulate = Color(1, 1, 1, 1)  # Reset to default

@@ -21,6 +21,9 @@ var next_path_pos_dir : Vector2 = Vector2.ZERO
 @export var bonus_ability_regen_per_sec : float = 10
 
 var player : Node2D
+@onready var death_freeze_timer = $DeathFreezeTimer
+
+@export var base_sprites : Array[Sprite2D]
 
 func _ready():
 	base_color = $Sprites.modulate
@@ -49,6 +52,10 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed * current_speed_percent
 	move_and_slide()
 
+func _base_enemy_move():
+	if GameManager.current_global_state == GameManager.GLOBAL_GAME_STATE.Default :
+		move_and_slide()
+
 func rotate_to_player():
 	if player:
 		var direction = (player.global_position - global_position).normalized()
@@ -58,21 +65,34 @@ func make_path():
 	nav_agent.target_position = player.global_position
 	next_path_pos_dir = to_local(nav_agent.get_next_path_position()).normalized()
 
-	# If the path size is 0 or 1 (only the start point), no valid path exists
 	if not nav_agent.is_target_reachable():
 		print("No valid path found!")
-		#get_parent().enemy_died()
-		#queue_free()
 	else:
 		print("Path found!")
 
 func _on_trigger_body_entered(body):
 	if body is Player:
 		if body.current_damage_state == Player.PLAYER_DAMAGE_STATE.Slashing:
-			get_parent().enemy_died()
-			queue_free()
+			_death()
 		else:
 			body.knockback(global_position)
 
+func _death():
+	if GameManager.is_live():
+		GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.TempFreeze
+		death_freeze_timer.wait_time = 0.2
+		death_freeze_timer.start()
+		
+		# Not working right now for some reason :(
+		for sprite in base_sprites:
+			var tween = create_tween().set_loops()
+			tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
+			tween.tween_property(sprite, "modulate", Color(1, 1, 1, 1), 0.2)
+
 func _on_timer_timeout():
 	make_path()
+
+func _on_death_freeze_timer_timeout():
+	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
+	get_parent().enemy_died()
+	queue_free()
