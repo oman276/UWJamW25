@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var nav_agent = $NavigationAgent2D
 @onready var color_rect = $ColorRect
 
+var is_death_anim : bool = false
+
 var base_color : Color
 var frozen_color : Color = Color.SKY_BLUE
 
@@ -24,22 +26,36 @@ var player : Node2D
 @onready var death_freeze_timer = $DeathFreezeTimer
 
 @export var base_sprites : Array[Sprite2D]
+var base_sprite_positions : Dictionary = {}
+
+@export var rand_scale : float = 1000
+var ran_gen : RandomNumberGenerator 
 
 func _ready():
+	ran_gen = RandomNumberGenerator.new()
 	base_color = $Sprites.modulate
 	player = get_node_or_null(target)
 	if player == null:
 		player = get_node("../Player")
 		if player == null:
 			print("fuck")
+	for sprite in base_sprites:
+		base_sprite_positions[sprite] = sprite.global_position
 
 func _process(delta):
-	current_speed_percent += regen_rate_per_sec * delta
-	if current_speed_percent > 1:
-		current_speed_percent = 1
-	
-	$Sprites.modulate = base_color.lerp(frozen_color, 1 - current_speed_percent)
-	$IceSprite.modulate.a = 1 - current_speed_percent
+	if is_death_anim == false:
+		current_speed_percent += regen_rate_per_sec * delta
+		if current_speed_percent > 1:
+			current_speed_percent = 1
+		
+		$Sprites.modulate = base_color.lerp(frozen_color, 1 - current_speed_percent)
+		$IceSprite.modulate.a = 1 - current_speed_percent
+	else:
+		var rand_x : float = ran_gen.randf_range(-1, 1)
+		var rand_y : float = ran_gen.randf_range(-1, 1)
+		
+		for sprite in base_sprites:
+			sprite.global_position = base_sprite_positions[sprite] + Vector2(rand_x, rand_y) * rand_scale
 
 func slowdown(delta : float):
 	current_speed_percent -= delta * slowdown_per_sec
@@ -78,16 +94,13 @@ func _on_trigger_body_entered(body):
 			body.knockback(global_position)
 
 func _death():
+	is_death_anim = true
+	for sprite in base_sprites:
+		base_sprite_positions[sprite] = sprite.global_position
 	if GameManager.is_live():
 		GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.TempFreeze
 		death_freeze_timer.wait_time = 0.2
 		death_freeze_timer.start()
-		
-		# Not working right now for some reason :(
-		for sprite in base_sprites:
-			var tween = create_tween().set_loops()
-			tween.tween_property(sprite, "modulate", Color.WHITE, 0.2)
-			tween.tween_property(sprite, "modulate", Color(1, 1, 1, 1), 0.2)
 
 func _on_timer_timeout():
 	make_path()

@@ -9,7 +9,7 @@ radius = 20.0
 [node name="EnemyBullet" type="Node2D"]
 scale = Vector2(0.05, 0.05)
 script = ExtResource("1_fprui")
-speed = 7500.0
+speed = 4500.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

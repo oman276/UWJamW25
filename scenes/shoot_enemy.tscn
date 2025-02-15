@@ -44,7 +44,7 @@ _data = {
 "idle": SubResource("Animation_yfxjq")
 }
 
-[node name="ShootEnemy" instance=ExtResource("1_qm1re")]
+[node name="ShootEnemy" node_paths=PackedStringArray("base_sprites") instance=ExtResource("1_qm1re")]
 scale = Vector2(7.23, 7.23)
 script = ExtResource("2_lnwqs")
 bullet_scene = ExtResource("3_g4ugq")
@@ -56,6 +56,8 @@ time_between_shots = 1.5
 speed = 100000.0
 target = NodePath("")
 min_speed_percentage = 0.1
+base_sprites = [NodePath("Sprites/Sprite2D"), NodePath("Sprites/Sprite2D2"), NodePath("IceSprite")]
+rand_scale = 75.0
 
 [node name="ColorRect" parent="." index="0"]
 visible = false
@@ -89,16 +91,17 @@ libraries = {
 autoplay = "idle"
 
 [node name="Sprites" type="Sprite2D" parent="." index="8"]
-z_index = 1
+z_index = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprites" index="0"]
+z_index = 2
 position = Vector2(6.23197, 2.49279)
 rotation = 3.14159
 scale = Vector2(0.327, -0.327)
 texture = ExtResource("4_pli78")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Sprites" index="1"]
-z_index = -1
+z_index = 2
 position = Vector2(2.49279, 0.623197)
 rotation = -3.14159
 scale = Vector2(0.316144, -0.316144)

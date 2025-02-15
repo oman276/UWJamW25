@@ -72,13 +72,15 @@ _data = {
 "idle": SubResource("Animation_jdsmv")
 }
 
-[node name="ChargeEnemy" instance=ExtResource("1_7mpna")]
+[node name="ChargeEnemy" node_paths=PackedStringArray("base_sprites") instance=ExtResource("1_7mpna")]
 scale = Vector2(7.223, 7.223)
 script = ExtResource("2_4uekb")
 accelleration = 10416.3
 speed = 300000.0
 target = NodePath("")
 min_speed_percentage = 0.1
+base_sprites = [NodePath("Sprites/Sprite2D2"), NodePath("Sprites/Sprite2D3"), NodePath("Sprites/Sprite2D"), NodePath("IceSprite")]
+rand_scale = 75.0
 
 [node name="ColorRect" parent="." index="0"]
 visible = false
@@ -103,16 +105,19 @@ autoplay = "idle"
 z_index = 1
 
 [node name="Sprite2D2" type="Sprite2D" parent="Sprites" index="0"]
+z_index = 2
 position = Vector2(0.623197, -2.49279)
 scale = Vector2(0.389302, 0.389302)
 texture = ExtResource("3_m651i")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Sprites" index="1"]
+z_index = 2
 position = Vector2(0.623197, -2.49279)
 scale = Vector2(0.389302, 0.389302)
 texture = ExtResource("4_ue34h")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprites" index="2"]
+z_index = 2
 position = Vector2(0.623197, -2.49279)
 scale = Vector2(0.389302, 0.389302)
 texture = ExtResource("5_xk72x")

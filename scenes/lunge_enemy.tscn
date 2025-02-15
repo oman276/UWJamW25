@@ -47,7 +47,7 @@ _data = {
 "idle": SubResource("Animation_lew8c")
 }
 
-[node name="LungeEnemy" instance=ExtResource("1_2sod7")]
+[node name="LungeEnemy" node_paths=PackedStringArray("base_sprites") instance=ExtResource("1_2sod7")]
 scale = Vector2(7.23, 7.23)
 script = ExtResource("2_u534n")
 base_speed = 200000.0
@@ -62,6 +62,8 @@ time_between_lunges = 7.0
 speed = 100.0
 target = NodePath("")
 min_speed_percentage = 0.1
+base_sprites = [NodePath("Sprites/Sprite2D"), NodePath("Sprites/Sprite2D2"), NodePath("IceSprite")]
+rand_scale = 75.0
 
 [node name="ColorRect" parent="." index="0"]
 visible = false
@@ -98,10 +100,12 @@ libraries = {
 z_index = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprites" index="0"]
+z_index = 2
 scale = Vector2(0.389, 0.389)
 texture = ExtResource("3_go5pn")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Sprites" index="1"]
+z_index = 2
 scale = Vector2(0.389, 0.389)
 texture = ExtResource("4_wjutp")
 
