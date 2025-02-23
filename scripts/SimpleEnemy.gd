@@ -29,7 +29,10 @@ var player : Node2D
 var base_sprite_positions : Dictionary = {}
 
 @export var rand_scale : float = 1000
-var ran_gen : RandomNumberGenerator 
+var ran_gen : RandomNumberGenerator
+
+@export var rotation_speed: float = 50
+#@export var 
 
 func _ready():
 	ran_gen = RandomNumberGenerator.new()
@@ -72,10 +75,13 @@ func _base_enemy_move():
 	if GameManager.current_global_state == GameManager.GLOBAL_GAME_STATE.Default :
 		move_and_slide()
 
-func rotate_to_player():
+func rotate_to_player(delta : float, items : Array[Node2D]):
 	if player:
 		var direction = (player.global_position - global_position).normalized()
-		rotation = direction.angle()
+		var target_rotation = direction.angle()
+		
+		for item in items:
+			item.rotation = lerp_angle(rotation, target_rotation, rotation_speed * delta)
 
 func make_path():
 	nav_agent.target_position = player.global_position

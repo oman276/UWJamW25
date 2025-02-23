@@ -35,6 +35,7 @@ func _physics_process(delta):
 			shoot_timer.start()
 	#move_and_slide()
 	_base_enemy_move()
+	#rotate_to_player(delta)
 	
 	#rotate the shooter
 	if player:

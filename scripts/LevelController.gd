@@ -36,12 +36,12 @@ func spawn_new_wave(num : int):
 	new_wave_.text = "WAVE " + str(num)
 	
 	for i in range(num):
-		var enemy_type = randi_range(1, 3)
+		var enemy_type = randi_range(1, 10)
 		var spawn_loc = randi_range(0, 4)
 		var enemy : PackedScene
-		if enemy_type == 1:
+		if enemy_type <= 7:
 			enemy = chase_enemy
-		elif enemy_type == 2:
+		elif enemy_type <= 9:
 			enemy = lunge_enemy
 		else:
 			enemy = shoot_enemy

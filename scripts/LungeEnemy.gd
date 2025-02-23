@@ -60,7 +60,7 @@ func _physics_process(delta):
 	
 	#move_and_slide()
 	_base_enemy_move()
-	#rotate_to_player()
+	#rotate_to_player(delta)
 
 func _on_pause_timer_timeout():
 	current_lunge_state = LUNGE_STATE.Lunging

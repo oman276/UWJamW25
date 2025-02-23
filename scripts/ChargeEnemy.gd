@@ -7,3 +7,4 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.move_toward(next_path_pos_dir * speed * current_speed_percent * delta, accelleration * delta)
 	#move_and_slide()
 	_base_enemy_move()
+	#rotate_to_player(delta)
