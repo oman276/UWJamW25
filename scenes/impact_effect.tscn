@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwlkf0q8vapi8"]
+[gd_scene load_steps=6 format=3 uid="uid://cwlkf0q8vapi8"]
 
 [ext_resource type="Script" path="res://scripts/impact_effect.gd" id="1_r8dmq"]
+[ext_resource type="Texture2D" uid="uid://dj8g3vocm7ly2" path="res://assets/fire.png" id="2_pa1i0"]
 
 [sub_resource type="Curve" id="Curve_gccck"]
 max_value = 4.0
@@ -11,25 +12,33 @@ point_count = 3
 curve = SubResource("Curve_gccck")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fxxs0"]
+lifetime_randomness = 0.28
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 5.0
 angle_max = 360.0
+direction = Vector3(0, 0, 0)
 spread = 180.0
-initial_velocity_min = 1200.0
-initial_velocity_max = 3600.0
+initial_velocity_min = 1080.0
+initial_velocity_max = 1620.0
 gravity = Vector3(0, 0, 0)
-scale_min = 25.0
-scale_max = 40.0
+scale_min = 0.05
+scale_max = 0.1
 scale_curve = SubResource("CurveTexture_8gq71")
 
 [node name="ImpactEffect" type="Node2D"]
+scale = Vector2(3, 3)
 script = ExtResource("1_r8dmq")
 
 [node name="Particles" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_fxxs0")
-lifetime = 0.5
+texture = ExtResource("2_pa1i0")
 one_shot = true
 explosiveness = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

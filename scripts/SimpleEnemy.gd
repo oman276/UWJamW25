@@ -103,6 +103,14 @@ func _on_trigger_body_entered(body):
 func _death():
 	impact_effect.start_effect()
 	is_death_anim = true
+	
+	# Detach particles from enemy so they persist after death
+	if impact_effect:
+		var world = get_tree().current_scene  # Get the root scene
+		impact_effect.get_parent().remove_child(impact_effect)  # Detach from enemy
+		world.add_child(impact_effect)  # Reattach to root (or another persistent node)
+		impact_effect.global_position = global_position
+	
 	for sprite in base_sprites:
 		base_sprite_positions[sprite] = sprite.global_position
 	if GameManager.is_live():
