@@ -156,11 +156,12 @@ func knockback(origin_pos: Vector2):
 			tween.tween_property(polygon, "modulate", Color.WHITE, 0.2)
 			tween.tween_property(polygon, "modulate", Color(1, 1, 1, 0), 0.2)
 	
-	freeze_timer.stop()
-	freeze_timer.wait_time = 0.1
-	freeze_timer.start()
-	
 	velocity = speed * knockback_multiplier * (global_position - origin_pos).normalized()
+	
+	freeze_timer.stop()
+	freeze_timer.wait_time = 0.05
+	Engine.time_scale = 0.2
+	freeze_timer.start()
 
 func _input(event: InputEvent) -> void:
 	#input to only register if player is free
@@ -272,6 +273,7 @@ func _on_visual_timer_timeout():
 
 func _on_freeze_timer_timeout():
 	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
+	Engine.time_scale = 1.0
 
 func _on_invuln_timer_timeout():
 	if current_damage_state == PLAYER_DAMAGE_STATE.Invulnerable:

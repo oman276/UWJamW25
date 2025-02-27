@@ -115,7 +115,8 @@ func _death():
 		base_sprite_positions[sprite] = sprite.global_position
 	if GameManager.is_live():
 		GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.TempFreeze
-		death_freeze_timer.wait_time = 0.1
+		death_freeze_timer.wait_time = 0.25
+		Engine.time_scale = 0.2
 		death_freeze_timer.start()
 
 func _on_timer_timeout():
@@ -123,5 +124,6 @@ func _on_timer_timeout():
 
 func _on_death_freeze_timer_timeout():
 	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
+	Engine.time_scale = 1
 	get_parent().enemy_died()
 	queue_free()
