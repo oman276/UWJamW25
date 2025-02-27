@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://fo3dcsvx5gnj"]
+[gd_scene load_steps=5 format=3 uid="uid://fo3dcsvx5gnj"]
 
 [ext_resource type="Script" path="res://scripts/SimpleEnemy.gd" id="1_ycc08"]
+[ext_resource type="PackedScene" uid="uid://cwlkf0q8vapi8" path="res://scenes/impact_effect.tscn" id="2_sw1t0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ethfy"]
 size = Vector2(38, 38)
@@ -46,6 +47,8 @@ wait_time = 0.5
 autostart = true
 
 [node name="DeathFreezeTimer" type="Timer" parent="."]
+
+[node name="ImpactEffect" parent="." instance=ExtResource("2_sw1t0")]
 
 [connection signal="area_entered" from="Trigger" to="." method="_on_trigger_area_entered"]
 [connection signal="body_entered" from="Trigger" to="." method="_on_trigger_body_entered"]

@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @onready var nav_agent = $NavigationAgent2D
 @onready var color_rect = $ColorRect
+@onready var impact_effect = $ImpactEffect
 
 var is_death_anim : bool = false
 
@@ -100,12 +101,13 @@ func _on_trigger_body_entered(body):
 			body.knockback(global_position)
 
 func _death():
+	impact_effect.start_effect()
 	is_death_anim = true
 	for sprite in base_sprites:
 		base_sprite_positions[sprite] = sprite.global_position
 	if GameManager.is_live():
 		GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.TempFreeze
-		death_freeze_timer.wait_time = 0.2
+		death_freeze_timer.wait_time = 0.1
 		death_freeze_timer.start()
 
 func _on_timer_timeout():
