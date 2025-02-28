@@ -77,10 +77,10 @@ func _base_enemy_move():
 		move_and_slide()
 
 func rotate_to_player(delta : float, root : Node2D):
-	if player:
+	if player and Engine.time_scale == 1:
 		var direction = (player.global_position - global_position).normalized()
 		var target_rotation = direction.angle()
-		root.rotation = lerp_angle(root.rotation, target_rotation, rotation_speed * delta) + 180
+		root.rotation = lerp_angle(root.rotation + 180, target_rotation + 180, rotation_speed * delta)
 
 func make_path():
 	nav_agent.target_position = player.global_position

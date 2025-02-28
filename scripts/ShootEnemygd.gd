@@ -4,6 +4,9 @@ extends SimpleEnemy
 @export var bullet_scene: PackedScene  
 @onready var bullet_spawn_point = $BulletSpawnHost/BulletSpawnPoint
 @onready var sprites = $Sprites
+@onready var visible_on_screen_notifier_2d = $VisibleOnScreenNotifier2D
+
+var is_on_screen : bool = false
 
 # SHOOT ENEMY:
 # Approach player, stop a solid distance away from them
@@ -30,7 +33,7 @@ func _physics_process(delta):
 		# lerp in direction of player based on navmesh
 		var direction = to_local(nav_agent.get_next_path_position()).normalized()
 		velocity = velocity.move_toward(direction * speed * delta, acceleration * delta)
-		if global_position.distance_to(player.global_position) < max_dis_to_player:
+		if global_position.distance_to(player.global_position) < max_dis_to_player and is_on_screen:
 			is_shooting = true
 			shoot_timer.start()
 	#move_and_slide()
@@ -50,3 +53,10 @@ func _on_shoot_timer_timeout():
 
 	bullet.global_transform = bullet_spawn_point.global_transform  
 	bullet.velocity = (player.global_position - bullet_spawn_point.global_position).normalized()
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered():
+	is_on_screen = true
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	is_on_screen = false
