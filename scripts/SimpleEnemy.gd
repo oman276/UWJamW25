@@ -76,13 +76,11 @@ func _base_enemy_move():
 	if GameManager.current_global_state == GameManager.GLOBAL_GAME_STATE.Default :
 		move_and_slide()
 
-func rotate_to_player(delta : float, items : Array[Node2D]):
+func rotate_to_player(delta : float, root : Node2D):
 	if player:
 		var direction = (player.global_position - global_position).normalized()
 		var target_rotation = direction.angle()
-		
-		for item in items:
-			item.rotation = lerp_angle(rotation, target_rotation, rotation_speed * delta)
+		root.rotation = lerp_angle(root.rotation, target_rotation, rotation_speed * delta) + 180
 
 func make_path():
 	nav_agent.target_position = player.global_position
@@ -114,9 +112,9 @@ func _death():
 	for sprite in base_sprites:
 		base_sprite_positions[sprite] = sprite.global_position
 	if GameManager.is_live():
-		GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.TempFreeze
-		death_freeze_timer.wait_time = 0.25
-		Engine.time_scale = 0.2
+		#GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.TempFreeze
+		death_freeze_timer.wait_time = 0.1
+		Engine.time_scale = 0.15
 		death_freeze_timer.start()
 
 func _on_timer_timeout():

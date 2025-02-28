@@ -40,8 +40,8 @@ func _physics_process(delta):
 	#rotate the shooter
 	if player:
 		var direction = (player.global_position - global_position).normalized()
-		bullet_spawn_host.rotation = direction.angle()
-		sprites.rotation = direction.angle()
+		bullet_spawn_host.rotation = lerp_angle(rotation, direction.angle(), rotation_speed * delta)
+		sprites.rotation = lerp_angle(rotation, direction.angle(), rotation_speed * delta)
 
 func _on_shoot_timer_timeout():
 	#fire bullet
