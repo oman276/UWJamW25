@@ -78,12 +78,13 @@ var tweens : Array[Tween]
 
 func _ready():
 	freeze_vfx.modulate.a = 0
-	#freeze_effect.visible = false
 	fire_effect.emitting = false
+	
 	add_child(anim_timer)
 	anim_timer.wait_time = 1.0
 	anim_timer.one_shot = true
 	player_scale = self.scale.x
+
 	freeze_vfx.emitting = false
 	freeze_effect_active = false
 	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
@@ -175,8 +176,6 @@ func _input(event: InputEvent) -> void:
 		
 		#Dodge
 		if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
-			var global_mouse_position = get_global_mouse_position()
-			var relative_mouse_position = (global_mouse_position - global_position).normalized()
 			dodge_attack()
 			
 		#Freeze Effect Start
@@ -186,8 +185,6 @@ func _input(event: InputEvent) -> void:
 		#Freeze Effect End
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_released():
 			freeze_effect_active = false
-			#deactivate spritw
-			#freeze_effect.visible = false
 			freeze_vfx.emitting = false
 			var tween: Tween = create_tween()
 			tween.tween_property(freeze_vfx, "modulate:a", 0, 0.5).from(1)
