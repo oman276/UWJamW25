@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kvm5bx0j2cii"
-path="res://.godot/imported/Untitled_Artwork.png-d90c847bcdbe0f822183364093d4c923.ctex"
+uid="uid://d32xktmhwyrgp"
+path="res://.godot/imported/enemy3_spines.png-08337aa137163eba5b0a95e6bbb2c2c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Untitled_Artwork.png"
-dest_files=["res://.godot/imported/Untitled_Artwork.png-d90c847bcdbe0f822183364093d4c923.ctex"]
+source_file="res://assets/enemies/enemy3_spines.png"
+dest_files=["res://.godot/imported/enemy3_spines.png-08337aa137163eba5b0a95e6bbb2c2c8.ctex"]
 
 [params]
 

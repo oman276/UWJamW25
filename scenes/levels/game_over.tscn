@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dkx4d3y4k4wmv"]
 
 [ext_resource type="Texture2D" uid="uid://dbu7oe0ruy4c0" path="res://game_over.png" id="1_uq5bb"]
-[ext_resource type="Script" path="res://scenes/levels/TitleScreen.gd" id="2_iplkp"]
+[ext_resource type="Script" path="res://scripts/TitleScreen.gd" id="2_iplkp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wa4fm"]
 radius = 61.0
