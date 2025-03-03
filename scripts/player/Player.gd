@@ -255,6 +255,7 @@ func _physics_process(delta: float) -> void:
 					velocity = bounce_vel
 				else:
 					velocity = bounce_vel.normalized() * speed * 1.2
+		
 
 func _on_movement_lock_timeout():
 	current_state = PLAYER_MOVE_STATE.Free

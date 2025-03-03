@@ -16,7 +16,6 @@ func _ready():
 	try_find_player()
 	base_zoom = zoom
 
-
 func _process(delta):
 	if target:
 		var target_position = target.global_position
@@ -29,14 +28,16 @@ func _process(delta):
 		else:
 			global_position = target_position
 		
-		#get velocity of player as a % of max velocity 
-		if player_max_speed > 0:
-			var current_speed = target.velocity.length()/50000
-			print("current speed: ", current_speed)
-			current_speed = clamp(current_speed, 0, 1)
-			var target_zoom = base_zoom + (max_zoom_add * current_speed)
-			#zoom.lerp(target_zoom, delta * zoom_speed)
-			zoom = target_zoom
+		var target_zoom : Vector2
+		var zoom_speed_active : float
+		if target.current_state == Player.PLAYER_MOVE_STATE.Slashing:
+			target_zoom = base_zoom + (max_zoom_add)
+			zoom_speed_active = zoom_speed * 5
+		else:
+			target_zoom = base_zoom
+			zoom_speed_active = zoom_speed
+		
+		zoom = lerp(zoom, target_zoom, zoom_speed_active * delta)
 				
 	else:
 		try_find_player()
