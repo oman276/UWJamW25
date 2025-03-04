@@ -90,7 +90,7 @@ func _ready():
 	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
 
 func death():
-	get_tree().change_scene_to_file("res://scenes/levels/game_over.tscn")
+	GameManager.load_level(GameManager.LEVELS.PostGame)
 	
 func lock_movement_for(seconds: float):
 	movement_lock.stop()
@@ -99,7 +99,6 @@ func lock_movement_for(seconds: float):
 
 func slash_attack(dir: Vector2):
 	ability_cooldown += ability_per_use
-	print(ability_cooldown)
 	if ability_cooldown >= 100:
 		death()
 	
@@ -233,7 +232,6 @@ func _physics_process(delta: float) -> void:
 		
 		var prev_velocity = velocity
 		move_and_slide()
-		print(velocity.x)
 		var angle_to_turn = velocity.angle()
 		if velocity.x < 0 and facing_left == true:
 			facing_left = false

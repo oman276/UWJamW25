@@ -57,7 +57,6 @@ func enemy_died():
 	if enemies_remaining == 0:
 		wave += 1
 		utils.wave = wave
-		print("New Wave")
 		spawn_new_wave(wave)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

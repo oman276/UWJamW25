@@ -1,18 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://dkx4d3y4k4wmv"]
 
+[ext_resource type="Script" uid="uid://11ij077yq11w" path="res://scripts/ui/game_over.gd" id="1_org1n"]
 [ext_resource type="Texture2D" uid="uid://dbu7oe0ruy4c0" path="res://game_over.png" id="1_uq5bb"]
-[ext_resource type="Script" uid="uid://ghv8kwcqpev5" path="res://scripts/TitleScreen.gd" id="2_iplkp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wa4fm"]
 radius = 61.0
 height = 484.0
 
 [node name="Game Over" type="Node2D"]
+script = ExtResource("1_org1n")
 
 [node name="TitleScreen" type="Sprite2D" parent="."]
 position = Vector2(961, 543)
 texture = ExtResource("1_uq5bb")
-script = ExtResource("2_iplkp")
 
 [node name="StartButton" type="Area2D" parent="."]
 position = Vector2(799, -416)
@@ -37,4 +37,4 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 60
 text = "WAVE : 2"
 
-[connection signal="input_event" from="StartButton" to="TitleScreen" method="_on_start_button_input_event"]
+[connection signal="input_event" from="StartButton" to="." method="_on_start_button_input_event"]

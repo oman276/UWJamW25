@@ -44,7 +44,6 @@ func activate_pause_state():
 func _physics_process(delta):
 	#Moving State
 	if current_lunge_state == LUNGE_STATE.Moving:
-		print("moving")
 		var direction = to_local(nav_agent.get_next_path_position()).normalized()
 		velocity = velocity.move_toward(direction * base_speed * current_speed_percent * delta, base_acceleration * delta)
 		#check distance to player
@@ -52,11 +51,9 @@ func _physics_process(delta):
 			activate_pause_state()
 	#Paused State
 	elif current_lunge_state == LUNGE_STATE.Paused:
-		print("paused")
 		velocity = velocity.move_toward(Vector2.ZERO, slowdown_speed * delta)
 	#Lunge Slowdown State
 	else:
-		print("lunginf")
 		velocity = velocity.move_toward(Vector2.ZERO, lunge_friction * delta)
 	
 	#move_and_slide()
