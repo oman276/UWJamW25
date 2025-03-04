@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://fuwldaqyjphl"]
+[gd_scene load_steps=24 format=3 uid="uid://fuwldaqyjphl"]
 
 [ext_resource type="PackedScene" uid="uid://dty6bam7ws52h" path="res://scenes/utils/main_camera.tscn" id="1_5xhns"]
 [ext_resource type="Script" uid="uid://ok2y3h8abkwj" path="res://scripts/utilities/LevelController.gd" id="1_iwnx3"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dlqkmvrdfg60d" path="res://scenes/ui/heart_container.tscn" id="14_q8r18"]
 [ext_resource type="PackedScene" uid="uid://c1e3rqofqm30v" path="res://scenes/ui/texture_progress_bar.tscn" id="15_jstp0"]
 [ext_resource type="AudioStream" uid="uid://cb2m54m3w04bt" path="res://bensound-timeflies.mp3" id="18_kjmfk"]
+[ext_resource type="FontFile" uid="uid://svrkp0um8ms5" path="res://assets/fonts/AlmendraSC-Regular.ttf" id="19_pkib5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8buv"]
 texture = ExtResource("3_8tgbt")
@@ -372,21 +373,31 @@ scale = Vector2(2, 2)
 [node name="TextureProgressBar" parent="CanvasLayer" instance=ExtResource("15_jstp0")]
 
 [node name="New Wave!" type="RichTextLabel" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.516146
 anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -169.0
-offset_top = -47.0
-offset_right = 173.0
-offset_bottom = 36.0
+anchor_right = 0.772917
+anchor_bottom = 0.625
+offset_left = -354.0
+offset_top = -87.0
+offset_right = -12.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 60
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 0.513726, 0.164706, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.498039)
+theme_override_constants/outline_size = 15
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_offset_x = 5
+theme_override_fonts/normal_font = ExtResource("19_pkib5")
+theme_override_font_sizes/normal_font_size = 165
 text = "New Wave!"
 fit_content = true
 scroll_active = false
+metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="."]
 

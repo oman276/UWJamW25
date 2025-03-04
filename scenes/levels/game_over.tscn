@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkx4d3y4k4wmv"]
+[gd_scene load_steps=5 format=3 uid="uid://dkx4d3y4k4wmv"]
 
 [ext_resource type="Script" uid="uid://11ij077yq11w" path="res://scripts/ui/game_over.gd" id="1_org1n"]
 [ext_resource type="Texture2D" uid="uid://dbu7oe0ruy4c0" path="res://game_over.png" id="1_uq5bb"]
+[ext_resource type="FontFile" uid="uid://svrkp0um8ms5" path="res://assets/fonts/AlmendraSC-Regular.ttf" id="3_qy7gw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wa4fm"]
 radius = 61.0
@@ -28,12 +29,19 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1382.0
-offset_top = 594.0
-offset_right = 1879.0
-offset_bottom = 712.0
+offset_left = 1511.0
+offset_top = 604.0
+offset_right = 1856.0
+offset_bottom = 722.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.514125, 0.164172, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_qy7gw")
 theme_override_font_sizes/font_size = 60
 text = "WAVE : 2"
 

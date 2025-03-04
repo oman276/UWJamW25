@@ -33,7 +33,7 @@ func spawn_new_wave(num : int):
 	timer.wait_time = 2
 	timer.start()
 	
-	new_wave_.text = "WAVE " + str(num)
+	new_wave_.text = " WAVE " + str(num)
 	
 	for i in range(num):
 		var enemy_type = randi_range(1, 10)
