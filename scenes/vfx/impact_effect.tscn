@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwlkf0q8vapi8"]
 
-[ext_resource type="Script" path="res://scripts/vfx/impact_effect.gd" id="1_r8dmq"]
+[ext_resource type="Script" uid="uid://oca8k23wroug" path="res://scripts/vfx/impact_effect.gd" id="1_r8dmq"]
 [ext_resource type="Texture2D" uid="uid://dj8g3vocm7ly2" path="res://assets/vfx/fire.png" id="2_pa1i0"]
 
 [sub_resource type="Curve" id="Curve_gccck"]
-max_value = 4.0
+_limits = [0.0, 4.0, 0.0, 1.0]
 _data = [Vector2(0, 3.34108), 0.0, 0.0, 0, 0, Vector2(0.346049, 1.19958), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 

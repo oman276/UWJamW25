@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://fuwldaqyjphl"]
 
 [ext_resource type="PackedScene" uid="uid://dty6bam7ws52h" path="res://scenes/utils/main_camera.tscn" id="1_5xhns"]
-[ext_resource type="Script" path="res://scripts/utilities/LevelController.gd" id="1_iwnx3"]
+[ext_resource type="Script" uid="uid://ok2y3h8abkwj" path="res://scripts/utilities/LevelController.gd" id="1_iwnx3"]
 [ext_resource type="PackedScene" uid="uid://brgiqpataf0au" path="res://scenes/player.tscn" id="2_4pjhe"]
 [ext_resource type="Texture2D" uid="uid://cpb8vh62mn6ip" path="res://assets/level/wall_tile.png" id="3_8tgbt"]
 [ext_resource type="PackedScene" uid="uid://g27ilmc6722t" path="res://scenes/enemies/shoot_enemy.tscn" id="4_edqi1"]
@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://h0udiscagitg" path="res://assets/level/wave2.png" id="8_b0n2w"]
 [ext_resource type="Texture2D" uid="uid://q8vgoa7bl4y8" path="res://assets/level/wave3.png" id="9_y4c0d"]
 [ext_resource type="Texture2D" uid="uid://b8c2noefqfnca" path="res://assets/level/small.png" id="10_e2fuh"]
-[ext_resource type="Script" path="res://scripts/utilities/OOB Trigger.gd" id="13_7weae"]
+[ext_resource type="Script" uid="uid://decwb7sw216i4" path="res://scripts/utilities/OOB Trigger.gd" id="13_7weae"]
 [ext_resource type="Texture2D" uid="uid://dbwdabypue4p6" path="res://assets/ui/bar.png" id="14_id3o5"]
 [ext_resource type="PackedScene" uid="uid://dlqkmvrdfg60d" path="res://scenes/ui/heart_container.tscn" id="14_q8r18"]
 [ext_resource type="PackedScene" uid="uid://c1e3rqofqm30v" path="res://scenes/ui/texture_progress_bar.tscn" id="15_jstp0"]
@@ -23,42 +23,18 @@
 texture = ExtResource("3_8tgbt")
 texture_region_size = Vector2i(134, 90)
 1:1/0 = 0
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
 2:1/0 = 0
-2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:1/0/physics_layer_0/angular_velocity = 0.0
 0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-67, -45, 67, -45, 67, 45, -67, 45)
 1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
 3:2/0 = 0
-3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:2/0/physics_layer_0/angular_velocity = 0.0
 3:1/0 = 0
-3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:1/0/physics_layer_0/angular_velocity = 0.0
 3:0/0 = 0
-3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:0/0/physics_layer_0/angular_velocity = 0.0
 2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
 0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
 0:2/0 = 0
-0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:2/0/physics_layer_0/angular_velocity = 0.0
 1:2/0 = 0
-1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:2/0/physics_layer_0/angular_velocity = 0.0
 2:2/0 = 0
-2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:2/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_ih4h5"]
 tile_size = Vector2i(134, 90)

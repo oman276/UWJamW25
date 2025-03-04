@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cpmpwfqf8a5r7"]
 
 [ext_resource type="PackedScene" uid="uid://fo3dcsvx5gnj" path="res://scenes/enemies/enemy.tscn" id="1_7mpna"]
-[ext_resource type="Script" path="res://scripts/enemy/ChargeEnemy.gd" id="2_4uekb"]
+[ext_resource type="Script" uid="uid://bo11fnamdf2x4" path="res://scripts/enemy/ChargeEnemy.gd" id="2_4uekb"]
 [ext_resource type="Texture2D" uid="uid://cmodyu52bruyi" path="res://assets/enemies/enemy2_spine1.png" id="3_m651i"]
 [ext_resource type="Texture2D" uid="uid://bslawgpvo8eic" path="res://assets/enemies/enemy2_spine.png" id="4_ue34h"]
 [ext_resource type="Texture2D" uid="uid://x45titxxcp23" path="res://assets/enemies/enemy2_head.png" id="5_xk72x"]
@@ -68,8 +68,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1vk2p"]
 _data = {
-"RESET": SubResource("Animation_vy10f"),
-"idle": SubResource("Animation_jdsmv")
+&"RESET": SubResource("Animation_vy10f"),
+&"idle": SubResource("Animation_jdsmv")
 }
 
 [node name="ChargeEnemy" node_paths=PackedStringArray("base_sprites") instance=ExtResource("1_7mpna")]

@@ -1,12 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://dnkhdw26lgaw4"]
 
-[ext_resource type="Script" path="res://scripts/player/FreezeEffect.gd" id="1_ajxd6"]
+[ext_resource type="Script" uid="uid://t31b1fkl5o30" path="res://scripts/player/FreezeEffect.gd" id="1_ajxd6"]
 [ext_resource type="Texture2D" uid="uid://jf8c34oae1d8" path="res://assets/vfx/snow.png" id="2_i7sd6"]
 [ext_resource type="Texture2D" uid="uid://cv0qrunyjthv3" path="res://assets/vfx/Untitled_Artwork.png" id="3_ksygx"]
 
 [sub_resource type="Curve" id="Curve_5o7i4"]
-min_value = -360.0
-max_value = 360.0
+_limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 

@@ -32,7 +32,7 @@ func _process(delta):
 		var zoom_speed_active : float
 		if target.current_state == Player.PLAYER_MOVE_STATE.Slashing:
 			target_zoom = base_zoom + (max_zoom_add)
-			zoom_speed_active = zoom_speed * 5
+			zoom_speed_active = zoom_speed
 		else:
 			target_zoom = base_zoom
 			zoom_speed_active = zoom_speed

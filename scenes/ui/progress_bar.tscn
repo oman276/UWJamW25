@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ds3wn0cu6p5d3"]
 
-[ext_resource type="Script" path="res://scripts/ui/ability_bar.gd" id="1_j8cyt"]
+[ext_resource type="Script" uid="uid://cpfmoi2igfhlp" path="res://scripts/ui/ability_bar.gd" id="1_j8cyt"]
 
 [node name="ProgressBar" type="ProgressBar"]
 anchors_preset = 1

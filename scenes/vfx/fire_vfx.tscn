@@ -3,8 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dj8g3vocm7ly2" path="res://assets/vfx/fire.png" id="1_46mfv"]
 
 [sub_resource type="Curve" id="Curve_qh5vp"]
-min_value = -360.0
-max_value = 360.0
+_limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -28,7 +27,7 @@ point_count = 2
 curve = SubResource("Curve_612ls")
 
 [sub_resource type="Curve" id="Curve_nt762"]
-max_value = 3.0
+_limits = [0.0, 3.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -60,8 +59,8 @@ color_ramp = SubResource("GradientTexture1D_qov41")
 modulate = Color(1.5, 1.497, 1.5, 1)
 position = Vector2(0, -6.25001)
 amount = 50
-process_material = SubResource("ParticleProcessMaterial_mkkw2")
 texture = ExtResource("1_46mfv")
 lifetime = 0.3
 fixed_fps = 120
 trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_mkkw2")

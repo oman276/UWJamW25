@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dj61u6x4wiglq"]
 
 [ext_resource type="PackedScene" uid="uid://fo3dcsvx5gnj" path="res://scenes/enemies/enemy.tscn" id="1_2sod7"]
-[ext_resource type="Script" path="res://scripts/enemy/LungeEnemy.gd" id="2_u534n"]
+[ext_resource type="Script" uid="uid://bimmdj1xkod1u" path="res://scripts/enemy/LungeEnemy.gd" id="2_u534n"]
 [ext_resource type="Texture2D" uid="uid://dft41xddisxd7" path="res://assets/enemies/enemy1_head.png" id="3_2or4n"]
 [ext_resource type="Texture2D" uid="uid://dpbj1x8sucrg8" path="res://assets/enemies/enemy1_spines.png" id="4_tngqv"]
 [ext_resource type="Texture2D" uid="uid://juaejm7f42u6" path="res://assets/vfx/ice.png" id="5_nqmy3"]
@@ -43,8 +43,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fego8"]
 _data = {
-"RESET": SubResource("Animation_frx7c"),
-"idle": SubResource("Animation_lew8c")
+&"RESET": SubResource("Animation_frx7c"),
+&"idle": SubResource("Animation_lew8c")
 }
 
 [node name="LungeEnemy" node_paths=PackedStringArray("base_sprites") instance=ExtResource("1_2sod7")]
@@ -93,7 +93,7 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
-"": SubResource("AnimationLibrary_fego8")
+&"": SubResource("AnimationLibrary_fego8")
 }
 
 [node name="Sprites" type="Node2D" parent="." index="9"]

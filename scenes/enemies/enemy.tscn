@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://fo3dcsvx5gnj"]
 
-[ext_resource type="Script" path="res://scripts/enemy/SimpleEnemy.gd" id="1_3p5kl"]
+[ext_resource type="Script" uid="uid://bycxequwsyyi1" path="res://scripts/enemy/SimpleEnemy.gd" id="1_3p5kl"]
 [ext_resource type="PackedScene" uid="uid://cwlkf0q8vapi8" path="res://scenes/vfx/impact_effect.tscn" id="2_sw1t0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ethfy"]
