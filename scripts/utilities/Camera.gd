@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var target: Player
+@export var target: WOIPlayer
 @export var smoothing_enabled: bool = true
 @export var smoothing_speed: float = 5.0
 
@@ -30,7 +30,7 @@ func _process(delta):
 		
 		var target_zoom : Vector2
 		var zoom_speed_active : float
-		if target.current_state == Player.PLAYER_MOVE_STATE.Slashing:
+		if target.current_state == WOIPlayer.PLAYER_MOVE_STATE.Slashing:
 			target_zoom = base_zoom + (max_zoom_add)
 			zoom_speed_active = zoom_speed
 		else:

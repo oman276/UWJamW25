@@ -33,7 +33,6 @@ var base_sprite_positions : Dictionary = {}
 var ran_gen : RandomNumberGenerator
 
 @export var rotation_speed: float = 50
-#@export var 
 
 func _ready():
 	ran_gen = RandomNumberGenerator.new()
@@ -92,8 +91,8 @@ func make_path():
 		print("Path found!")
 
 func _on_trigger_body_entered(body):
-	if body is Player:
-		if body.current_damage_state == Player.PLAYER_DAMAGE_STATE.Slashing:
+	if body is WOIPlayer:
+		if body.current_damage_state == WOIPlayer.PLAYER_DAMAGE_STATE.Slashing:
 			_death()
 		else:
 			body.knockback(global_position)
@@ -102,7 +101,6 @@ func _death():
 	impact_effect.start_effect()
 	is_death_anim = true
 	
-	# Detach particles from enemy so they persist after death
 	if impact_effect:
 		var world = get_tree().current_scene  # Get the root scene
 		impact_effect.get_parent().remove_child(impact_effect)  # Detach from enemy
@@ -112,7 +110,6 @@ func _death():
 	for sprite in base_sprites:
 		base_sprite_positions[sprite] = sprite.global_position
 	if GameManager.is_live():
-		#GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.TempFreeze
 		death_freeze_timer.wait_time = 0.1
 		Engine.time_scale = 0.15
 		death_freeze_timer.start()

@@ -8,6 +8,6 @@ func _process(delta):
 		global_translate(velocity * speed * delta) 
 
 func _on_area_2d_body_entered(body):
-	if body is Player and body.current_damage_state != Player.PLAYER_DAMAGE_STATE.Slashing:
+	if body is WOIPlayer and body.current_damage_state != WOIPlayer.PLAYER_DAMAGE_STATE.Slashing:
 			body.knockback(global_position)
 	queue_free()

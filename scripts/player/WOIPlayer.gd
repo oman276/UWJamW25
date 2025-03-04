@@ -1,4 +1,4 @@
-class_name Player
+class_name WOIPlayer
 
 extends CharacterBody2D
 @onready var movement_lock = $MovementLock

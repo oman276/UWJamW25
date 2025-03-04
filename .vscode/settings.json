@@ -1,0 +1,7 @@
+{
+  "editor.cursorSmoothCaretAnimation": "off",
+  "editor.smoothScrolling": false,
+  "editor.formatOnSave": true,
+  "diffEditor.codeLens": false,
+  "godotTools.editorPath.godot4": "c:\\Users\\oweng\\OneDrive\\Desktop\\Owen's Stuff\\Godot\\Godot_v4.4-stable_win64.exe\\Godot_v4.4-stable_win64.exe"
+}

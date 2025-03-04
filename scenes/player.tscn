@@ -1,6 +1,6 @@
 [gd_scene load_steps=39 format=3 uid="uid://brgiqpataf0au"]
 
-[ext_resource type="Script" uid="uid://cx0r32cfe0olr" path="res://scripts/player/Player.gd" id="1_cbau7"]
+[ext_resource type="Script" uid="uid://cx0r32cfe0olr" path="res://scripts/player/WOIPlayer.gd" id="1_cbau7"]
 [ext_resource type="Script" uid="uid://t31b1fkl5o30" path="res://scripts/player/FreezeEffect.gd" id="2_i6oex"]
 [ext_resource type="Texture2D" uid="uid://buu84fd0mtgp1" path="res://assets/icarus_sprites/Untitled_Artwork-1.png" id="3_cxm2x"]
 [ext_resource type="Texture2D" uid="uid://jf8c34oae1d8" path="res://assets/vfx/snow.png" id="3_dp0ue"]
