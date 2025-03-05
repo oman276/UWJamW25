@@ -83,8 +83,8 @@ lifetime_randomness = 0.14
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 25.0
-inherit_velocity_ratio = 1.0
-direction = Vector3(1, 8, 0)
+inherit_velocity_ratio = 0.1
+direction = Vector3(0, 0, 0)
 spread = 100.0
 angular_velocity_min = -174.86
 angular_velocity_max = 720.0
@@ -1357,9 +1357,9 @@ script = ExtResource("2_i6oex")
 z_index = 5
 position = Vector2(91.6667, -16.6667)
 amount = 50
-process_material = SubResource("ParticleProcessMaterial_22he0")
 texture = ExtResource("3_dp0ue")
 lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_22he0")
 
 [node name="icewave" type="Sprite2D" parent="FreezeEffect/FreezeVFX"]
 z_index = -1
@@ -1380,11 +1380,11 @@ polygon = PackedVector2Array(10.4167, -3.76344, -7.29166, 50, 101.042, 184.409, 
 modulate = Color(1.5, 1.497, 1.5, 1)
 position = Vector2(0, -6.25001)
 amount = 50
-process_material = SubResource("ParticleProcessMaterial_mkkw2")
 texture = ExtResource("3_tfcsg")
 lifetime = 0.3
 fixed_fps = 120
-trail_lifetime = 1.0
+visibility_rect = Rect2(-250, -250, 500, 500)
+process_material = SubResource("ParticleProcessMaterial_mkkw2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_i0pan")
@@ -1564,7 +1564,7 @@ rest = Transform2D(1, 0, 0, 1, -7.8125, 80.7292)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_nfylv")
+&"": SubResource("AnimationLibrary_nfylv")
 }
 autoplay = "flight"
 
