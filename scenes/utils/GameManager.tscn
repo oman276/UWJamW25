@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgju4xog8coi"]
+[gd_scene load_steps=3 format=3 uid="uid://bgju4xog8coi"]
 
 [ext_resource type="Script" uid="uid://dvr7utmb11xks" path="res://scripts/GameManager.gd" id="1_h5yca"]
+[ext_resource type="PackedScene" uid="uid://dmut62bvgcaxi" path="res://scenes/ui/fade_canvas.tscn" id="2_jv50c"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_h5yca")
+
+[node name="FadeCanvas" parent="." instance=ExtResource("2_jv50c")]

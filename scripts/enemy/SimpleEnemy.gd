@@ -1,5 +1,4 @@
 class_name SimpleEnemy
-
 extends CharacterBody2D
 
 @onready var nav_agent = $NavigationAgent2D
@@ -87,8 +86,6 @@ func make_path():
 
 	if not nav_agent.is_target_reachable():
 		print("No valid path found!")
-	else:
-		print("Path found!")
 
 func _on_trigger_body_entered(body):
 	if body is WOIPlayer:
