@@ -30,10 +30,16 @@ func _ready():
 func spawn_new_wave(num : int):
 	enemies_remaining = num
 	timer.stop()
-	timer.wait_time = 2
+	timer.wait_time = 3
 	timer.start()
 	
+	new_wave_.modulate.a = 0
 	new_wave_.text = " WAVE " + str(num)
+
+	var tween = get_tree().create_tween()
+	tween.tween_property(new_wave_, "modulate:a", 1.0, 1.0).set_trans(Tween.TRANS_SINE)
+	tween.tween_interval(1.0)
+	tween.tween_property(new_wave_, "modulate:a", 0.0, 1.0).set_trans(Tween.TRANS_SINE)
 	
 	for i in range(num):
 		var enemy_type = randi_range(1, 10)
