@@ -1336,6 +1336,7 @@ character_polys = [NodePath("Polygons/arm_left"), NodePath("Polygons/torso"), No
 shape = SubResource("RectangleShape2D_qs0el")
 
 [node name="MovementLock" type="Timer" parent="."]
+one_shot = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

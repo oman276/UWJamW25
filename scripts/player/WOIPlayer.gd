@@ -10,6 +10,11 @@ extends CharacterBody2D
 @onready var freeze_vfx = $FreezeEffect/FreezeVFX
 @onready var freeze_timer = $FreezeTimer
 @onready var invuln_timer = $InvulnTimer
+@onready var collider : CollisionShape2D = $CollisionShape2D
+@onready var wing_l : Polygon2D = $Polygons/wing_left
+@onready var wing_r : Polygon2D = $Polygons/wing_right
+
+
 
 var anim_timer := Timer.new()
 var dash_toggle = false
@@ -25,7 +30,8 @@ enum PLAYER_MOVE_STATE {
 	Slashing,
 	Dodging,
 	FreezeFrame,
-	Knockback
+	Knockback,
+	DeathFall
 }
 
 enum PLAYER_DAMAGE_STATE {
@@ -90,7 +96,21 @@ func _ready():
 	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
 
 func death():
+	current_state = PLAYER_MOVE_STATE.DeathFall
+	current_damage_state = PLAYER_DAMAGE_STATE.Invulnerable
+	collision_layer = 0
+	collision_mask = 0
+	wing_l.visible = false
+	wing_r.visible = false
+
+	velocity = Vector2.ZERO
+	# in process: 
+	# 	set the thing to keep rotating based on the random rotation calculated here
+	#   velocity to slowly drift down
+
+	await get_tree().create_timer(4).timeout
 	GameManager.load_level(GameManager.LEVELS.PostGame)
+	pass
 	
 func lock_movement_for(seconds: float):
 	movement_lock.stop()
@@ -125,15 +145,8 @@ func dodge_attack():
 	velocity = velocity * dodge_multiplier
 	
 func knockback(origin_pos: Vector2):
-	if current_damage_state != PLAYER_DAMAGE_STATE.Invulnerable:
-		health -= 1
-		if (health == 0):
-			death()
-		heart1.visible = health >= 3
-		heart2.visible = health >= 2
-		heart3.visible = health >= 1
-	
-	current_state = PLAYER_MOVE_STATE.Knockback
+	if current_state != PLAYER_MOVE_STATE.DeathFall:
+		current_state = PLAYER_MOVE_STATE.Knockback
 	
 	color_rect.color = Color.DARK_RED
 	visual_timer.stop()
@@ -141,6 +154,8 @@ func knockback(origin_pos: Vector2):
 	visual_timer.start()
 	lock_movement_for(0.2)
 	
+	velocity = speed * knockback_multiplier * (global_position - origin_pos).normalized()
+
 	if current_damage_state != PLAYER_DAMAGE_STATE.Invulnerable:
 		if not is_inside_tree():
 			return
@@ -155,13 +170,19 @@ func knockback(origin_pos: Vector2):
 			tweens.append(tween)  # Store the tween for stopping later
 			tween.tween_property(polygon, "modulate", Color.WHITE, 0.2)
 			tween.tween_property(polygon, "modulate", Color(1, 1, 1, 0), 0.2)
-	
-	velocity = speed * knockback_multiplier * (global_position - origin_pos).normalized()
+
+		health -= 1
+		if (health == 0):
+			death()
+		heart1.visible = health >= 3
+		heart2.visible = health >= 2
+		heart3.visible = health >= 1
 	
 	freeze_timer.stop()
 	freeze_timer.wait_time = 0.05
 	Engine.time_scale = 0.2
 	freeze_timer.start()
+		
 
 func _input(event: InputEvent) -> void:
 	#input to only register if player is free
@@ -229,6 +250,8 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.move_toward(last_slash_dir * speed * slash_multiplier, acceleration * delta * slash_acceleration_multiplier)
 		elif (current_state == PLAYER_MOVE_STATE.Dodging || current_state == PLAYER_MOVE_STATE.Knockback):
 			velocity = velocity.move_toward(Vector2.ZERO, friction * delta * dodge_acceleration_multiplier)
+		elif (current_state == PLAYER_MOVE_STATE.DeathFall):
+			velocity = velocity.move_toward(Vector2.DOWN * speed, acceleration * delta * 0.25)
 		
 		var prev_velocity = velocity
 		move_and_slide()
@@ -253,10 +276,12 @@ func _physics_process(delta: float) -> void:
 					velocity = bounce_vel
 				else:
 					velocity = bounce_vel.normalized() * speed * 1.2
-		
 
 func _on_movement_lock_timeout():
-	current_state = PLAYER_MOVE_STATE.Free
+	if current_state != PLAYER_MOVE_STATE.DeathFall:
+		current_state = PLAYER_MOVE_STATE.Free
+	else:
+		print("locked?")
 
 func _on_attack_timer_timeout():
 	current_damage_state = PLAYER_DAMAGE_STATE.Vulnerable
