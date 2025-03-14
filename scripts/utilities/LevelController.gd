@@ -25,7 +25,6 @@ func _ready():
 	
 	wave = 1
 	spawn_new_wave(1)
-	new_wave_.text = ""
 
 func spawn_new_wave(num : int):
 	enemies_remaining = num
