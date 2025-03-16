@@ -44,6 +44,9 @@ func _ready():
 	for sprite in base_sprites:
 		base_sprite_positions[sprite] = sprite.global_position
 
+	if player:
+		player.add_enemy_indicator(self)
+
 func _process(delta):
 	if is_death_anim == false:
 		current_speed_percent += regen_rate_per_sec * delta

@@ -82,6 +82,9 @@ var facing_left = true
 @export var character_polys : Array[Polygon2D]
 var tweens : Array[Tween]
 
+var arrow_scn
+@onready var enemy_indicator_hub: Node2D = $EnemyIndicatorHub
+
 func _ready():
 	freeze_vfx.modulate.a = 0
 	fire_effect.emitting = false
@@ -95,6 +98,8 @@ func _ready():
 	freeze_effect_active = false
 	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
 
+	arrow_scn = preload("res://scenes/objects/EnemyIndicator.tscn")
+
 func death():
 	current_state = PLAYER_MOVE_STATE.DeathFall
 	current_damage_state = PLAYER_DAMAGE_STATE.Invulnerable
@@ -104,9 +109,6 @@ func death():
 	wing_r.visible = false
 
 	velocity = Vector2.ZERO
-	# in process: 
-	# 	set the thing to keep rotating based on the random rotation calculated here
-	#   velocity to slowly drift down
 
 	await get_tree().create_timer(4).timeout
 	GameManager.load_level(GameManager.LEVELS.PostGame)
@@ -182,7 +184,6 @@ func knockback(origin_pos: Vector2):
 	freeze_timer.wait_time = 0.05
 	Engine.time_scale = 0.2
 	freeze_timer.start()
-		
 
 func _input(event: InputEvent) -> void:
 	#input to only register if player is free
@@ -307,3 +308,8 @@ func _on_invuln_timer_timeout():
 	
 	for polygon in character_polys:
 		polygon.modulate = Color(1, 1, 1, 1)  # Reset to default
+
+func add_enemy_indicator(enemy : Node2D):
+	var indicator = arrow_scn.instantiate()
+	enemy_indicator_hub.add_child(indicator)
+	indicator.setup(enemy)

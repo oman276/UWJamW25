@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvfpy7er4rx17"]
+
+[ext_resource type="Script" uid="uid://yituj1ukcsf4" path="res://scripts/player/EnemyIndicator.gd" id="1_3hbtu"]
+[ext_resource type="Texture2D" uid="uid://c0irftj5ekbla" path="res://assets/Temp Arrow.png" id="1_fgiid"]
+
+[node name="EnemyIndicator" type="Node2D"]
+script = ExtResource("1_3hbtu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 30
+position = Vector2(300, 0)
+scale = Vector2(0.76, 0.29)
+texture = ExtResource("1_fgiid")
