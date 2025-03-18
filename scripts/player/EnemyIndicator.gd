@@ -13,7 +13,6 @@ var enemy_existed : bool = false
 @export var min_distance : float = 2000
 @export var max_distance : float = 15000
 
-
 func setup(_enemy : Node2D):
     enemy = _enemy
     enemy_existed = true

@@ -13,12 +13,21 @@ enum LEVELS{
 	PostGame
 }
 
-var level_str_dict : Dictionary[LEVELS, String] = {
-	LEVELS.None : "",
-	LEVELS.MainMenu : "res://scenes/levels/title.tscn",
-	LEVELS.Game : "res://scenes/levels/main_scene.tscn",
-	LEVELS.PostGame : "res://scenes/levels/game_over.tscn",
+enum THEMES{
+	None,
+	Title,
+	Action,
 }
+
+var level_str_dict : Dictionary = {
+	LEVELS.None : ["", THEMES.Title],
+	LEVELS.MainMenu : ["res://scenes/levels/title.tscn", THEMES.Title],
+	LEVELS.Game : ["res://scenes/levels/main_scene.tscn", THEMES.Action],
+	LEVELS.PostGame : ["res://scenes/levels/game_over.tscn", THEMES.Title],
+}
+
+var current_theme : THEMES = THEMES.None
+@onready var music_player := AudioStreamPlayer.new()
 
 var loading_canvas : CanvasLayer
 var loading_canvas_path : String = "res://scenes/ui/fade_canvas.tscn"
@@ -31,6 +40,7 @@ func _ready():
 	var temp = load(loading_canvas_path)
 	loading_canvas = temp.instantiate()
 	add_child(loading_canvas)
+	add_child(music_player)  
 
 	load_level(LEVELS.MainMenu)
 
@@ -49,10 +59,24 @@ func load_level(level : LEVELS):
 		current_level_node.queue_free()
 		current_level_node = null 
 
-	var scene_str = level_str_dict[level]
+	var scene_str = level_str_dict[level][0]
 	if scene_str != "":
 		var scene = load(scene_str)
 		current_level_node = scene.instantiate()
 		add_child(current_level_node)
 
 	loading_canvas.fade_out()
+	play_music(level_str_dict[level][1])
+
+func play_music(track : THEMES):
+	if track != current_theme:
+		current_theme = track
+		music_player.stop()
+		match track:
+			THEMES.Action:
+				music_player.stream = preload("res://assets/music/action_theme.mp3")
+			THEMES.Title:
+				music_player.stream = preload("res://assets/music/title_theme.mp3")
+		music_player.volume_db = -10  
+		music_player.autoplay = true 
+		music_player.play()
