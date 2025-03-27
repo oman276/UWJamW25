@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://da5gb4ef32rcn"]
+[gd_scene load_steps=4 format=3 uid="uid://da5gb4ef32rcn"]
 
 [ext_resource type="FontFile" uid="uid://bslcwic4ca0qi" path="res://assets/fonts/Vollkorn-VariableFont_wght.ttf" id="1_fhg1p"]
+[ext_resource type="Script" uid="uid://nfsbodpd08wn" path="res://scripts/CreditScene.gd" id="1_uvwux"]
 [ext_resource type="FontFile" uid="uid://svrkp0um8ms5" path="res://assets/fonts/AlmendraSC-Regular.ttf" id="2_uvwux"]
 
 [node name="Credit Screen" type="Node2D"]
+script = ExtResource("1_uvwux")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
@@ -43,3 +46,32 @@ and
 [b]NICOLE PLANETA[/b]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -789.0
+offset_top = -151.0
+offset_right = 790.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/normal_font = ExtResource("1_fhg1p")
+theme_override_fonts/italics_font = ExtResource("1_fhg1p")
+theme_override_fonts/bold_font = ExtResource("2_uvwux")
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "Find more fun at [b]OWENGAMES.COM[/b]
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

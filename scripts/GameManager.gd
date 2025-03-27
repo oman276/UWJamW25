@@ -10,7 +10,8 @@ enum LEVELS{
 	None,
 	MainMenu,
 	Game,
-	PostGame
+	PostGame,
+  Credits
 }
 
 enum THEMES{
@@ -21,6 +22,7 @@ enum THEMES{
 
 var level_str_dict : Dictionary = {
 	LEVELS.None : ["", THEMES.Title],
+  LEVELS.Credits : ["res://scenes/levels/credits.tscn", THEMES.Title],
 	LEVELS.MainMenu : ["res://scenes/levels/title.tscn", THEMES.Title],
 	LEVELS.Game : ["res://scenes/levels/main_scene.tscn", THEMES.Action],
 	LEVELS.PostGame : ["res://scenes/levels/game_over.tscn", THEMES.Title],
@@ -42,7 +44,7 @@ func _ready():
 	add_child(loading_canvas)
 	add_child(music_player)  
 
-	load_level(LEVELS.MainMenu)
+	load_level(LEVELS.Credits)
 
 func is_live() -> bool:
 	return current_global_state == GLOBAL_GAME_STATE.Default
