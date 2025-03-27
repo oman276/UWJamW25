@@ -14,8 +14,6 @@ extends CharacterBody2D
 @onready var wing_l : Polygon2D = $Polygons/wing_left
 @onready var wing_r : Polygon2D = $Polygons/wing_right
 
-
-
 var anim_timer := Timer.new()
 var dash_toggle = false
 
@@ -85,6 +83,9 @@ var tweens : Array[Tween]
 var arrow_scn
 @onready var enemy_indicator_hub: Node2D = $EnemyIndicatorHub
 
+var score : int
+var enemies_hit : int
+
 func _ready():
 	freeze_vfx.modulate.a = 0
 	fire_effect.emitting = false
@@ -99,6 +100,9 @@ func _ready():
 	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
 
 	arrow_scn = preload("res://scenes/objects/EnemyIndicator.tscn")
+
+	score = 0
+	enemies_hit = 0
 
 func death():
 	current_state = PLAYER_MOVE_STATE.DeathFall

@@ -22,7 +22,7 @@ enum THEMES{
 
 var level_str_dict : Dictionary = {
 	LEVELS.None : ["", THEMES.Title],
-  LEVELS.Credits : ["res://scenes/levels/credits.tscn", THEMES.Title],
+	LEVELS.Credits : ["res://scenes/levels/credits.tscn", THEMES.Title],
 	LEVELS.MainMenu : ["res://scenes/levels/title.tscn", THEMES.Title],
 	LEVELS.Game : ["res://scenes/levels/main_scene.tscn", THEMES.Action],
 	LEVELS.PostGame : ["res://scenes/levels/game_over.tscn", THEMES.Title],
@@ -37,6 +37,9 @@ var loading_canvas_path : String = "res://scenes/ui/fade_canvas.tscn"
 var current_global_state : GLOBAL_GAME_STATE = GLOBAL_GAME_STATE.Default
 var current_level_enum : LEVELS = LEVELS.None
 var current_level_node : Node2D
+
+# Score variables
+var high_score : int = 0
 
 func _ready():
 	var temp = load(loading_canvas_path)
@@ -82,3 +85,7 @@ func play_music(track : THEMES):
 		music_player.volume_db = -10  
 		music_player.autoplay = true 
 		music_player.play()
+
+func set_score(score : int):
+	if score > high_score:
+		high_score = score

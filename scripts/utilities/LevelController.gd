@@ -6,6 +6,9 @@ extends Node2D
 @export var waves : Array[Sprite2D] = []
 @onready var timer = $Timer
 @onready var new_wave_ = $"CanvasLayer/New Wave!"
+@onready var score_list: RichTextLabel = $CanvasLayer/ScoreList
+@onready var combo: RichTextLabel = $CanvasLayer/Combo
+@onready var added_score: RichTextLabel = $CanvasLayer/AddedScore
 
 @export var chase_enemy : PackedScene
 @export var lunge_enemy : PackedScene
