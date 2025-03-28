@@ -184,9 +184,9 @@ navigation_polygon = SubResource("NavigationPolygon_35c2p")
 [node name="LungeEnemy" parent="." instance=ExtResource("14_p8s2r")]
 position = Vector2(1390, 189)
 script = ExtResource("13_f0kkh")
+accelleration = 100.0
 speed = 2000.0
 regen_rate_per_sec = 0.05
-accelleration = 100.0
 
 [node name="ChargeEnemy" parent="." instance=ExtResource("12_72yaj")]
 position = Vector2(1378, 502)

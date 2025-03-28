@@ -2,7 +2,8 @@ extends Sprite2D
 @onready var label = $"../Label"
 
 func _ready():
-	#MusicManager.play_music(preload("res://bensound-timeflies.mp3"))  # Change music
 	if label:
-		label.text = "WAVE: " + str(utils.wave)
+		var score = GameManager.current_score
+		var high_score = GameManager.high_score
+		label.text = "Your Score: " + str(score).pad_decimals(5) + "\nHigh Score: " + str(high_score).pad_decimals(5)
 

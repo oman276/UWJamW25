@@ -83,8 +83,7 @@ var tweens : Array[Tween]
 var arrow_scn
 @onready var enemy_indicator_hub: Node2D = $EnemyIndicatorHub
 
-var score : int
-var enemies_hit : int
+var combo : int = 0
 
 func _ready():
 	freeze_vfx.modulate.a = 0
@@ -100,9 +99,6 @@ func _ready():
 	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
 
 	arrow_scn = preload("res://scenes/objects/EnemyIndicator.tscn")
-
-	score = 0
-	enemies_hit = 0
 
 func death():
 	current_state = PLAYER_MOVE_STATE.DeathFall
@@ -124,6 +120,8 @@ func lock_movement_for(seconds: float):
 	movement_lock.start()
 
 func slash_attack(dir: Vector2):
+	combo = 0
+
 	ability_cooldown += ability_per_use
 	if ability_cooldown >= 100:
 		death()
@@ -317,3 +315,7 @@ func add_enemy_indicator(enemy : Node2D):
 	var indicator = arrow_scn.instantiate()
 	enemy_indicator_hub.add_child(indicator)
 	indicator.setup(enemy)
+
+func hit_enemy():
+	combo += 1
+	get_parent().add_score(combo)

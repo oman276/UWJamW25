@@ -39,7 +39,9 @@ var current_level_enum : LEVELS = LEVELS.None
 var current_level_node : Node2D
 
 # Score variables
+var current_score : int = 0
 var high_score : int = 0
+var new_best : bool = false
 
 func _ready():
 	var temp = load(loading_canvas_path)
@@ -87,5 +89,10 @@ func play_music(track : THEMES):
 		music_player.play()
 
 func set_score(score : int):
-	if score > high_score:
-		high_score = score
+	current_score = score
+	if current_score > high_score:
+		high_score = current_score
+		new_best = true
+
+
+

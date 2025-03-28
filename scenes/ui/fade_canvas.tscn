@@ -10,6 +10,7 @@ colors = PackedColorArray(0.169293, 0.107371, 0.049144, 1, 0.220319, 0.1432, 0.0
 gradient = SubResource("Gradient_dkasa")
 
 [node name="FadeCanvas" type="CanvasLayer"]
+layer = 10
 script = ExtResource("1_dl0qo")
 
 [node name="TextureRect" type="TextureRect" parent="."]

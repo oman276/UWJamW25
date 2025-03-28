@@ -6,9 +6,6 @@ extends Node2D
 @export var waves : Array[Sprite2D] = []
 @onready var timer = $Timer
 @onready var new_wave_ = $"CanvasLayer/New Wave!"
-@onready var score_list: RichTextLabel = $CanvasLayer/ScoreList
-@onready var combo: RichTextLabel = $CanvasLayer/Combo
-@onready var added_score: RichTextLabel = $CanvasLayer/AddedScore
 
 @export var chase_enemy : PackedScene
 @export var lunge_enemy : PackedScene
@@ -21,6 +18,13 @@ var initial_wave_positions : Array[Vector2] = []
 var wave : int = 1
 var enemies_remaining : int = 0
 
+var score : int = 0
+
+@onready var score_list: RichTextLabel = $CanvasLayer/ScoreList
+@onready var combo_text: RichTextLabel = $CanvasLayer/Combo
+@onready var added_score_text: RichTextLabel = $CanvasLayer/AddedScore 
+@onready var score_timer: Timer = $ScoreUITimer
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for wave in waves:
@@ -28,6 +32,11 @@ func _ready():
 	
 	wave = 1
 	spawn_new_wave(1)
+
+	score_list.text = " Score: " + str(score).pad_zeros(5)
+	combo_text.modulate.a = 0
+	added_score_text.modulate.a = 0
+
 
 func spawn_new_wave(num : int):
 	enemies_remaining = num
@@ -76,3 +85,21 @@ func _process(delta):
 
 func _on_timer_timeout():
 	new_wave_.text = ""
+
+func add_score(combo : int):
+	var added_score = 100 * combo *2
+	score += added_score
+	print(score)
+	score_list.text = " Score: " + str(score).pad_zeros(5)
+
+	score_timer.start()
+
+	combo_text.text = " x[b]" + str(combo) + "[/b]"
+	combo_text.modulate.a = 1
+	added_score_text.text = " +[b]" + str(added_score) + "[/b]"
+	added_score_text.modulate.a = 1
+
+func _on_score_ui_timer_timeout() -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(combo_text, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(added_score_text, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE)

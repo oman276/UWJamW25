@@ -93,7 +93,7 @@ navigation_polygon = SubResource("NavigationPolygon_kpctt")
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2
-position = Vector2(-620, 1114)
+position = Vector2(-812, 800)
 scale = Vector2(8.53796, 8.53796)
 texture = ExtResource("7_fo85q")
 
@@ -488,5 +488,9 @@ position = Vector2(13879, -2374)
 
 [node name="RespawnTimer" type="Timer" parent="."]
 
+[node name="ScoreUITimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="body_entered" from="Waves/OOB Trigger" to="Waves/OOB Trigger" method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ScoreUITimer" to="." method="_on_score_ui_timer_timeout"]

@@ -1,3 +1,4 @@
+
 class_name SimpleEnemy
 extends CharacterBody2D
 
@@ -93,6 +94,7 @@ func make_path():
 func _on_trigger_body_entered(body):
 	if body is WOIPlayer:
 		if body.current_damage_state == WOIPlayer.PLAYER_DAMAGE_STATE.Slashing:
+			body.hit_enemy()
 			_death()
 		else:
 			body.knockback(global_position)
