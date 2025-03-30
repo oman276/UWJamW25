@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxh80qoyrf7yh"]
+
+[ext_resource type="Script" uid="uid://coptjsm0d4fk" path="res://scripts/utilities/WaveMovement.gd" id="1_hoc2y"]
+[ext_resource type="Texture2D" uid="uid://loou2d5at62x" path="res://assets/level/wave1.png" id="1_nf5d2"]
+[ext_resource type="Texture2D" uid="uid://h0udiscagitg" path="res://assets/level/wave2.png" id="2_hoc2y"]
+[ext_resource type="Texture2D" uid="uid://q8vgoa7bl4y8" path="res://assets/level/wave3.png" id="3_cblns"]
+
+[node name="WaveSet" type="Node2D"]
+z_index = -1
+script = ExtResource("1_hoc2y")
+
+[node name="Wave1" type="Sprite2D" parent="."]
+scale = Vector2(4.285, 4.285)
+texture = ExtResource("1_nf5d2")
+
+[node name="Wave2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(89, -67)
+scale = Vector2(4.285, 4.285)
+texture = ExtResource("2_hoc2y")
+
+[node name="Wave3" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(195, -128)
+scale = Vector2(4.285, 4.285)
+texture = ExtResource("3_cblns")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Mover" type="Node2D" parent="Pivot"]
+position = Vector2(0, -385)

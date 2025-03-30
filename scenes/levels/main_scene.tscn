@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://fuwldaqyjphl"]
+[gd_scene load_steps=21 format=3 uid="uid://fuwldaqyjphl"]
 
 [ext_resource type="PackedScene" uid="uid://dty6bam7ws52h" path="res://scenes/utils/main_camera.tscn" id="1_5xhns"]
 [ext_resource type="Script" uid="uid://ok2y3h8abkwj" path="res://scripts/utilities/LevelController.gd" id="1_iwnx3"]
@@ -7,11 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://g27ilmc6722t" path="res://scenes/enemies/shoot_enemy.tscn" id="4_edqi1"]
 [ext_resource type="PackedScene" uid="uid://cpmpwfqf8a5r7" path="res://scenes/enemies/charge_enemy.tscn" id="4_ph6b0"]
 [ext_resource type="PackedScene" uid="uid://dj61u6x4wiglq" path="res://scenes/enemies/lunge_enemy.tscn" id="4_wj1i0"]
-[ext_resource type="Texture2D" uid="uid://loou2d5at62x" path="res://assets/level/wave1.png" id="7_fjgyb"]
 [ext_resource type="Texture2D" uid="uid://d2qflta0umd8q" path="res://assets/background/background.png" id="7_fo85q"]
-[ext_resource type="Texture2D" uid="uid://h0udiscagitg" path="res://assets/level/wave2.png" id="8_b0n2w"]
-[ext_resource type="Texture2D" uid="uid://q8vgoa7bl4y8" path="res://assets/level/wave3.png" id="9_y4c0d"]
 [ext_resource type="Texture2D" uid="uid://b8c2noefqfnca" path="res://assets/level/small.png" id="10_e2fuh"]
+[ext_resource type="PackedScene" uid="uid://dxh80qoyrf7yh" path="res://scenes/objects/wave_set.tscn" id="10_x7kll"]
 [ext_resource type="Script" uid="uid://decwb7sw216i4" path="res://scripts/utilities/OOB Trigger.gd" id="13_7weae"]
 [ext_resource type="Texture2D" uid="uid://dbwdabypue4p6" path="res://assets/ui/bar.png" id="14_id3o5"]
 [ext_resource type="PackedScene" uid="uid://dlqkmvrdfg60d" path="res://scenes/ui/heart_container.tscn" id="14_q8r18"]
@@ -56,7 +54,7 @@ size = Vector2(22646, 2403.5)
 [node name="MainScene" type="Node2D" node_paths=PackedStringArray("waves", "spawns")]
 script = ExtResource("1_iwnx3")
 wave_move_scale = 1.0
-waves = [NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
+waves = [null, null, null, null, null, null, null, null, null]
 chase_enemy = ExtResource("4_ph6b0")
 lunge_enemy = ExtResource("4_wj1i0")
 shoot_enemy = ExtResource("4_edqi1")
@@ -99,33 +97,19 @@ color = Color(0.784314, 0.756863, 0.709804, 1)
 position = Vector2(-1904, 43)
 navigation_polygon = SubResource("NavigationPolygon_kpctt")
 
-[node name="WaveSet" type="Node2D" parent="."]
-z_index = -1
-
-[node name="Wave4" type="Sprite2D" parent="WaveSet"]
-position = Vector2(-7416, 5093)
-scale = Vector2(4.285, 4.285)
-texture = ExtResource("7_fjgyb")
-
-[node name="Wave5" type="Sprite2D" parent="WaveSet"]
-position = Vector2(-10013, 3964)
-scale = Vector2(4.285, 4.285)
-texture = ExtResource("8_b0n2w")
-
-[node name="Wave6" type="Sprite2D" parent="WaveSet"]
-position = Vector2(-9745, 4748)
-scale = Vector2(4.285, 4.285)
-texture = ExtResource("9_y4c0d")
-
-[node name="OOB Trigger" type="Area2D" parent="WaveSet"]
+[node name="OOB Trigger" type="Area2D" parent="."]
+position = Vector2(-3418, 274)
 collision_layer = 256
 collision_mask = 2
 collision_priority = 100.0
 script = ExtResource("13_7weae")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WaveSet/OOB Trigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OOB Trigger"]
 position = Vector2(5760, 6400)
 shape = SubResource("RectangleShape2D_rqet2")
+
+[node name="WaveSet2" parent="." instance=ExtResource("10_x7kll")]
+position = Vector2(-7418, 5100)
 
 [node name="Pivot" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -300,6 +284,6 @@ position = Vector2(13879, -2374)
 [node name="ScoreUITimer" type="Timer" parent="."]
 wait_time = 3.0
 
-[connection signal="body_entered" from="WaveSet/OOB Trigger" to="WaveSet/OOB Trigger" method="_on_body_entered"]
+[connection signal="body_entered" from="OOB Trigger" to="OOB Trigger" method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="ScoreUITimer" to="." method="_on_score_ui_timer_timeout"]
