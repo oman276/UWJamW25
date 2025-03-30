@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxh80qoyrf7yh"]
+[gd_scene load_steps=5 format=3 uid="uid://bdj3fhd3lxdeh"]
 
 [ext_resource type="Script" uid="uid://coptjsm0d4fk" path="res://scripts/utilities/WaveMovement.gd" id="1_hoc2y"]
 [ext_resource type="Texture2D" uid="uid://loou2d5at62x" path="res://assets/level/wave1.png" id="1_nf5d2"]
@@ -8,8 +8,10 @@
 [node name="WaveSet" type="Node2D"]
 z_index = -1
 script = ExtResource("1_hoc2y")
+wave_move_scale = 1.0
 
 [node name="Wave1" type="Sprite2D" parent="."]
+z_index = 1
 scale = Vector2(4.285, 4.285)
 texture = ExtResource("1_nf5d2")
 

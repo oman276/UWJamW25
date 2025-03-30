@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://r6bn0fqkgahe"]
+
+[ext_resource type="PackedScene" uid="uid://vei6iigrybfy" path="res://scenes/chunks/map_chunk_template.tscn" id="1_72cqm"]
+
+[node name="ChunkAlignmentTest" type="Node2D"]
+
+[node name="MapChunkTemplate" parent="." instance=ExtResource("1_72cqm")]
+
+[node name="MapChunkTemplate2" parent="." instance=ExtResource("1_72cqm")]
+position = Vector2(15246, 0)
+
+[node name="MapChunkTemplate3" parent="." instance=ExtResource("1_72cqm")]
+position = Vector2(-15246, 0)

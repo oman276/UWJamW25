@@ -13,8 +13,6 @@ extends Node2D
 
 @export var spawns : Array[Node2D] = []
 
-var initial_wave_positions : Array[Vector2] = []
-
 var wave : int = 1
 var enemies_remaining : int = 0
 
@@ -24,12 +22,16 @@ var score : int = 0
 @onready var combo_text: RichTextLabel = $CanvasLayer/Combo
 @onready var added_score_text: RichTextLabel = $CanvasLayer/AddedScore 
 @onready var score_timer: Timer = $ScoreUITimer
+@onready var enemy_respawn_timer : Timer = $RespawnTimer
 
-# Called when the node enters the scene tree for the first time.
+# Level Looping
+#TODO: Spawnpoints must be selected between all 3 available chunks of zone
+#TODO: Change camera boundaries to depend on the size of the available playspace
+
+# background set at (0, 0) compared to the node
+# x-position seems to be +-15246 (yeah, I think this works fine?) (bounds of each section is center +- 7623)
+
 func _ready():
-	for wave in waves:
-		initial_wave_positions.append(wave.position)
-	
 	wave = 1
 	spawn_new_wave(1)
 
@@ -37,8 +39,8 @@ func _ready():
 	combo_text.modulate.a = 0
 	added_score_text.modulate.a = 0
 
-
 func spawn_new_wave(num : int):
+
 	enemies_remaining = num
 	timer.stop()
 	timer.wait_time = 3
@@ -66,8 +68,8 @@ func spawn_new_wave(num : int):
 		add_child(enemy_ins)
 		enemy_ins.global_position = spawns[spawn_loc].global_position
 		
-		$RespawnTimer.start(1)  # Start a 5-second timer
-		await $RespawnTimer.timeout
+		enemy_respawn_timer.start(1)
+		await enemy_respawn_timer.timeout
 
 func enemy_died():
 	enemies_remaining -= 1
@@ -82,7 +84,6 @@ func _on_timer_timeout():
 func add_score(combo : int):
 	var added_score = 100 * combo *2
 	score += added_score
-	print(score)
 	score_list.text = " Score: " + str(score).pad_zeros(5)
 
 	score_timer.start()

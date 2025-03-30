@@ -1,55 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://fuwldaqyjphl"]
+[gd_scene load_steps=13 format=3 uid="uid://fuwldaqyjphl"]
 
 [ext_resource type="PackedScene" uid="uid://dty6bam7ws52h" path="res://scenes/utils/main_camera.tscn" id="1_5xhns"]
 [ext_resource type="Script" uid="uid://ok2y3h8abkwj" path="res://scripts/utilities/LevelController.gd" id="1_iwnx3"]
 [ext_resource type="PackedScene" uid="uid://brgiqpataf0au" path="res://scenes/player.tscn" id="2_4pjhe"]
-[ext_resource type="Texture2D" uid="uid://cpb8vh62mn6ip" path="res://assets/level/wall_tile.png" id="3_8tgbt"]
 [ext_resource type="PackedScene" uid="uid://g27ilmc6722t" path="res://scenes/enemies/shoot_enemy.tscn" id="4_edqi1"]
 [ext_resource type="PackedScene" uid="uid://cpmpwfqf8a5r7" path="res://scenes/enemies/charge_enemy.tscn" id="4_ph6b0"]
 [ext_resource type="PackedScene" uid="uid://dj61u6x4wiglq" path="res://scenes/enemies/lunge_enemy.tscn" id="4_wj1i0"]
-[ext_resource type="Texture2D" uid="uid://d2qflta0umd8q" path="res://assets/background/background.png" id="7_fo85q"]
-[ext_resource type="Texture2D" uid="uid://b8c2noefqfnca" path="res://assets/level/small.png" id="10_e2fuh"]
-[ext_resource type="PackedScene" uid="uid://dxh80qoyrf7yh" path="res://scenes/objects/wave_set.tscn" id="10_x7kll"]
-[ext_resource type="Script" uid="uid://decwb7sw216i4" path="res://scripts/utilities/OOB Trigger.gd" id="13_7weae"]
+[ext_resource type="PackedScene" uid="uid://vei6iigrybfy" path="res://scenes/chunks/map_chunk_template.tscn" id="7_df41j"]
 [ext_resource type="Texture2D" uid="uid://dbwdabypue4p6" path="res://assets/ui/bar.png" id="14_id3o5"]
 [ext_resource type="PackedScene" uid="uid://dlqkmvrdfg60d" path="res://scenes/ui/heart_container.tscn" id="14_q8r18"]
 [ext_resource type="PackedScene" uid="uid://c1e3rqofqm30v" path="res://scenes/ui/texture_progress_bar.tscn" id="15_jstp0"]
 [ext_resource type="FontFile" uid="uid://bslcwic4ca0qi" path="res://assets/fonts/Vollkorn-VariableFont_wght.ttf" id="19_efd43"]
 [ext_resource type="FontFile" uid="uid://svrkp0um8ms5" path="res://assets/fonts/AlmendraSC-Regular.ttf" id="19_pkib5"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8buv"]
-texture = ExtResource("3_8tgbt")
-texture_region_size = Vector2i(134, 90)
-1:1/0 = 0
-2:1/0 = 0
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-67, -45, 67, -45, 67, 45, -67, 45)
-1:0/0 = 0
-3:2/0 = 0
-3:1/0 = 0
-3:0/0 = 0
-2:0/0 = 0
-0:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_ih4h5"]
-tile_size = Vector2i(134, 90)
-physics_layer_0/collision_layer = 1
-sources/2 = SubResource("TileSetAtlasSource_k8buv")
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_kpctt"]
-vertices = PackedVector2Array(7553, -704, 12377, -94, 10569, -94, -1693, -164, 6147, -704, 10569, -1244, 14387, -1244, 3131, -1514, 4539, -1784, 5141, -1784, 16272, -3530, 16134, 7596, 14387, -2524, 13583, 4966, 13583, 3146, 12377, 916, 5141, -3613, 10569, -2524, 7553, -2794, -5114, 7105, 12177, 4966, 7955, 3886, -3301, 4966, 4137, 3886, -3903, 4966, -3903, 3416, -5035, -3690, -4305, -164, 12177, 3146, 10569, 916, 3131, -2254, 4539, -3617, 921, -2254, 6147, -2794, 921, -1514, -1693, -904, 7955, 3146, 719, 3616, 4137, 3146, -687, 3616, -687, 2606, -3301, 3416, 719, 2606, -4305, -904)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(0, 5, 6, 1), PackedInt32Array(3, 7, 8, 9, 4), PackedInt32Array(10, 11, 6, 12), PackedInt32Array(6, 11, 13, 14), PackedInt32Array(6, 14, 15, 1), PackedInt32Array(16, 10, 12, 17, 18), PackedInt32Array(13, 11, 19, 20), PackedInt32Array(21, 20, 19, 22, 23), PackedInt32Array(24, 22, 19), PackedInt32Array(25, 24, 19, 26, 27), PackedInt32Array(15, 14, 28, 29), PackedInt32Array(8, 7, 30, 31), PackedInt32Array(26, 31, 30, 32), PackedInt32Array(5, 0, 18, 17), PackedInt32Array(16, 18, 33), PackedInt32Array(9, 16, 33, 4), PackedInt32Array(34, 7, 3, 35), PackedInt32Array(28, 20, 21, 36, 29), PackedInt32Array(23, 22, 37, 38), PackedInt32Array(39, 37, 22), PackedInt32Array(40, 39, 22, 41, 3), PackedInt32Array(38, 37, 42), PackedInt32Array(3, 2, 29, 36, 38, 42), PackedInt32Array(3, 42, 40), PackedInt32Array(27, 3, 41, 25), PackedInt32Array(43, 27, 26), PackedInt32Array(35, 43, 26, 32, 34)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-5135, -3791, 16374, -3630, 16233, 7699, -5288, 7418)])
-parsed_collision_mask = 1
-source_geometry_mode = 1
-source_geometry_group_name = &"navigation"
-agent_radius = 100.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqet2"]
-size = Vector2(22646, 2403.5)
 
 [node name="MainScene" type="Node2D" node_paths=PackedStringArray("waves", "spawns")]
 script = ExtResource("1_iwnx3")
@@ -58,7 +20,7 @@ waves = [null, null, null, null, null, null, null, null, null]
 chase_enemy = ExtResource("4_ph6b0")
 lunge_enemy = ExtResource("4_wj1i0")
 shoot_enemy = ExtResource("4_edqi1")
-spawns = [NodePath("Spawnpoints/1"), NodePath("Spawnpoints/2"), NodePath("Spawnpoints/3"), NodePath("Spawnpoints/4"), NodePath("Spawnpoints/5")]
+spawns = [NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("bottom_left", "top_right") instance=ExtResource("1_5xhns")]
 position = Vector2(986, 899)
@@ -70,74 +32,7 @@ zoom_speed = 1.0
 
 [node name="Player" parent="." instance=ExtResource("2_4pjhe")]
 
-[node name="MapChunk1" type="Node2D" parent="."]
-
-[node name="Background" type="Sprite2D" parent="MapChunk1"]
-z_index = -5
-position = Vector2(-812, 800)
-scale = Vector2(8.53796, 8.53796)
-texture = ExtResource("7_fo85q")
-
-[node name="TileMap" type="TileMap" parent="MapChunk1" groups=["navigation"]]
-z_index = 6
-position = Vector2(-1391, -534)
-scale = Vector2(3, 3)
-tile_set = SubResource("TileSet_ih4h5")
-format = 2
-layer_0/tile_data = PackedInt32Array(2228216, 2, 0)
-
-[node name="ColorRect" type="ColorRect" parent="MapChunk1/TileMap"]
-offset_left = -2539.0
-offset_top = 1981.0
-offset_right = 2925.0
-offset_bottom = 3161.0
-color = Color(0.784314, 0.756863, 0.709804, 1)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(-1904, 43)
-navigation_polygon = SubResource("NavigationPolygon_kpctt")
-
-[node name="OOB Trigger" type="Area2D" parent="."]
-position = Vector2(-3418, 274)
-collision_layer = 256
-collision_mask = 2
-collision_priority = 100.0
-script = ExtResource("13_7weae")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OOB Trigger"]
-position = Vector2(5760, 6400)
-shape = SubResource("RectangleShape2D_rqet2")
-
-[node name="WaveSet2" parent="." instance=ExtResource("10_x7kll")]
-position = Vector2(-7418, 5100)
-
-[node name="Pivot" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(925, 40)
-texture = ExtResource("10_e2fuh")
-
-[node name="Mover" type="Sprite2D" parent="Pivot"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(200, 0)
-texture = ExtResource("10_e2fuh")
-
-[node name="Spawnpoints" type="Node2D" parent="."]
-position = Vector2(0, 6577)
-
-[node name="1" type="Node2D" parent="Spawnpoints"]
-position = Vector2(-4292, 0)
-
-[node name="2" type="Node2D" parent="Spawnpoints"]
-position = Vector2(1251, 13)
-
-[node name="3" type="Node2D" parent="Spawnpoints"]
-position = Vector2(5852, 107)
-
-[node name="4" type="Node2D" parent="Spawnpoints"]
-position = Vector2(10025, 47)
-
-[node name="5" type="Node2D" parent="Spawnpoints"]
-position = Vector2(14762, -74)
+[node name="MapChunkTemplate" parent="." instance=ExtResource("7_df41j")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -284,6 +179,5 @@ position = Vector2(13879, -2374)
 [node name="ScoreUITimer" type="Timer" parent="."]
 wait_time = 3.0
 
-[connection signal="body_entered" from="OOB Trigger" to="OOB Trigger" method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="ScoreUITimer" to="." method="_on_score_ui_timer_timeout"]

@@ -97,4 +97,3 @@ func set_score(score : int):
 func reset_score():
 	current_score = 0
 	new_best = false
-

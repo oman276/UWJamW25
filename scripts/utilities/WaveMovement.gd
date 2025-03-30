@@ -6,7 +6,8 @@ extends Node2D
 @onready var pivot: Node2D = $Pivot
 @onready var mover: Node2D = $Pivot/Mover
 
-@export var wave_move_scale: float = 3.0
+@export var wave_move_scale: float = 3
+@export var rotate_speed : float = 2
 
 var waves : Array[Sprite2D] = []
 var initial_wave_positions: Array[Vector2] = []
@@ -17,10 +18,9 @@ func _ready() -> void:
 	waves.append(wave_3)
 
 	for i in range(3):
-		waves[i].global_position += (0.2 + (0.1 * i)) * wave_move_scale * mover.global_position
 		initial_wave_positions.append(waves[i].global_position)
 
 func _process(delta):
-	pivot.rotation += 1 * delta
+	pivot.rotation += delta * rotate_speed
 	for i in range(3):
-		waves[i].position = initial_wave_positions[i] + (0.2 + (0.1 * i)) * wave_move_scale * mover.global_position
+		waves[i].global_position = initial_wave_positions[i] + (0.1 + (0.1 * i)) * wave_move_scale * to_local(mover.global_position)
