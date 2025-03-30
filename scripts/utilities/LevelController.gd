@@ -99,7 +99,8 @@ func add_score(combo : int):
 	added_score_text.text = " +[b]" + str(added_score) + "[/b]"
 	added_score_text.modulate.a = 1
 
+	GameManager.set_score(score)
+
 func _on_score_ui_timer_timeout() -> void:
-	var tween = get_tree().create_tween()
-	tween.tween_property(combo_text, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(added_score_text, "modulate:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE)
+	combo_text.modulate.a = 0
+	added_score_text.modulate.a = 0
