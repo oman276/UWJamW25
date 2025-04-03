@@ -31,13 +31,58 @@ var score : int = 0
 # background set at (0, 0) compared to the node
 # x-position seems to be +-15246 (yeah, I think this works fine?) (bounds of each section is center +- 7623)
 
+var left_pos_to_add : Vector2 = Vector2(-15246, 0)
+var right_pos_to_add : Vector2 = Vector2(15246, 0)
+
+var top_y_pos : float = -6000
+
+@export var chunk_1 : PackedScene
+@export var chunk_2 : PackedScene
+@export var chunk_3 : PackedScene
+
+var chunk_1_instance : MapChunk
+var chunk_2_instance : MapChunk
+var chunk_3_instance : MapChunk
+
+#May delete later
+@onready var chunk_1_path : String = "res://scenes/chunks/map_chunk_1.tscn"
+@onready var chunk_2_path : String = "res://scenes/chunks/map_chunk_2.tscn"
+@onready var chunk_3_path : String = "res://scenes/chunks/map_chunk_3.tscn"
+
+var bottom_left : Vector2 # min x, max y
+var top_right : Vector2 # max x, min y
+
 func _ready():
+
+	#instantiate the chunks
+	chunk_1_instance = chunk_1.instantiate()
+	add_child(chunk_1_instance)
+	chunk_1_instance.global_position = Vector2(0, 0)
+	var spawn_parent_1 = chunk_1_instance.get_node("Spawnpoints")
+	for spawn in spawn_parent_1.get_children():
+		spawns.append(spawn)
+
+	chunk_2_instance = chunk_2.instantiate()
+	add_child(chunk_2_instance)
+	chunk_2_instance.global_position = Vector2(0, 0) + left_pos_to_add
+	var spawn_parent_2 = chunk_2_instance.get_node("Spawnpoints")
+	for spawn in spawn_parent_2.get_children():
+		spawns.append(spawn)
+
+	chunk_3_instance = chunk_3.instantiate()
+	add_child(chunk_3_instance)
+	chunk_3_instance.global_position = Vector2(0, 0) + right_pos_to_add
+	var spawn_parent_3 = chunk_3_instance.get_node("Spawnpoints")
+	for spawn in spawn_parent_3.get_children():
+		spawns.append(spawn)
+
 	wave = 1
 	spawn_new_wave(1)
 
 	score_list.text = " Score: " + str(score).pad_zeros(5)
 	combo_text.modulate.a = 0
 	added_score_text.modulate.a = 0
+
 
 func spawn_new_wave(num : int):
 
@@ -56,7 +101,7 @@ func spawn_new_wave(num : int):
 	
 	for i in range(num):
 		var enemy_type = randi_range(1, 10)
-		var spawn_loc = randi_range(0, 4)
+		var spawn_loc = randi_range(0, spawns.size() - 1)
 		var enemy : PackedScene
 		if enemy_type <= 7:
 			enemy = chase_enemy

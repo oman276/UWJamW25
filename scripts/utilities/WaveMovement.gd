@@ -23,4 +23,4 @@ func _ready() -> void:
 func _process(delta):
 	pivot.rotation += delta * rotate_speed
 	for i in range(3):
-		waves[i].global_position = initial_wave_positions[i] + (0.1 + (0.1 * i)) * wave_move_scale * to_local(mover.global_position)
+		waves[i].global_position = initial_wave_positions[i] + (0.1 + (0.1 * i)) * wave_move_scale * to_local(mover.global_position) + get_parent().global_position

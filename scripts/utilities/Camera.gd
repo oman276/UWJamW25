@@ -12,16 +12,21 @@ var base_zoom : Vector2
 var player_max_speed : float = 0
 @export var zoom_speed : float = 5
 
+var level_manager : MainScene
+
 func _ready():
 	try_find_player()
 	base_zoom = zoom
+	level_manager = get_parent()
+
+#we only need a top and bottom clamp anymore!
 
 func _process(delta):
 	if target:
 		var target_position = target.global_position
 		
-		target_position.x = clamp(target_position.x, bottom_left.global_position.x, top_right.global_position.x)
-		target_position.y = clamp(target_position.y, top_right.global_position.y, bottom_left.global_position.y)	
+		#target_position.x = clamp(target_position.x, bottom_left.global_position.x, top_right.global_position.x)
+		target_position.y = clamp(target_position.y, -6000, 6000)	
 		
 		if smoothing_enabled:
 			global_position = global_position.lerp(target_position, smoothing_speed * delta)

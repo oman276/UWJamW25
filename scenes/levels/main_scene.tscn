@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://fuwldaqyjphl"]
+[gd_scene load_steps=15 format=3 uid="uid://fuwldaqyjphl"]
 
 [ext_resource type="PackedScene" uid="uid://dty6bam7ws52h" path="res://scenes/utils/main_camera.tscn" id="1_5xhns"]
 [ext_resource type="Script" uid="uid://ok2y3h8abkwj" path="res://scripts/utilities/LevelController.gd" id="1_iwnx3"]
@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://g27ilmc6722t" path="res://scenes/enemies/shoot_enemy.tscn" id="4_edqi1"]
 [ext_resource type="PackedScene" uid="uid://cpmpwfqf8a5r7" path="res://scenes/enemies/charge_enemy.tscn" id="4_ph6b0"]
 [ext_resource type="PackedScene" uid="uid://dj61u6x4wiglq" path="res://scenes/enemies/lunge_enemy.tscn" id="4_wj1i0"]
-[ext_resource type="PackedScene" uid="uid://vei6iigrybfy" path="res://scenes/chunks/map_chunk_template.tscn" id="7_df41j"]
+[ext_resource type="PackedScene" uid="uid://detf6s3bwl15t" path="res://scenes/chunks/map_chunk_1.tscn" id="5_84bhp"]
+[ext_resource type="PackedScene" uid="uid://2p25ludnwbfh" path="res://scenes/chunks/map_chunk_2.tscn" id="6_jtcbb"]
+[ext_resource type="PackedScene" uid="uid://c73ifrwbs2t1e" path="res://scenes/chunks/map_chunk_3.tscn" id="7_x7kll"]
 [ext_resource type="Texture2D" uid="uid://dbwdabypue4p6" path="res://assets/ui/bar.png" id="14_id3o5"]
 [ext_resource type="PackedScene" uid="uid://dlqkmvrdfg60d" path="res://scenes/ui/heart_container.tscn" id="14_q8r18"]
 [ext_resource type="PackedScene" uid="uid://c1e3rqofqm30v" path="res://scenes/ui/texture_progress_bar.tscn" id="15_jstp0"]
@@ -20,7 +22,10 @@ waves = [null, null, null, null, null, null, null, null, null]
 chase_enemy = ExtResource("4_ph6b0")
 lunge_enemy = ExtResource("4_wj1i0")
 shoot_enemy = ExtResource("4_edqi1")
-spawns = [NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
+spawns = [null, null, null, null, null]
+chunk_1 = ExtResource("5_84bhp")
+chunk_2 = ExtResource("6_jtcbb")
+chunk_3 = ExtResource("7_x7kll")
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("bottom_left", "top_right") instance=ExtResource("1_5xhns")]
 position = Vector2(986, 899)
@@ -31,8 +36,6 @@ max_zoom_add = Vector2(0.15, 0.15)
 zoom_speed = 1.0
 
 [node name="Player" parent="." instance=ExtResource("2_4pjhe")]
-
-[node name="MapChunkTemplate" parent="." instance=ExtResource("7_df41j")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

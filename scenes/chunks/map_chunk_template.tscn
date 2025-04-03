@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://vei6iigrybfy"]
+[gd_scene load_steps=10 format=3 uid="uid://vei6iigrybfy"]
 
+[ext_resource type="Script" uid="uid://b11iwnnwbkoj2" path="res://scripts/MapChunk.gd" id="1_gt4yc"]
 [ext_resource type="Texture2D" uid="uid://d2qflta0umd8q" path="res://assets/background/background.png" id="1_kydym"]
 [ext_resource type="Texture2D" uid="uid://cpb8vh62mn6ip" path="res://assets/level/wall_tile.png" id="2_gt4yc"]
 [ext_resource type="PackedScene" uid="uid://bdj3fhd3lxdeh" path="res://scenes/objects/wave_set.tscn" id="3_55ngy"]
@@ -40,6 +41,7 @@ agent_radius = 100.0
 size = Vector2(15774, 3559.75)
 
 [node name="MapChunkTemplate" type="Node2D"]
+script = ExtResource("1_gt4yc")
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -100

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://de1wx5jiet4su"]
 
 [ext_resource type="FontFile" uid="uid://bslcwic4ca0qi" path="res://assets/fonts/Vollkorn-VariableFont_wght.ttf" id="1_fhg1p"]
-[ext_resource type="Script" path="res://scripts/CreditScene.gd" id="1_uvwux"]
+[ext_resource type="Script" uid="uid://nfsbodpd08wn" path="res://scripts/CreditScene.gd" id="1_uvwux"]
 [ext_resource type="FontFile" uid="uid://svrkp0um8ms5" path="res://assets/fonts/AlmendraSC-Regular.ttf" id="2_uvwux"]
 
 [node name="Credit Screen" type="Node2D"]
