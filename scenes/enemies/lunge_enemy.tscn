@@ -80,7 +80,7 @@ scale = Vector2(1.7, 1.7)
 shape = SubResource("CircleShape2D_rugxs")
 
 [node name="NavigationAgent2D" parent="." index="3"]
-debug_enabled = false
+debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="LungeTimer" type="Timer" parent="." index="5"]
 one_shot = true
