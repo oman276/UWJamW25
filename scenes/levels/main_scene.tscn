@@ -15,14 +15,13 @@
 [ext_resource type="FontFile" uid="uid://bslcwic4ca0qi" path="res://assets/fonts/Vollkorn-VariableFont_wght.ttf" id="19_efd43"]
 [ext_resource type="FontFile" uid="uid://svrkp0um8ms5" path="res://assets/fonts/AlmendraSC-Regular.ttf" id="19_pkib5"]
 
-[node name="MainScene" type="Node2D" node_paths=PackedStringArray("waves", "spawns")]
+[node name="MainScene" type="Node2D" node_paths=PackedStringArray("waves")]
 script = ExtResource("1_iwnx3")
 wave_move_scale = 1.0
 waves = [null, null, null, null, null, null, null, null, null]
 chase_enemy = ExtResource("4_ph6b0")
 lunge_enemy = ExtResource("4_wj1i0")
 shoot_enemy = ExtResource("4_edqi1")
-spawns = [null, null, null, null, null]
 chunk_1 = ExtResource("5_84bhp")
 chunk_2 = ExtResource("6_jtcbb")
 chunk_3 = ExtResource("7_x7kll")

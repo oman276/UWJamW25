@@ -11,7 +11,7 @@ extends Node2D
 @export var lunge_enemy : PackedScene
 @export var shoot_enemy : PackedScene
 
-@export var spawns : Array[Node2D] = []
+var spawns : Array[Node2D] = []
 
 var wave : int = 1
 var enemies_remaining : int = 0
@@ -24,12 +24,6 @@ var score : int = 0
 @onready var score_timer: Timer = $ScoreUITimer
 @onready var enemy_respawn_timer : Timer = $RespawnTimer
 
-# Level Looping
-#TODO: Spawnpoints must be selected between all 3 available chunks of zone
-#TODO: Change camera boundaries to depend on the size of the available playspace
-
-# background set at (0, 0) compared to the node
-# x-position seems to be +-15246 (yeah, I think this works fine?) (bounds of each section is center +- 7623)
 
 var left_pos_to_add : Vector2 = Vector2(-15246, 0)
 var right_pos_to_add : Vector2 = Vector2(15246, 0)
@@ -49,8 +43,16 @@ var chunk_3_instance : MapChunk
 @onready var chunk_2_path : String = "res://scenes/chunks/map_chunk_2.tscn"
 @onready var chunk_3_path : String = "res://scenes/chunks/map_chunk_3.tscn"
 
-var bottom_left : Vector2 # min x, max y
-var top_right : Vector2 # max x, min y
+var current_center : float
+var left_x_bound : float 
+var right_x_bound : float 
+var chunk_order : Array[int]
+@onready var transform_val = 15246 * 3
+
+var enemies_list : Array[Node2D]
+
+var tween_combo_text: Tween
+var tween_score_text: Tween
 
 func _ready():
 
@@ -60,6 +62,8 @@ func _ready():
 	chunk_1_instance.global_position = Vector2(0, 0)
 	var spawn_parent_1 = chunk_1_instance.get_node("Spawnpoints")
 	for spawn in spawn_parent_1.get_children():
+		if spawn == null:
+			print("1 null")
 		spawns.append(spawn)
 
 	chunk_2_instance = chunk_2.instantiate()
@@ -67,6 +71,8 @@ func _ready():
 	chunk_2_instance.global_position = Vector2(0, 0) + left_pos_to_add
 	var spawn_parent_2 = chunk_2_instance.get_node("Spawnpoints")
 	for spawn in spawn_parent_2.get_children():
+		if spawn == null:
+			print("2 null")
 		spawns.append(spawn)
 
 	chunk_3_instance = chunk_3.instantiate()
@@ -74,7 +80,14 @@ func _ready():
 	chunk_3_instance.global_position = Vector2(0, 0) + right_pos_to_add
 	var spawn_parent_3 = chunk_3_instance.get_node("Spawnpoints")
 	for spawn in spawn_parent_3.get_children():
+		if spawn == null:
+			print("3 null")
 		spawns.append(spawn)
+
+	current_center = 0
+	left_x_bound = -7632 - 10
+	right_x_bound = 7623 + 10
+	chunk_order = [2, 1, 3]
 
 	wave = 1
 	spawn_new_wave(1)
@@ -83,8 +96,8 @@ func _ready():
 	combo_text.modulate.a = 0
 	added_score_text.modulate.a = 0
 
-
 func spawn_new_wave(num : int):
+	enemies_list.clear()
 
 	enemies_remaining = num
 	timer.stop()
@@ -113,6 +126,8 @@ func spawn_new_wave(num : int):
 		add_child(enemy_ins)
 		enemy_ins.global_position = spawns[spawn_loc].global_position
 		
+		enemies_list.append(enemy_ins)
+
 		enemy_respawn_timer.start(1)
 		await enemy_respawn_timer.timeout
 
@@ -137,9 +152,92 @@ func add_score(combo : int):
 	combo_text.modulate.a = 1
 	added_score_text.text = " +[b]" + str(added_score) + "[/b]"
 	added_score_text.modulate.a = 1
+	#pop_animation(combo_text)
+	#pop_animation(added_score_text)
 
 	GameManager.set_score(score)
 
 func _on_score_ui_timer_timeout() -> void:
 	combo_text.modulate.a = 0
 	added_score_text.modulate.a = 0
+	#tween_text.tween_property(combo_text, "modulate:a", Vector2(1, 1), 0.07)
+
+func _process(delta):
+	if player.global_position.x < left_x_bound:
+		# Moving right object to the left
+
+		print("left transform!")
+		var chunk_to_move_num : int = chunk_order[2]
+		chunk_order[2] = chunk_order[1]
+		chunk_order[1] = chunk_order[0]
+		chunk_order[0] = chunk_to_move_num
+		
+		var transform_boundaries = current_center + 7632
+
+		current_center -= 15246
+		left_x_bound -= 15246
+		right_x_bound -= 15246
+		
+		var chunk_to_move : MapChunk
+		match chunk_to_move_num:
+			1:
+				chunk_to_move = chunk_1_instance
+			2:
+				chunk_to_move = chunk_2_instance
+			3:
+				chunk_to_move = chunk_3_instance
+			_:
+				print("ERROR: Somehow trying to move something other than chunk 1, 2, 3")
+		
+		chunk_to_move.global_position.x -= transform_val
+		for enemy in enemies_list:
+			if enemy != null and enemy.global_position.x > transform_boundaries:
+				enemy.global_position.x -= transform_val
+	
+	elif player.global_position.x > right_x_bound:
+		# Moving left object to the right
+
+		print("right transform!")
+		var chunk_to_move_num : int = chunk_order[0]
+		chunk_order[0] = chunk_order[1]
+		chunk_order[1] = chunk_order[2]
+		chunk_order[2] = chunk_to_move_num
+
+		var transform_boundaries = current_center - 7632
+		
+		current_center += 15246
+		left_x_bound += 15246
+		right_x_bound += 15246
+		
+		var chunk_to_move : MapChunk
+		match chunk_to_move_num:
+			1:
+				chunk_to_move = chunk_1_instance
+			2:
+				chunk_to_move = chunk_2_instance
+			3:
+				chunk_to_move = chunk_3_instance
+			_:
+				print("ERROR: Somehow trying to move something other than chunk 1, 2, 3")
+		
+		chunk_to_move.global_position.x += transform_val
+		for enemy in enemies_list:
+			if enemy != null and enemy.global_position.x < transform_boundaries:
+				enemy.global_position.x += transform_val
+
+
+# func pop_animation(target_node: RichTextLabel):
+# 	if tween_text:
+# 		tween_text.kill()
+
+# 	tween_text = get_tree().create_tween()
+# 	tween_text.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+# 	tween_text.tween_property(target_node, "scale", Vector2(1.2, 1.2), 0.1)
+# 	tween_text.tween_property(target_node, "scale", Vector2(0.95, 0.95), 0.08)
+# 	tween_text.tween_property(target_node, "scale", Vector2(1, 1), 0.07)
+
+# func reset_scale(target_node: Node2D):
+# 	if tween_text:
+# 		tween_text.kill()
+# 	target_node.scale = Vector2(1, 1)
