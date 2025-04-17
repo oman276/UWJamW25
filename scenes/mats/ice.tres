@@ -1,0 +1,25 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=4 format=3 uid="uid://b2red8jwwo7qr"]
+
+[sub_resource type="Curve" id="Curve_5o7i4"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vrxnm"]
+curve = SubResource("Curve_5o7i4")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ijey3"]
+
+[resource]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(120, 20, 0)
+emission_shape = 2
+emission_sphere_radius = 111.13
+angular_velocity_curve = SubResource("CurveTexture_vrxnm")
+directional_velocity_min = 0.0
+directional_velocity_max = 0.0
+directional_velocity_curve = SubResource("CurveXYZTexture_ijey3")
+gravity = Vector3(0, 0, 0)
+linear_accel_max = 10.0
+scale_min = 0.2
+scale_max = 0.5

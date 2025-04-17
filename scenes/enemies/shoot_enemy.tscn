@@ -66,6 +66,7 @@ visible = false
 position = Vector2(11.3119, 18.4786)
 
 [node name="NavigationAgent2D" parent="." index="3"]
+debug_enabled = false
 debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="ShootTimer" type="Timer" parent="." index="5"]

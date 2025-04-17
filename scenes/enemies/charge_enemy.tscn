@@ -90,6 +90,7 @@ rotation = 0.698132
 shape = SubResource("CapsuleShape2D_i41d2")
 
 [node name="NavigationAgent2D" parent="." index="3"]
+debug_enabled = false
 debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="Timer" parent="." index="4"]

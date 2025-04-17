@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://detf6s3bwl15t"]
+[gd_scene load_steps=3 format=3 uid="uid://detf6s3bwl15t"]
 
 [ext_resource type="PackedScene" uid="uid://vei6iigrybfy" path="res://scenes/chunks/map_chunk_template.tscn" id="1_pj77y"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_pj77y"]
+vertices = PackedVector2Array(4534, 6509, 9795.91, 8895.04, -7696.25, 9074.96, 3932, 6509, 5740, 4079, 4534, 6039, 5338, 4349, 5338, 1379, 5338, -711, 8956, -2671, 5740, 3339, 3530, 3339, 3530, 4079, -290, 3539, -290, 2799, 1520, -1051, -7601.71, -3891.94, -6520, -3902.36, -6520, -2671, 5338, 3339, 5338, 3069, 4936, 3069, 4936, 2799, 4334, 2799, 4334, 3069, 3932, 3069, 3932, 3339, -1898, 2799, -1898, 2259, -2702, 2259, -2702, 909, 1520, -1791, -3706, 2459, -2902, 2459, -2902, 2999, -2098, 2999, -2098, 3539, 3932, 4079, 3932, 4349, 4334, 4349, 4334, 4619, 3932, 6039, 4936, 4619, 4936, 4349, 5338, 4079, -5314, -2671, -5314, -1861, -4912, -1861, -4912, -1051, -4510, -1051, -4510, -781, -3506, -781, -3506, -1051, -3104, -1051, -3104, -1861, -2702, -1861, -2702, -2671, 3730, -1791, 4534, -711, 4534, -1251, 3730, -1251, 3530, -1051, 3530, -511, 4334, -511, 4334, 1379, 8956, -4051.54, 9526.07, -4057.04, -3706, 909)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14, 15), PackedInt32Array(16, 17, 18, 2), PackedInt32Array(10, 19, 20), PackedInt32Array(20, 21, 22, 7), PackedInt32Array(23, 24, 25), PackedInt32Array(25, 26, 11, 15), PackedInt32Array(14, 27, 28, 15), PackedInt32Array(15, 28, 29, 30, 31), PackedInt32Array(32, 33, 34, 2), PackedInt32Array(34, 35, 36, 2), PackedInt32Array(12, 37, 38, 2), PackedInt32Array(38, 39, 40, 41, 2), PackedInt32Array(42, 43, 6), PackedInt32Array(6, 44, 4), PackedInt32Array(42, 6, 5), PackedInt32Array(40, 42, 5, 41), PackedInt32Array(18, 45, 46, 2), PackedInt32Array(46, 47, 48, 2), PackedInt32Array(48, 49, 50, 2), PackedInt32Array(51, 52, 53, 30), PackedInt32Array(30, 53, 54, 55, 31), PackedInt32Array(55, 56, 9, 57, 31), PackedInt32Array(8, 58, 59, 9), PackedInt32Array(59, 60, 57, 9), PackedInt32Array(15, 61, 62), PackedInt32Array(62, 63, 64), PackedInt32Array(9, 65, 66, 1), PackedInt32Array(9, 1, 4, 10), PackedInt32Array(7, 10, 20), PackedInt32Array(64, 7, 22, 23), PackedInt32Array(41, 3, 2), PackedInt32Array(2, 50, 51, 67), PackedInt32Array(13, 12, 2, 36), PackedInt32Array(64, 23, 25, 15, 62), PackedInt32Array(51, 30, 67), PackedInt32Array(2, 67, 32)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-7701, -3991, 9624, -4158, 9898, 8994, -7797, 9176)])
+parsed_collision_mask = 1
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation"
+agent_radius = 100.0
 
 [node name="MapChunk1" node_paths=PackedStringArray("_spawns") instance=ExtResource("1_pj77y")]
 _spawns = [NodePath("Spawnpoints/1"), NodePath("Spawnpoints/2"), NodePath("Spawnpoints/3"), NodePath("Spawnpoints/4"), NodePath("Spawnpoints/5")]
@@ -10,6 +19,7 @@ layer_0/tile_data = PackedInt32Array(-1179664, 2, 0, -1114128, 2, 0, -1048592, 2
 
 [node name="NavigationRegion2D" parent="." index="7"]
 visible = true
+navigation_polygon = SubResource("NavigationPolygon_pj77y")
 
 [node name="Spawnpoints" parent="." index="9"]
 position = Vector2(286, 6203)

@@ -36,9 +36,19 @@ zoom_speed = 1.0
 
 [node name="Player" parent="." instance=ExtResource("2_4pjhe")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="DeathEffectLayer" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="DeathEffectLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.470588)
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="UILayer"]
 offset_left = 19.0
 offset_top = 12.0
 offset_right = 613.0
@@ -46,16 +56,16 @@ offset_bottom = 212.0
 scale = Vector2(0.485, 0.485)
 texture = ExtResource("14_id3o5")
 
-[node name="HeartContainer" parent="CanvasLayer" instance=ExtResource("14_q8r18")]
+[node name="HeartContainer" parent="UILayer" instance=ExtResource("14_q8r18")]
 offset_left = 37.0
 offset_top = 26.0
 offset_right = 165.0
 offset_bottom = 66.0
 scale = Vector2(2, 2)
 
-[node name="TextureProgressBar" parent="CanvasLayer" instance=ExtResource("15_jstp0")]
+[node name="TextureProgressBar" parent="UILayer" instance=ExtResource("15_jstp0")]
 
-[node name="New Wave!" type="RichTextLabel" parent="CanvasLayer"]
+[node name="NewWave" type="RichTextLabel" parent="UILayer"]
 anchors_preset = -1
 anchor_left = 0.516146
 anchor_top = 0.5
@@ -82,7 +92,7 @@ fit_content = true
 scroll_active = false
 metadata/_edit_use_anchors_ = true
 
-[node name="ScoreList" type="RichTextLabel" parent="CanvasLayer"]
+[node name="ScoreList" type="RichTextLabel" parent="UILayer"]
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.991667
@@ -107,7 +117,7 @@ fit_content = true
 scroll_active = false
 metadata/_edit_use_anchors_ = true
 
-[node name="Combo" type="RichTextLabel" parent="CanvasLayer"]
+[node name="Combo" type="RichTextLabel" parent="UILayer"]
 anchors_preset = -1
 anchor_left = 0.00364583
 anchor_top = -0.0944444
@@ -138,7 +148,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="AddedScore" type="RichTextLabel" parent="CanvasLayer"]
+[node name="AddedScore" type="RichTextLabel" parent="UILayer"]
 anchors_preset = -1
 anchor_left = 0.00364583
 anchor_top = -0.0944444

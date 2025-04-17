@@ -85,6 +85,8 @@ var arrow_scn
 
 var combo : int = 0
 
+@onready var slash_attack_active : bool = false
+
 func _ready():
 	freeze_vfx.modulate.a = 0
 	fire_effect.emitting = false
@@ -139,9 +141,7 @@ func slash_attack(dir: Vector2):
 	attack_timer.wait_time = invuln_time
 	attack_timer.start()
 	
-	current_damage_state = PLAYER_DAMAGE_STATE.Slashing
-	color_rect.color = Color.GOLD
-	fire_effect.emitting = true
+	current_damage_state = PLAYER_DAMAGE_STATE.Slashing	
 
 func dodge_attack():
 	current_state = PLAYER_MOVE_STATE.Dodging
@@ -213,29 +213,6 @@ func _input(event: InputEvent) -> void:
 			tween.tween_property(freeze_vfx, "modulate:a", 0, 0.5).from(1)
 			pass
 
-func _process(delta: float) -> void:
-	if anim_timer.time_left == 0 && dash_toggle == true:
-		$AnimationPlayer.play("flight")
-		dash_toggle = false
-	
-	freeze_effect.effect_active = freeze_effect_active
-	
-	if freeze_effect_active:
-		#rotate the object to face the mouse
-		var mouse_pos = get_global_mouse_position()
-		var direction = (mouse_pos - global_position).normalized()
-		var angle = direction.angle()
-		freeze_effect.global_rotation = angle
-		if freeze_vfx.emitting == false:
-			freeze_vfx.emitting = true
-			var tween: Tween = create_tween()
-			tween.tween_property(freeze_vfx, "modulate:a", 1, 0.5).from(0)
-	fire_effect.rotation_degrees = self.rotation_degrees
-	
-	ability_cooldown -= ability_cooldown_drop_per_sec * delta
-	if ability_cooldown < 0:
-		ability_cooldown = 0
-
 func _physics_process(delta: float) -> void:
 	if GameManager.current_global_state == GameManager.GLOBAL_GAME_STATE.Default:
 		#handle input if free
@@ -277,8 +254,37 @@ func _physics_process(delta: float) -> void:
 				var bounce_vel = prev_velocity.bounce(collision.get_normal()) * speed_kept_on_bounce
 				if (bounce_vel.length() < speed):
 					velocity = bounce_vel
+					velocity = velocity
 				else:
 					velocity = bounce_vel.normalized() * speed * 1.2
+
+    
+	if anim_timer.time_left == 0 && dash_toggle == true:
+		$AnimationPlayer.play("flight")
+		dash_toggle = false
+	
+	freeze_effect.effect_active = freeze_effect_active
+	
+	if freeze_effect_active:
+		#rotate the object to face the mouse
+		var mouse_pos = get_global_mouse_position()
+		var direction = (mouse_pos - global_position).normalized()
+		var angle = direction.angle()
+		freeze_effect.global_rotation = angle
+		if freeze_vfx.emitting == false:
+			freeze_vfx.emitting = true
+			var tween: Tween = create_tween()
+			tween.tween_property(freeze_vfx, "modulate:a", 1, 0.5).from(0)
+	fire_effect.rotation_degrees = self.rotation_degrees
+	
+	ability_cooldown -= ability_cooldown_drop_per_sec * delta
+	if ability_cooldown < 0:
+		ability_cooldown = 0
+
+	if current_damage_state == PLAYER_DAMAGE_STATE.Slashing:
+		fire_effect.emitting = true
+	else:
+		fire_effect.emitting = false
 
 func _on_movement_lock_timeout():
 	if current_state != PLAYER_MOVE_STATE.DeathFall:

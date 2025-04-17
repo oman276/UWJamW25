@@ -5,7 +5,7 @@ extends Node2D
 @export var wave_move_scale : float = 3
 @export var waves : Array[Sprite2D] = []
 @onready var timer = $Timer
-@onready var new_wave_ = $"CanvasLayer/New Wave!"
+@onready var new_wave_ = $UILayer/NewWave
 
 @export var chase_enemy : PackedScene
 @export var lunge_enemy : PackedScene
@@ -18,9 +18,9 @@ var enemies_remaining : int = 0
 
 var score : int = 0
 
-@onready var score_list: RichTextLabel = $CanvasLayer/ScoreList
-@onready var combo_text: RichTextLabel = $CanvasLayer/Combo
-@onready var added_score_text: RichTextLabel = $CanvasLayer/AddedScore 
+@onready var score_list: RichTextLabel = $UILayer/ScoreList
+@onready var combo_text: RichTextLabel = $UILayer/Combo
+@onready var added_score_text: RichTextLabel = $UILayer/AddedScore 
 @onready var score_timer: Timer = $ScoreUITimer
 @onready var enemy_respawn_timer : Timer = $RespawnTimer
 
@@ -162,11 +162,10 @@ func _on_score_ui_timer_timeout() -> void:
 	added_score_text.modulate.a = 0
 	#tween_text.tween_property(combo_text, "modulate:a", Vector2(1, 1), 0.07)
 
-func _process(delta):
+func _process(_delta):
 	if player.global_position.x < left_x_bound:
 		# Moving right object to the left
 
-		print("left transform!")
 		var chunk_to_move_num : int = chunk_order[2]
 		chunk_order[2] = chunk_order[1]
 		chunk_order[1] = chunk_order[0]
