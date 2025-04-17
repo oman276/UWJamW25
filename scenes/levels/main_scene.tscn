@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://fuwldaqyjphl"]
+[gd_scene load_steps=16 format=3 uid="uid://fuwldaqyjphl"]
 
 [ext_resource type="PackedScene" uid="uid://dty6bam7ws52h" path="res://scenes/utils/main_camera.tscn" id="1_5xhns"]
 [ext_resource type="Script" uid="uid://ok2y3h8abkwj" path="res://scripts/utilities/LevelController.gd" id="1_iwnx3"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://detf6s3bwl15t" path="res://scenes/chunks/map_chunk_1.tscn" id="5_84bhp"]
 [ext_resource type="PackedScene" uid="uid://2p25ludnwbfh" path="res://scenes/chunks/map_chunk_2.tscn" id="6_jtcbb"]
 [ext_resource type="PackedScene" uid="uid://c73ifrwbs2t1e" path="res://scenes/chunks/map_chunk_3.tscn" id="7_x7kll"]
+[ext_resource type="Texture2D" uid="uid://dj8g3vocm7ly2" path="res://assets/vfx/fire.png" id="10_jtcbb"]
 [ext_resource type="Texture2D" uid="uid://dbwdabypue4p6" path="res://assets/ui/bar.png" id="14_id3o5"]
 [ext_resource type="PackedScene" uid="uid://dlqkmvrdfg60d" path="res://scenes/ui/heart_container.tscn" id="14_q8r18"]
 [ext_resource type="PackedScene" uid="uid://c1e3rqofqm30v" path="res://scenes/ui/texture_progress_bar.tscn" id="15_jstp0"]
@@ -25,6 +26,10 @@ shoot_enemy = ExtResource("4_edqi1")
 chunk_1 = ExtResource("5_84bhp")
 chunk_2 = ExtResource("6_jtcbb")
 chunk_3 = ExtResource("7_x7kll")
+max_death_effect_a = 70.0
+max_fire_effect_a = 800.0
+min_percent_to_start_death_effect = 55.0
+death_effect_fade_speed = 0.3
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("bottom_left", "top_right") instance=ExtResource("1_5xhns")]
 position = Vector2(986, 899)
@@ -44,7 +49,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 0, 0, 0.470588)
+color = Color(1, 0, 0, 0)
+
+[node name="Fire1" type="TextureRect" parent="DeathEffectLayer/ColorRect"]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 250.0
+offset_right = 1030.0
+offset_bottom = 1221.0
+rotation = 0.713267
+texture = ExtResource("10_jtcbb")
+expand_mode = 1
+
+[node name="Fire2" type="TextureRect" parent="DeathEffectLayer/ColorRect"]
+layout_mode = 0
+offset_left = 1635.0
+offset_top = 814.0
+offset_right = 2526.0
+offset_bottom = 1785.0
+rotation = 4.01258
+texture = ExtResource("10_jtcbb")
+expand_mode = 1
+
+[node name="Fire3" type="TextureRect" parent="DeathEffectLayer/ColorRect"]
+layout_mode = 0
+offset_left = 1121.0
+offset_top = 741.0
+offset_right = 2012.0
+offset_bottom = 1712.0
+rotation = -0.56324
+texture = ExtResource("10_jtcbb")
+expand_mode = 1
+
+[node name="Fire4" type="TextureRect" parent="DeathEffectLayer/ColorRect"]
+layout_mode = 0
+offset_left = 814.0
+offset_top = 144.0
+offset_right = 1705.0
+offset_bottom = 1115.0
+rotation = 2.32014
+texture = ExtResource("10_jtcbb")
+expand_mode = 1
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
@@ -154,10 +199,10 @@ anchor_left = 0.00364583
 anchor_top = -0.0944444
 anchor_right = 1.06198
 anchor_bottom = 1.00926
-offset_left = 1152.0
-offset_top = 910.0
-offset_right = -139.0
-offset_bottom = -24.0
+offset_left = 1118.0
+offset_top = 901.0
+offset_right = -173.0
+offset_bottom = -33.0001
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_vertical = 4

@@ -54,6 +54,17 @@ var enemies_list : Array[Node2D]
 var tween_combo_text: Tween
 var tween_score_text: Tween
 
+# Near-Death Effects
+@export var max_death_effect_a : float
+@export var max_fire_effect_a : float
+@export var min_percent_to_start_death_effect : float
+@export var death_effect_fade_speed : float
+@onready var big_red_rect : ColorRect = $DeathEffectLayer/ColorRect
+@onready var fire_1: TextureRect = $DeathEffectLayer/ColorRect/Fire1
+@onready var fire_2: TextureRect = $DeathEffectLayer/ColorRect/Fire2
+@onready var fire_3: TextureRect = $DeathEffectLayer/ColorRect/Fire3
+@onready var fire_4: TextureRect = $DeathEffectLayer/ColorRect/Fire4
+
 func _ready():
 
 	#instantiate the chunks
@@ -95,6 +106,11 @@ func _ready():
 	score_list.text = " Score: " + str(score).pad_zeros(5)
 	combo_text.modulate.a = 0
 	added_score_text.modulate.a = 0
+
+	fire_1.modulate.a = 0
+	fire_2.modulate.a = 0
+	fire_3.modulate.a = 0
+	fire_4.modulate.a = 0
 
 func spawn_new_wave(num : int):
 	enemies_list.clear()
@@ -164,8 +180,6 @@ func _on_score_ui_timer_timeout() -> void:
 
 func _process(_delta):
 	if player.global_position.x < left_x_bound:
-		# Moving right object to the left
-
 		var chunk_to_move_num : int = chunk_order[2]
 		chunk_order[2] = chunk_order[1]
 		chunk_order[1] = chunk_order[0]
@@ -194,9 +208,6 @@ func _process(_delta):
 				enemy.global_position.x -= transform_val
 	
 	elif player.global_position.x > right_x_bound:
-		# Moving left object to the right
-
-		print("right transform!")
 		var chunk_to_move_num : int = chunk_order[0]
 		chunk_order[0] = chunk_order[1]
 		chunk_order[1] = chunk_order[2]
@@ -223,6 +234,23 @@ func _process(_delta):
 		for enemy in enemies_list:
 			if enemy != null and enemy.global_position.x < transform_boundaries:
 				enemy.global_position.x += transform_val
+		
+	# Near-Death Effects
+	var ability_cooldown_vis_percent : float = max(0, player.ability_cooldown - min_percent_to_start_death_effect) / (100 - min_percent_to_start_death_effect)
+	#print("Ability Cooldown: " + str(player.ability_cooldown))
+	#print("Cooldown Percent: " + str(ability_cooldown_vis_percent))
+	if ability_cooldown_vis_percent > 0:
+		var target_death_effect = lerp(0.0, max_death_effect_a , ability_cooldown_vis_percent) / max_death_effect_a
+		big_red_rect.color.a = lerp(0.0, target_death_effect, clamp(death_effect_fade_speed, 0.0, 1.0)) 
+		
+		var target_fire_effect = lerp(0.0, max_fire_effect_a, ability_cooldown_vis_percent)  / max_fire_effect_a * 3
+		print(lerp(0.0, target_fire_effect, clamp(death_effect_fade_speed, 0.0, 1.0)))
+		fire_1.modulate.a = lerp(0.0, target_fire_effect, clamp(death_effect_fade_speed, 0.0, 1.0))
+		fire_2.modulate.a = lerp(0.0, target_fire_effect, clamp(death_effect_fade_speed, 0.0, 1.0))
+		fire_3.modulate.a = lerp(0.0, target_fire_effect, clamp(death_effect_fade_speed, 0.0, 1.0))
+		fire_4.modulate.a = lerp(0.0, target_fire_effect, clamp(death_effect_fade_speed, 0.0, 1.0))
+	else:
+		big_red_rect.color.a = 0
 
 
 # func pop_animation(target_node: RichTextLabel):
