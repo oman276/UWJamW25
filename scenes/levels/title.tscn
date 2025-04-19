@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfqqja5bo4xpj"]
+[gd_scene load_steps=11 format=3 uid="uid://bfqqja5bo4xpj"]
 
-[ext_resource type="Texture2D" uid="uid://bk62qi0skkd4t" path="res://assets/title/title_screen.png" id="1_mw222"]
+[ext_resource type="Texture2D" uid="uid://bk62qi0skkd4t" path="res://assets/enemies/title_screen.png" id="1_mw222"]
 [ext_resource type="Script" uid="uid://dqtpbdhiqcksq" path="res://scripts/ui/main_menu.gd" id="1_t6ifd"]
 [ext_resource type="Texture2D" uid="uid://dp13giu4ndehr" path="res://assets/title/menu_background.png" id="3_r3hnr"]
 [ext_resource type="Texture2D" uid="uid://bcxwpnd3suv2r" path="res://assets/title/title_text_cropped.png" id="4_fxmy8"]
 [ext_resource type="Texture2D" uid="uid://dskgl3t3kfbve" path="res://assets/title/icarus_cropped.png" id="5_ua3w2"]
 [ext_resource type="Texture2D" uid="uid://sndn4nhl4d1g" path="res://assets/title/start_cropped.png" id="6_jypgf"]
 [ext_resource type="Texture2D" uid="uid://bkavab5n0obrg" path="res://assets/title/instructions_cropped.png" id="7_t6ifd"]
+[ext_resource type="Texture2D" uid="uid://kvm5bx0j2cii" path="res://assets/instructions.png" id="8_geju3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wa4fm"]
 radius = 61.0
@@ -16,12 +17,11 @@ height = 484.0
 radius = 61.0
 height = 654.0
 
-[node name="Title" type="Node2D" node_paths=PackedStringArray("icarus_spr", "main_text", "start_btn", "instructions_btn")]
+[node name="Title" type="Node2D" node_paths=PackedStringArray("icarus_spr", "main_text", "instructions")]
 script = ExtResource("1_t6ifd")
 icarus_spr = NodePath("Background/Icarus")
 main_text = NodePath("Background/Title Text")
-start_btn = NodePath("Background/Start Button")
-instructions_btn = NodePath("Background/Instructions Button")
+instructions = NodePath("Background/Instructions")
 
 [node name="TitleScreen" type="Sprite2D" parent="."]
 visible = false
@@ -114,7 +114,34 @@ mouse_filter = 0
 texture = ExtResource("7_t6ifd")
 expand_mode = 1
 
+[node name="Instructions" type="TextureRect" parent="Background"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_geju3")
+
+[node name="Instructions Quit" type="TextureRect" parent="Background/Instructions"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -153.0
+offset_right = -72.0
+offset_bottom = -57.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 0
+expand_mode = 1
+
 [connection signal="input_event" from="StartButton" to="TitleScreen" method="_on_start_button_input_event"]
 [connection signal="input_event" from="InstructionsButton" to="TitleScreen" method="_on_instructions_button_input_event"]
 [connection signal="gui_input" from="Background/Start Button" to="." method="_on_start_button_gui_input"]
 [connection signal="gui_input" from="Background/Instructions Button" to="." method="_on_instructions_button_gui_input"]
+[connection signal="gui_input" from="Background/Instructions/Instructions Quit" to="." method="_on_instructions_quit_gui_input"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c8tf7w0l5vj81"]
 
-[ext_resource type="Texture2D" uid="uid://kvm5bx0j2cii" path="res://assets/Untitled_Artwork.png" id="1_w3ro4"]
+[ext_resource type="Texture2D" uid="uid://kvm5bx0j2cii" path="res://assets/instructions.png" id="1_w3ro4"]
 
 [sub_resource type="Resource" id="Resource_x1tk8"]
 metadata/__load_path__ = "res://scenes/levels/instructions.gd"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kvm5bx0j2cii"
-path="res://.godot/imported/Untitled_Artwork.png-d90c847bcdbe0f822183364093d4c923.ctex"
+uid="uid://bk62qi0skkd4t"
+path="res://.godot/imported/title_screen.png-da9feac1bc11e36a2147665a892ffae6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Untitled_Artwork.png"
-dest_files=["res://.godot/imported/Untitled_Artwork.png-d90c847bcdbe0f822183364093d4c923.ctex"]
+source_file="res://assets/enemies/title_screen.png"
+dest_files=["res://.godot/imported/title_screen.png-da9feac1bc11e36a2147665a892ffae6.ctex"]
 
 [params]
 
