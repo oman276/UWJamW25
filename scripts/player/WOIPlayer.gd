@@ -127,6 +127,7 @@ func slash_attack(dir: Vector2):
 	ability_cooldown += ability_per_use
 	if ability_cooldown >= 100:
 		death()
+		return
 	
 	anim_timer.start()
 	dash_toggle = true
