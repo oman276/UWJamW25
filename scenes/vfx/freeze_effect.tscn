@@ -1,51 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnkhdw26lgaw4"]
+[gd_scene load_steps=3 format=3 uid="uid://dnkhdw26lgaw4"]
 
 [ext_resource type="Script" uid="uid://t31b1fkl5o30" path="res://scripts/player/FreezeEffect.gd" id="1_ajxd6"]
-[ext_resource type="Texture2D" uid="uid://jf8c34oae1d8" path="res://assets/vfx/snow.png" id="2_i7sd6"]
-[ext_resource type="Texture2D" uid="uid://cv0qrunyjthv3" path="res://assets/vfx/Untitled_Artwork.png" id="3_ksygx"]
-
-[sub_resource type="Curve" id="Curve_5o7i4"]
-_limits = [-360.0, 360.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_vrxnm"]
-curve = SubResource("Curve_5o7i4")
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ijey3"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_22he0"]
-particle_flag_disable_z = true
-emission_shape_offset = Vector3(120, 20, 0)
-emission_shape = 2
-emission_sphere_radius = 111.13
-angular_velocity_curve = SubResource("CurveTexture_vrxnm")
-directional_velocity_min = 0.0
-directional_velocity_max = 0.0
-directional_velocity_curve = SubResource("CurveXYZTexture_ijey3")
-gravity = Vector3(0, 0, 0)
-linear_accel_max = 10.0
-scale_min = 0.2
-scale_max = 0.5
+[ext_resource type="PackedScene" uid="uid://bg6kgfg02dfo" path="res://scenes/vfx/freeze_vfx.tscn" id="2_gdle3"]
 
 [node name="FreezeEffect" type="Node2D"]
 scale = Vector2(3.65338, 3.65338)
 script = ExtResource("1_ajxd6")
 
-[node name="FreezeVFX" type="GPUParticles2D" parent="."]
-z_index = 5
+[node name="FreezeVFX" parent="." instance=ExtResource("2_gdle3")]
 position = Vector2(91.6667, -16.6667)
-amount = 50
-process_material = SubResource("ParticleProcessMaterial_22he0")
-texture = ExtResource("2_i7sd6")
-lifetime = 0.3
-preprocess = 1.0
-
-[node name="icewave" type="Sprite2D" parent="FreezeVFX"]
-z_index = -1
-position = Vector2(126.042, 33.8542)
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("3_ksygx")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8

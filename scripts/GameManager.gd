@@ -1,5 +1,12 @@
 extends Node2D
 
+var test_freeze_vfx: GPUParticles2D
+var test_fire_vfx: GPUParticles2D
+@onready var particle_load_state : PARTICLE_LOAD_STATE = PARTICLE_LOAD_STATE.None
+var fire_fx_path : String =  "res://scenes/vfx/fire_vfx.tscn"
+var freeze_fx_path : String = "res://scenes/vfx/freeze_vfx.tscn"
+
+
 enum GLOBAL_GAME_STATE {
 	Default,
 	Paused,
@@ -18,6 +25,12 @@ enum THEMES{
 	None,
 	Title,
 	Action,
+}
+
+enum PARTICLE_LOAD_STATE{
+	None,
+	Loading,
+	Loaded,
 }
 
 var level_str_dict : Dictionary = {
@@ -47,9 +60,35 @@ func _ready():
 	var temp = load(loading_canvas_path)
 	loading_canvas = temp.instantiate()
 	add_child(loading_canvas)
-	add_child(music_player)  
+	add_child(music_player)
+
+	var temp_fire = load(fire_fx_path)
+	test_fire_vfx = temp_fire.instantiate()
+	add_child(test_fire_vfx)
+	test_fire_vfx.visible = false
+	test_fire_vfx.emitting = false
+	var temp_freeze = load(freeze_fx_path)
+	test_freeze_vfx = temp_freeze.instantiate()
+	add_child(test_freeze_vfx)
+	test_freeze_vfx.visible = false	
+	test_freeze_vfx.emitting = false
 
 	load_level(LEVELS.Credits)
+
+func _process(_delta):
+	match particle_load_state:
+		PARTICLE_LOAD_STATE.None:
+			particle_load_state = PARTICLE_LOAD_STATE.Loading
+			test_freeze_vfx.visible = true
+			test_freeze_vfx.emitting = true
+			test_fire_vfx.visible = true
+			test_fire_vfx.emitting = true
+		PARTICLE_LOAD_STATE.Loading:
+			particle_load_state = PARTICLE_LOAD_STATE.Loaded
+			test_freeze_vfx.visible = false
+			test_freeze_vfx.emitting = false
+			test_fire_vfx.visible = false
+			test_fire_vfx.emitting = false
 
 func is_live() -> bool:
 	return current_global_state == GLOBAL_GAME_STATE.Default

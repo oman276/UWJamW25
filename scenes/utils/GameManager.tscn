@@ -1,9 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgju4xog8coi"]
+[gd_scene load_steps=7 format=3 uid="uid://bgju4xog8coi"]
 
 [ext_resource type="Script" uid="uid://dvr7utmb11xks" path="res://scripts/GameManager.gd" id="1_h5yca"]
 [ext_resource type="PackedScene" uid="uid://dmut62bvgcaxi" path="res://scenes/ui/fade_canvas.tscn" id="2_jv50c"]
+[ext_resource type="Texture2D" uid="uid://jf8c34oae1d8" path="res://assets/vfx/snow.png" id="3_2g3si"]
+[ext_resource type="Material" uid="uid://b2red8jwwo7qr" path="res://scenes/mats/ice.tres" id="4_yrtdd"]
+[ext_resource type="Texture2D" uid="uid://dj8g3vocm7ly2" path="res://assets/vfx/fire.png" id="5_yrtdd"]
+[ext_resource type="Material" uid="uid://4uda6u8wxjms" path="res://scenes/mats/fire.tres" id="6_5qoel"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_h5yca")
 
 [node name="FadeCanvas" parent="." instance=ExtResource("2_jv50c")]
+
+[node name="TestFreezeVfx" type="GPUParticles2D" parent="."]
+z_index = 5
+position = Vector2(436, 295)
+scale = Vector2(0.1, 0.1)
+emitting = false
+amount = 50
+texture = ExtResource("3_2g3si")
+lifetime = 0.3
+preprocess = 0.1
+process_material = ExtResource("4_yrtdd")
+
+[node name="TestFireVfx" type="GPUParticles2D" parent="."]
+modulate = Color(1.5, 1.497, 1.5, 1)
+position = Vector2(596, 297)
+scale = Vector2(0.1, 0.1)
+emitting = false
+amount = 50
+texture = ExtResource("5_yrtdd")
+lifetime = 0.3
+preprocess = 0.1
+fixed_fps = 120
+visibility_rect = Rect2(-250, -250, 500, 500)
+process_material = ExtResource("6_5qoel")
