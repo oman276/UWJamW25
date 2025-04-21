@@ -3,6 +3,10 @@ extends Node2D
 @onready var timer = $Timer
 
 func start_effect():
+	print("Particles Started")
+	particles = $Particles
+	timer = $Timer
+
 	particles.emitting = true
 	timer.start()
 

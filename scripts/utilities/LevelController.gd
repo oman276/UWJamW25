@@ -240,14 +240,11 @@ func _process(_delta):
 		
 	# Near-Death Effects
 	var ability_cooldown_vis_percent : float = max(0, player.ability_cooldown - min_percent_to_start_death_effect) / (100 - min_percent_to_start_death_effect)
-	#print("Ability Cooldown: " + str(player.ability_cooldown))
-	#print("Cooldown Percent: " + str(ability_cooldown_vis_percent))
 	if ability_cooldown_vis_percent > 0:
 		var target_death_effect = lerp(0.0, max_death_effect_a , ability_cooldown_vis_percent) / max_death_effect_a
 		big_red_rect.color.a = lerp(0.0, target_death_effect, clamp(death_effect_fade_speed, 0.0, 1.0)) 
 		
 		var target_fire_effect = lerp(0.0, max_fire_effect_a, ability_cooldown_vis_percent)  / max_fire_effect_a * 3
-		print(lerp(0.0, target_fire_effect, clamp(death_effect_fade_speed, 0.0, 1.0)))
 		fire_1.modulate.a = lerp(0.0, target_fire_effect, clamp(death_effect_fade_speed, 0.0, 1.0))
 		fire_2.modulate.a = lerp(0.0, target_fire_effect, clamp(death_effect_fade_speed, 0.0, 1.0))
 		fire_3.modulate.a = lerp(0.0, target_fire_effect, clamp(death_effect_fade_speed, 0.0, 1.0))

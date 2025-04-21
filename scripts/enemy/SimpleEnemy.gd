@@ -68,7 +68,7 @@ func slowdown(delta : float):
 		current_speed_percent = min_speed_percentage
 	player.ability_cooldown -= bonus_ability_regen_per_sec * delta
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var direction = to_local(nav_agent.get_next_path_position()).normalized()
 	velocity = direction * speed * current_speed_percent
 	move_and_slide()
@@ -112,7 +112,6 @@ func _death():
 		base_sprite_positions[sprite] = sprite.global_position
 	if GameManager.is_live():
 		death_freeze_timer.wait_time = 0.1
-		#Engine.time_scale = 0.15
 		death_freeze_timer.start()
 		get_parent().hit_slowdown_begin(0.1)
 

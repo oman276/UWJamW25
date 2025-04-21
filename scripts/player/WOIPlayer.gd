@@ -87,6 +87,9 @@ var combo : int = 0
 
 @onready var slash_attack_active : bool = false
 
+@onready var bonk_particles_str = "res://scenes/vfx/bonk_effect.tscn"
+@export var bonk_speed_threshold : float = 100.0
+
 func _ready():
 	freeze_vfx.modulate.a = 0
 	fire_effect.emitting = false
@@ -263,6 +266,12 @@ func _physics_process(delta: float) -> void:
 				else:
 					velocity = bounce_vel.normalized() * speed * 1.2
 
+				if velocity.length() > bonk_speed_threshold:
+					var bonk_effect = load(bonk_particles_str)
+					var bonk_instance = bonk_effect.instantiate()
+					get_tree().current_scene.add_child(bonk_instance)
+					bonk_instance.global_position = global_position
+					bonk_instance.start_effect()
 	
 	if anim_timer.time_left == 0 && dash_toggle == true:
 		$AnimationPlayer.play("flight")
