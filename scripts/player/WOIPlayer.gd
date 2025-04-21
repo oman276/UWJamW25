@@ -115,6 +115,9 @@ func death():
 
 	velocity = Vector2.ZERO
 
+	freeze_effect.visible = false
+	freeze_vfx.emitting = false
+
 	await get_tree().create_timer(4).timeout
 	GameManager.load_level(GameManager.LEVELS.PostGame)
 	pass
