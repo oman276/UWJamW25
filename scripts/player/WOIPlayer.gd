@@ -102,8 +102,6 @@ func _ready():
 
 	arrow_scn = preload("res://scenes/objects/EnemyIndicator.tscn")
 
-	
-
 func death():
 	current_state = PLAYER_MOVE_STATE.DeathFall
 	current_damage_state = PLAYER_DAMAGE_STATE.Invulnerable
@@ -169,7 +167,6 @@ func knockback(origin_pos: Vector2):
 	invuln_timer.wait_time = 2
 	invuln_timer.start()
 
-	#tweens.clear()
 	for tween in tweens:
 		if tween:
 			tween.kill()
@@ -194,20 +191,6 @@ func knockback(origin_pos: Vector2):
 			death()
 			
 	current_damage_state = PLAYER_DAMAGE_STATE.Invulnerable
-
-	# var poly_count = 0
-	# for polygon in character_polys:
-	# 	print("Tweening polygon: ", poly_count, polygon.name)
-	# 	tweens[poly_count].set_loops(10)
-	# 	tweens[poly_count].chain().tween_property(polygon, "modulate", Color.WHITE, 0.2)
-	# 	tweens[poly_count].chain().tween_property(polygon, "modulate", Color(1, 1, 1, 0), 0.2)
-	# 	tweens[poly_count].play()
-	# 	poly_count += 1
-
-	#freeze_timer.stop()
-	#freeze_timer.wait_time = 0.05
-	#Engine.time_scale = 0.2
-	#freeze_timer.start()
 
 func _input(event: InputEvent) -> void:
 	#input to only register if player is free
