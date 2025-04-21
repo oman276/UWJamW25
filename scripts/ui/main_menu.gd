@@ -17,7 +17,7 @@ func _ready():
 	tween.set_loops()
 
 	instructions.visible = false
-
+	instructions.modulate.a = 0.0
 
 func _on_start_button_gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -25,8 +25,16 @@ func _on_start_button_gui_input(event):
 
 func _on_instructions_button_gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		instructions.modulate.a = 0.0
 		instructions.visible = true
+		var tween = create_tween()
+		tween.tween_property(instructions, "modulate:a", 1.0, 0.276).set_trans(Tween.TRANS_LINEAR)
 
 func _on_instructions_quit_gui_input(event:InputEvent):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		var tween = create_tween()
+		tween.tween_property(instructions, "modulate:a", 0.0, 0.276).set_trans(Tween.TRANS_LINEAR)
+		
+		await tween.finished
+		instructions.modulate.a = 0.0
 		instructions.visible = false
