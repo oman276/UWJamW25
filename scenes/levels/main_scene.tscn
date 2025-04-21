@@ -236,5 +236,10 @@ position = Vector2(13879, -2374)
 [node name="ScoreUITimer" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="GameSpeedTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="ScoreUITimer" to="." method="_on_score_ui_timer_timeout"]
+[connection signal="timeout" from="GameSpeedTimer" to="." method="_on_game_speed_timer_timeout"]

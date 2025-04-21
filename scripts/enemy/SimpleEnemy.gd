@@ -1,4 +1,3 @@
-
 class_name SimpleEnemy
 extends CharacterBody2D
 
@@ -113,14 +112,15 @@ func _death():
 		base_sprite_positions[sprite] = sprite.global_position
 	if GameManager.is_live():
 		death_freeze_timer.wait_time = 0.1
-		Engine.time_scale = 0.15
+		#Engine.time_scale = 0.15
 		death_freeze_timer.start()
+		get_parent().hit_slowdown_begin(0.1)
 
 func _on_timer_timeout():
 	make_path()
 
 func _on_death_freeze_timer_timeout():
-	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
-	Engine.time_scale = 1
+	#GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
+	#Engine.time_scale = 1
 	get_parent().enemy_died()
 	queue_free()

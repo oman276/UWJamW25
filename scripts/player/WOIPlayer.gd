@@ -102,6 +102,8 @@ func _ready():
 
 	arrow_scn = preload("res://scenes/objects/EnemyIndicator.tscn")
 
+	
+
 func death():
 	current_state = PLAYER_MOVE_STATE.DeathFall
 	current_damage_state = PLAYER_DAMAGE_STATE.Invulnerable
@@ -160,33 +162,52 @@ func knockback(origin_pos: Vector2):
 	lock_movement_for(0.2)
 	
 	velocity = speed * knockback_multiplier * (global_position - origin_pos).normalized()
+	
+	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.TempFreeze
+	get_parent().hit_slowdown_begin(0.03)
+	invuln_timer.stop()
+	invuln_timer.wait_time = 2
+	invuln_timer.start()
+
+	#tweens.clear()
+	for tween in tweens:
+		if tween:
+			tween.kill()
+	tweens.clear()
+
+	for polygon in character_polys:
+			var tween = create_tween().set_loops()
+			tweens.append(tween)
+			tween.tween_property(polygon, "modulate", Color.WHITE, 0.2)
+			tween.tween_property(polygon, "modulate", Color(1, 1, 1, 0), 0.2)
 
 	if current_damage_state != PLAYER_DAMAGE_STATE.Invulnerable:
 		if not is_inside_tree():
 			return
 		
-		current_damage_state = PLAYER_DAMAGE_STATE.Invulnerable
-		GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.TempFreeze
-		invuln_timer.stop()
-		invuln_timer.wait_time = 2
-		invuln_timer.start()
-		for polygon in character_polys:
-			var tween = create_tween().set_loops()
-			tweens.append(tween)  # Store the tween for stopping later
-			tween.tween_property(polygon, "modulate", Color.WHITE, 0.2)
-			tween.tween_property(polygon, "modulate", Color(1, 1, 1, 0), 0.2)
-
 		health -= 1
-		if (health == 0):
-			death()
+		
 		heart1.visible = health >= 3
 		heart2.visible = health >= 2
 		heart3.visible = health >= 1
-	
-	freeze_timer.stop()
-	freeze_timer.wait_time = 0.05
-	Engine.time_scale = 0.2
-	freeze_timer.start()
+		if (health == 0):
+			death()
+			
+	current_damage_state = PLAYER_DAMAGE_STATE.Invulnerable
+
+	# var poly_count = 0
+	# for polygon in character_polys:
+	# 	print("Tweening polygon: ", poly_count, polygon.name)
+	# 	tweens[poly_count].set_loops(10)
+	# 	tweens[poly_count].chain().tween_property(polygon, "modulate", Color.WHITE, 0.2)
+	# 	tweens[poly_count].chain().tween_property(polygon, "modulate", Color(1, 1, 1, 0), 0.2)
+	# 	tweens[poly_count].play()
+	# 	poly_count += 1
+
+	#freeze_timer.stop()
+	#freeze_timer.wait_time = 0.05
+	#Engine.time_scale = 0.2
+	#freeze_timer.start()
 
 func _input(event: InputEvent) -> void:
 	#input to only register if player is free
@@ -259,7 +280,7 @@ func _physics_process(delta: float) -> void:
 				else:
 					velocity = bounce_vel.normalized() * speed * 1.2
 
-    
+	
 	if anim_timer.time_left == 0 && dash_toggle == true:
 		$AnimationPlayer.play("flight")
 		dash_toggle = false
@@ -307,12 +328,13 @@ func _on_freeze_timer_timeout():
 	Engine.time_scale = 1.0
 
 func _on_invuln_timer_timeout():
+	print("Invuln Timer ended")
 	if current_damage_state == PLAYER_DAMAGE_STATE.Invulnerable:
 		current_damage_state = PLAYER_DAMAGE_STATE.Vulnerable
 	
 	for tween in tweens:
 		if tween: 
-			tween.kill()  
+			tween.kill()
 	tweens.clear()  
 	
 	for polygon in character_polys:

@@ -65,6 +65,9 @@ var tween_score_text: Tween
 @onready var fire_3: TextureRect = $DeathEffectLayer/ColorRect/Fire3
 @onready var fire_4: TextureRect = $DeathEffectLayer/ColorRect/Fire4
 
+# Global game-speed control
+@onready var game_speed_timer: Timer = $GameSpeedTimer
+
 func _ready():
 
 	#instantiate the chunks
@@ -252,6 +255,17 @@ func _process(_delta):
 	else:
 		big_red_rect.color.a = 0
 
+func hit_slowdown_begin(length : float):
+	game_speed_timer.stop()
+	game_speed_timer.wait_time = length
+	game_speed_timer.start()
+	Engine.time_scale = 0.15
+	pass
+
+func _on_game_speed_timer_timeout():
+	GameManager.current_global_state = GameManager.GLOBAL_GAME_STATE.Default
+	Engine.time_scale = 1
+	pass
 
 # func pop_animation(target_node: RichTextLabel):
 # 	if tween_text:
@@ -268,3 +282,4 @@ func _process(_delta):
 # 	if tween_text:
 # 		tween_text.kill()
 # 	target_node.scale = Vector2(1, 1)
+
