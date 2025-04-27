@@ -40,7 +40,8 @@ death_effect_fade_speed = 0.3
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("bottom_left", "top_right") instance=ExtResource("1_5xhns")]
 position = Vector2(986, 899)
-zoom = Vector2(0.2, 0.2)
+zoom = Vector2(0.19, 0.19)
+smoothing_speed = 23.0
 bottom_left = NodePath("../BottomLeft")
 top_right = NodePath("../TopRight")
 max_zoom_add = Vector2(0.15, 0.15)

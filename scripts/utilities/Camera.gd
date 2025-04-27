@@ -19,8 +19,6 @@ func _ready():
 	base_zoom = zoom
 	level_manager = get_parent()
 
-#we only need a top and bottom clamp anymore!
-
 func _process(delta):
 	if target:
 		var target_position = target.global_position		
