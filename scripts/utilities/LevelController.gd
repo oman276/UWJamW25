@@ -108,7 +108,9 @@ func _ready():
 
 	score_list.text = " Score: " + str(score).pad_zeros(5)
 	combo_text.modulate.a = 0
+	combo_text.pivot_offset = combo_text.get_rect().size / 2
 	added_score_text.modulate.a = 0
+	added_score_text.pivot_offset = added_score_text.get_rect().size / 2
 
 	fire_1.modulate.a = 0
 	fire_2.modulate.a = 0
@@ -171,15 +173,16 @@ func add_score(combo : int):
 	combo_text.modulate.a = 1
 	added_score_text.text = " +[b]" + str(added_score) + "[/b]"
 	added_score_text.modulate.a = 1
-	#pop_animation(combo_text)
-	#pop_animation(added_score_text)
+	pop_animation(tween_combo_text, combo_text)
+	pop_animation(tween_score_text, added_score_text)
 
 	GameManager.set_score(score)
 
 func _on_score_ui_timer_timeout() -> void:
 	combo_text.modulate.a = 0
 	added_score_text.modulate.a = 0
-	#tween_text.tween_property(combo_text, "modulate:a", Vector2(1, 1), 0.07)
+	reset_scale(tween_combo_text, combo_text)
+	reset_scale(tween_score_text, added_score_text)
 
 func _process(_delta):
 	if player.global_position.x < left_x_bound:
@@ -264,19 +267,17 @@ func _on_game_speed_timer_timeout():
 	Engine.time_scale = 1
 	pass
 
-# func pop_animation(target_node: RichTextLabel):
-# 	if tween_text:
-# 		tween_text.kill()
+func pop_animation(tween: Tween, target_node: RichTextLabel):
+	if tween:
+		reset_scale(tween, target_node)
 
-# 	tween_text = get_tree().create_tween()
-# 	tween_text.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(target_node, "scale", Vector2(1.2, 1.2), 0.276)
+	tween.tween_property(target_node, "scale", Vector2(1, 1), 0.15)
 
-# 	tween_text.tween_property(target_node, "scale", Vector2(1.2, 1.2), 0.1)
-# 	tween_text.tween_property(target_node, "scale", Vector2(0.95, 0.95), 0.08)
-# 	tween_text.tween_property(target_node, "scale", Vector2(1, 1), 0.07)
-
-# func reset_scale(target_node: Node2D):
-# 	if tween_text:
-# 		tween_text.kill()
-# 	target_node.scale = Vector2(1, 1)
+func reset_scale(tween : Tween, target_node: RichTextLabel):
+	if tween:
+		tween.kill()
+	target_node.scale = Vector2(1, 1)
 
