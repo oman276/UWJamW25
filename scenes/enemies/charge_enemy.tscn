@@ -106,19 +106,19 @@ autoplay = "idle"
 z_index = 1
 
 [node name="Sprite2D2" type="Sprite2D" parent="Sprites" index="0"]
-z_index = 2
+z_index = 1
 position = Vector2(0.623197, -2.49279)
 scale = Vector2(0.389302, 0.389302)
 texture = ExtResource("3_m651i")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Sprites" index="1"]
-z_index = 2
+z_index = 1
 position = Vector2(0.623197, -2.49279)
 scale = Vector2(0.389302, 0.389302)
 texture = ExtResource("4_ue34h")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprites" index="2"]
-z_index = 2
+z_index = 1
 position = Vector2(0.623197, -2.49279)
 scale = Vector2(0.389302, 0.389302)
 texture = ExtResource("5_xk72x")

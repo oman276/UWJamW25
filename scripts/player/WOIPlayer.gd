@@ -118,6 +118,10 @@ func death():
 	freeze_effect.visible = false
 	freeze_vfx.emitting = false
 
+	for child in enemy_indicator_hub.get_children():
+		if child.is_inside_tree():
+			child.queue_free()
+
 	await get_tree().create_timer(4).timeout
 	GameManager.load_level(GameManager.LEVELS.PostGame)
 	pass

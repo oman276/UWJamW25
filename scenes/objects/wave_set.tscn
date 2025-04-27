@@ -11,7 +11,7 @@ script = ExtResource("1_hoc2y")
 wave_move_scale = 1.0
 
 [node name="Wave1" type="Sprite2D" parent="."]
-z_index = 1
+z_index = 3
 scale = Vector2(4.285, 4.285)
 texture = ExtResource("1_nf5d2")
 

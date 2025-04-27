@@ -92,17 +92,17 @@ libraries = {
 autoplay = "idle"
 
 [node name="Sprites" type="Sprite2D" parent="." index="8"]
-z_index = 2
+z_index = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprites" index="0"]
-z_index = 2
+z_index = 1
 position = Vector2(6.23197, 2.49279)
 rotation = 3.14159
 scale = Vector2(0.327, -0.327)
 texture = ExtResource("4_0td66")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Sprites" index="1"]
-z_index = 2
+z_index = 1
 position = Vector2(2.49279, 0.623197)
 rotation = -3.14159
 scale = Vector2(0.316144, -0.316144)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://fuwldaqyjphl"]
+[gd_scene load_steps=18 format=3 uid="uid://fuwldaqyjphl"]
 
 [ext_resource type="PackedScene" uid="uid://dty6bam7ws52h" path="res://scenes/utils/main_camera.tscn" id="1_5xhns"]
 [ext_resource type="Script" uid="uid://ok2y3h8abkwj" path="res://scripts/utilities/LevelController.gd" id="1_iwnx3"]
@@ -15,6 +15,13 @@
 [ext_resource type="PackedScene" uid="uid://c1e3rqofqm30v" path="res://scenes/ui/texture_progress_bar.tscn" id="15_jstp0"]
 [ext_resource type="FontFile" uid="uid://bslcwic4ca0qi" path="res://assets/fonts/Vollkorn-VariableFont_wght.ttf" id="19_efd43"]
 [ext_resource type="FontFile" uid="uid://svrkp0um8ms5" path="res://assets/fonts/AlmendraSC-Regular.ttf" id="19_pkib5"]
+
+[sub_resource type="Gradient" id="Gradient_jtcbb"]
+offsets = PackedFloat32Array(0, 0.0289855, 1)
+colors = PackedColorArray(1, 1, 0, 0.0627451, 1, 1, 0, 0.0156863, 1, 1, 0, 0.0627451)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x7kll"]
+gradient = SubResource("Gradient_jtcbb")
 
 [node name="MainScene" type="Node2D" node_paths=PackedStringArray("waves")]
 script = ExtResource("1_iwnx3")
@@ -222,6 +229,14 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UILayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_x7kll")
 
 [node name="Timer" type="Timer" parent="."]
 

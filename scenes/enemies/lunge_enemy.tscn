@@ -101,12 +101,12 @@ libraries = {
 z_index = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprites" index="0"]
-z_index = 2
+z_index = 1
 scale = Vector2(0.389, 0.389)
 texture = ExtResource("3_2or4n")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Sprites" index="1"]
-z_index = 2
+z_index = 1
 scale = Vector2(0.389, 0.389)
 texture = ExtResource("4_tngqv")
 
