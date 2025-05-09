@@ -1,6 +1,6 @@
 extends SimpleEnemy
 
-@export var accelleration : float = 100.0
+@export var accelleration: float = 100.0
 @onready var sprites = $Sprites
 
 func _physics_process(delta: float) -> void:

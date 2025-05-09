@@ -1240,7 +1240,7 @@ _data = {
 &"flight": SubResource("Animation_8eetp")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("character_polys") groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(328, 252)
 scale = Vector2(1.92, 1.92)
 collision_layer = 2
@@ -1255,7 +1255,6 @@ speed_kept_on_bounce = 0.7
 dodge_acceleration_multiplier = 5.0
 knockback_multiplier = 2.0
 knockback_acceleration_multiplier = 2.0
-character_polys = [NodePath("Polygons/arm_left"), NodePath("Polygons/torso"), NodePath("Polygons/arm_right"), NodePath("Polygons/hand_right"), NodePath("Polygons/hand_left"), NodePath("Polygons/thigh_right"), NodePath("Polygons/thigh_left"), NodePath("Polygons/leg_left"), NodePath("Polygons/leg_right"), NodePath("Polygons/head"), NodePath("Polygons/wing_left"), NodePath("Polygons/wing_right"), NodePath("Polygons/sword")]
 bonk_speed_threshold = 2000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
